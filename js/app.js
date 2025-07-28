@@ -13,7 +13,7 @@ function app() {
             {
                 id: 'home',
                 name: 'Home',
-                path: '/',
+                path: '#home',
                 icon: 'home_icon.svg',
                 sections: [
                     { id: 'who-we-are', title: 'Who We Are' },
@@ -24,14 +24,14 @@ function app() {
             {
                 id: 'about_us',
                 name: 'About Us',
-                path: '/about-us',
+                path: '#about_us',
                 icon: 'about_us_icon.svg',
                 sections: []
             },
             {
                 id: 'resources',
                 name: 'Resources',
-                path: '/resources',
+                path: '#resources',
                 icon: 'resources_icon.svg',
                 sections: [
                     { id: 'crime-prevention', title: 'Crime Prevention' },
@@ -42,14 +42,14 @@ function app() {
             {
                 id: 'news',
                 name: 'News',
-                path: '/news',
+                path: '#news',
                 icon: 'news_icon.svg',
                 sections: []
             },
             {
                 id: 'volunteer',
                 name: 'Volunteer',
-                path: '/volunteer',
+                path: '#volunteer',
                 icon: 'volunteer_icon.svg',
                 sections: [
                     { id: 'opportunities', title: 'Opportunities' },
@@ -60,14 +60,14 @@ function app() {
             {
                 id: 'events',
                 name: 'Events',
-                path: '/events',
+                path: '#events',
                 icon: 'events_icon.svg',
                 sections: []
             },
             {
                 id: 'sponsors',
                 name: 'Sponsors',
-                path: '/sponsors',
+                path: '#sponsors',
                 icon: 'sponsors_icon.svg',
                 sections: []
             }
@@ -77,7 +77,7 @@ function app() {
         init() {
             this.loadFooter();
             this.handleInitialRoute();
-            this.setupPopstateListener();
+            this.setupHashChangeListener();
             this.setupScrollSpy();
             this.preloadCommonPages();
         },
@@ -101,36 +101,36 @@ function app() {
         
         // Handle initial page load routing
         handleInitialRoute() {
-            const path = window.location.pathname;
-            const pageId = this.getPageIdFromPath(path);
+            const hash = window.location.hash || '#home';
+            const pageId = this.getPageIdFromHash(hash);
             if (pageId) {
                 this.currentPage = pageId;
                 this.loadPage(pageId);
             } else {
                 // Default to home page
-                this.navigateTo('/');
+                this.navigateTo('#home');
             }
         },
         
-        // Convert URL path to page ID
-        getPageIdFromPath(path) {
-            if (path === '/' || path === '') return 'home';
+        // Convert hash to page ID
+        getPageIdFromHash(hash) {
+            if (!hash || hash === '#' || hash === '#home') return 'home';
             
-            const page = this.navigation.find(nav => nav.path === path);
+            const page = this.navigation.find(nav => nav.path === hash);
             return page ? page.id : null;
         },
         
-        // Convert page ID to URL path
-        getPathFromPageId(pageId) {
+        // Convert page ID to hash
+        getHashFromPageId(pageId) {
             const page = this.navigation.find(nav => nav.id === pageId);
-            return page ? page.path : '/';
+            return page ? page.path : '#home';
         },
         
         // Main navigation function
-        async navigateTo(path) {
-            const pageId = this.getPageIdFromPath(path);
+        async navigateTo(hash) {
+            const pageId = this.getPageIdFromHash(hash);
             if (!pageId) {
-                console.error('Page not found:', path);
+                console.error('Page not found:', hash);
                 return;
             }
             
@@ -141,9 +141,9 @@ function app() {
             }
             
             try {
-                // Update URL without page reload
-                if (window.location.pathname !== path) {
-                    window.history.pushState({ pageId }, '', path);
+                // Update URL hash
+                if (window.location.hash !== hash) {
+                    window.location.hash = hash;
                 }
                 
                 // Update current page
@@ -235,14 +235,16 @@ function app() {
             document.title = `${pageTitle} - Crime Stoppers Winnipeg`;
         },
         
-        // Handle browser back/forward buttons
-        setupPopstateListener() {
-            window.addEventListener('popstate', (event) => {
-                if (event.state && event.state.pageId) {
-                    this.currentPage = event.state.pageId;
-                    this.loadPage(event.state.pageId);
-                } else {
-                    this.handleInitialRoute();
+        // Handle hash changes for navigation
+        setupHashChangeListener() {
+            window.addEventListener('hashchange', () => {
+                const hash = window.location.hash || '#home';
+                const pageId = this.getPageIdFromHash(hash);
+                if (pageId && pageId !== this.currentPage) {
+                    this.currentPage = pageId;
+                    this.loadPage(pageId);
+                    this.activeSection = '';
+                    window.scrollTo(0, 0);
                 }
             });
         },
@@ -257,7 +259,7 @@ function app() {
                 });
                 
                 // Update URL hash
-                window.history.replaceState(null, '', `${window.location.pathname}#${sectionId}`);
+                window.history.replaceState(null, '', `${window.location.pathname}${window.location.hash}#${sectionId}`);
                 
                 // Update active section
                 this.activeSection = sectionId;
