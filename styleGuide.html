@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Style Guide - Design System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Hind:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
+    <style>
+      /* CSS Variables - Root Level */
+      :root {
+        /* Brand Colors */
+        --color-primary: #8cc63f; /* Fresh Lime */
+        --color-secondary: #b8d9b4; /* Sage Mist */
+        --color-accent: #6f8ea7; /* Storm Blue */
+        --color-dark: #09161c; /* Midnight Navy */
+        --color-dark-alt: #42453e; /* Forest Shadow */
+        --color-light: #f7fafc; /* Cool White */
+        --color-danger: #bf1e2e; /* Crimson Red */
+
+        /* Utility Colors */
+        --color-hover-light: rgba(255, 255, 255, 0.13);
+
+        /* Typography */
+        --font-primary: 'Montserrat', sans-serif;
+        --font-secondary: 'Hind', sans-serif;
+
+        /* Font Sizes */
+        --text-xs: 0.5rem; /* 8px */
+        --text-sm: 0.625rem; /* 10px */
+        --text-base: 1rem; /* 16px - Base */
+        --text-lg: 1.125rem; /* 18px */
+        --text-xl: 1.25rem; /* 20px */
+        --text-2xl: 1.563rem; /* 25px */
+        --text-3xl: 2.188rem; /* 35px */
+        --text-4xl: 2.5rem; /* 40px */
+
+        /* Font Weights */
+        --font-weight-regular: 400;
+        --font-weight-medium: 500;
+        --font-weight-semibold: 600;
+        --font-weight-bold: 700;
+        --font-weight-black: 900;
+
+        /* Spacing */
+        --space-1: 0.25rem; /* 4px */
+        --space-2: 0.5rem; /* 8px */
+        --space-3: 0.625rem; /* 10px */
+        --space-4: 0.75rem; /* 12px */
+        --space-5: 1.25rem; /* 20px */
+        --space-6: 1.5rem; /* 24px */
+
+        /* Border Radius */
+        --radius-sm: 2px;
+        --radius-md: 8px;
+        --radius-lg: 16px;
+        --radius-line: 13px;
+        --radius-xl: 42px;
+        --radius-full: 9999px;
+
+        /* Shadows */
+        --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Base Styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: var(--font-secondary);
+        font-size: var(--text-base);
+        line-height: 1.5;
+        color: var(--color-dark);
+        background-color: var(--color-light);
+      }
+
+      /* Layout */
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: var(--space-4);
+      }
+      .section {
+        margin-bottom: var(--space-6);
+        background: white;
+        padding: var(--space-5);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-md);
+      }
+      .section-title {
+        font-family: var(--font-primary);
+        font-size: var(--text-3xl);
+        font-weight: var(--font-weight-bold);
+        margin-bottom: var(--space-5);
+        color: var(--color-dark);
+      }
+      .subsection {
+        margin-bottom: var(--space-5);
+      }
+      .subsection-title {
+        font-size: var(--text-xl);
+        font-weight: var(--font-weight-bold);
+        margin-bottom: var(--space-4);
+        padding-bottom: var(--space-2);
+        border-bottom: 1px solid #eee;
+        color: var(--color-dark-alt);
+      }
+      .component-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: var(--space-5);
+        align-items: start;
+      }
+      .component-preview {
+        padding: var(--space-5);
+        background-color: var(--color-dark);
+        border-radius: var(--radius-md);
+      }
+      .component-label {
+        font-size: var(--text-sm);
+        color: var(--color-accent);
+        margin-bottom: var(--space-2);
+        font-weight: var(--font-weight-semibold);
+        text-transform: uppercase;
+      }
+
+      /* Color Swatches */
+      .color-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: var(--space-4);
+      }
+      .color-swatch {
+        border-radius: var(--radius-md);
+        overflow: hidden;
+        box-shadow: var(--shadow-md);
+        cursor: pointer;
+        transition: transform 0.2s;
+      }
+      .color-swatch:hover {
+        transform: translateY(-4px);
+      }
+      .color-preview {
+        height: 100px;
+      }
+      .color-info {
+        padding: var(--space-3);
+        background: white;
+        font-size: var(--text-sm);
+      }
+      .color-name {
+        font-weight: var(--font-weight-bold);
+        color: var(--color-dark);
+      }
+      .color-value {
+        color: var(--color-accent);
+        font-family: monospace;
+      }
+
+      /* Typography Samples */
+      .type-sample {
+        margin-bottom: var(--space-3);
+        padding: var(--space-3);
+        background: #f9f9f9;
+        border-left: 4px solid var(--color-secondary);
+      }
+      .type-label {
+        font-size: var(--text-sm);
+        color: var(--color-accent);
+        margin-bottom: var(--space-1);
+        font-weight: var(--font-weight-semibold);
+      }
+      .font-montserrat {
+        font-family: var(--font-primary);
+      }
+      .font-hind {
+        font-family: var(--font-secondary);
+      }
+
+      /* Utility Classes */
+      .flex {
+        display: flex;
+      }
+      .items-center {
+        align-items: center;
+      }
+      .justify-center {
+        justify-content: center;
+      }
+      .gap-2 {
+        gap: var(--space-2);
+      }
+      .gap-3 {
+        gap: var(--space-3);
+      }
+      .gap-5 {
+        gap: var(--space-5);
+      }
+      .flex-wrap {
+        flex-wrap: wrap;
+      }
+      .justify-center {
+        justify-content: center;
+      }
+
+      /* --- Component Styles --- */
+
+      /* Navigation Components */
+      .nav-group {
+        display: inline-flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 5px;
+        width: 100%;
+      }
+      .nav-item {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        padding-left: 3px;
+        align-self: stretch;
+        border-radius: var(--radius-md);
+        transition: background-color 0.2s;
+      }
+      .nav-item:hover {
+        background-color: var(--color-hover-light);
+      }
+      .nav-icon-container {
+        width: 32px;
+        height: 32px;
+        padding: 3px;
+        border-radius: var(--radius-md);
+        background-color: var(--color-secondary);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .nav-item.is-selected .nav-icon-container {
+        background-color: var(--color-primary);
+      }
+      .nav-icon-placeholder {
+        width: 24px;
+        height: 24px;
+        background-color: rgba(0, 0, 0, 0.1);
+        border-radius: 4px;
+      }
+      .nav-text {
+        font-family: var(--font-secondary);
+        font-size: var(--text-2xl);
+        font-weight: var(--font-weight-medium);
+        color: var(--color-secondary);
+      }
+      .nav-item.is-selected .nav-text {
+        color: var(--color-primary);
+        font-weight: var(--font-weight-semibold);
+      }
+      .sub-nav {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-3);
+        align-self: stretch;
+        padding-left: 40px;
+      }
+      .sub-nav-item {
+        display: flex;
+        align-items: center;
+        gap: var(--space-3);
+        height: 25px;
+      }
+      .sub-nav-indicator {
+        width: 3px;
+        align-self: stretch;
+        background-color: var(--color-dark-alt);
+        border-radius: 88px;
+      }
+      .sub-nav-item.is-selected .sub-nav-indicator {
+        background-color: var(--color-primary);
+      }
+      .sub-nav-text {
+        font-family: var(--font-secondary);
+        font-size: var(--text-xl);
+        font-weight: var(--font-weight-regular);
+        color: var(--color-secondary);
+        text-transform: uppercase;
+      }
+      .sub-nav-item.is-selected .sub-nav-text {
+        color: var(--color-primary);
+        font-weight: var(--font-weight-medium);
+      }
+
+      /* Success Card Component */
+      .success-card {
+        background: var(--color-light);
+        border-radius: var(--radius-lg);
+        padding: 12px 15px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 4px;
+        text-align: center;
+      }
+      .success-card.is-reversed {
+        flex-direction: column-reverse;
+      }
+      .success-card-header {
+        font-family: var(--font-primary);
+        font-size: var(--text-2xl);
+        font-weight: var(--font-weight-bold);
+        color: var(--color-dark);
+        line-height: 1.46;
+      }
+      .success-card-body {
+        font-family: var(--font-primary);
+        font-size: var(--text-lg);
+        font-weight: var(--font-weight-regular);
+        color: #000;
+        line-height: 1.46;
+      }
+      .success-card-icon {
+        width: 84px;
+        height: 76px;
+        border: 2px dashed #ccc;
+        border-radius: 4px;
+        flex-shrink: 0;
+      }
+      .success-card.is-mobile .success-card-header {
+        font-size: var(--text-xl);
+      }
+      .success-card.is-mobile .success-card-body {
+        font-size: var(--text-base);
+      }
+
+      /* Info Card Component */
+      .info-card {
+        background-color: var(--color-light);
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+        display: inline-flex;
+        flex-direction: column;
+        text-align: center;
+        max-width: 300px;
+      }
+      .info-card-header {
+        padding: 4px;
+        display: flex;
+        justify-content: flex-end;
+      }
+      .info-card-content {
+        padding-bottom: var(--space-3);
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-3);
+      }
+      .info-card-title {
+        font-family: var(--font-primary);
+        font-size: 15px;
+        font-weight: var(--font-weight-bold);
+        color: var(--color-dark);
+      }
+      .info-card-phone {
+        font-family: var(--font-primary);
+        font-size: 23px;
+        font-weight: var(--font-weight-bold);
+        color: var(--color-dark);
+        line-height: 1.2;
+      }
+      .info-card-description {
+        font-family: var(--font-primary);
+        font-size: var(--text-sm);
+        font-weight: var(--font-weight-bold);
+        color: var(--color-dark);
+      }
+
+      /* Button Components */
+      .btn {
+        border: none;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--font-primary);
+        transition: all 0.2s ease;
+      }
+      .btn-copy {
+        background-color: var(--color-accent);
+        padding: 3px;
+        border-radius: 14px;
+        gap: 4px;
+      }
+      .btn-copy .btn-text {
+        color: var(--color-light);
+        font-size: var(--text-sm);
+        font-weight: var(--font-weight-semibold);
+        text-transform: uppercase;
+      }
+      .btn-copy.is-copied {
+        background-color: var(--color-primary);
+      }
+      .btn-copy.is-copied .btn-text {
+        font-size: var(--text-xs);
+      }
+      .icon-copy {
+        width: 20px;
+        height: 20px;
+        position: relative;
+      }
+      .icon-copy-rect1 {
+        position: absolute;
+        width: 8.33px;
+        height: 10px;
+        left: 4.17px;
+        top: 7.5px;
+        border-radius: 4px;
+        outline: 2px var(--color-light) solid;
+        outline-offset: -1px;
+      }
+      .icon-copy-rect2 {
+        position: absolute;
+        width: 9.17px;
+        height: 12.5px;
+        left: 6.67px;
+        top: 2.5px;
+        border-radius: 3px;
+        border: 2px var(--color-light) solid;
+      }
+      .icon-done {
+        width: 18px;
+        height: 18px;
+        position: relative;
+      }
+      .icon-done-check {
+        width: 9.47px;
+        height: 5.25px;
+        left: 4.25px;
+        top: 6.75px;
+        position: absolute;
+        transform: rotate(-45deg);
+        border-left: 2px solid var(--color-light);
+        border-bottom: 2px solid var(--color-light);
+      }
+      .btn-learn-more {
+        background: var(--color-accent);
+        border-radius: 20px;
+        padding-left: 12px;
+        padding-right: 6px;
+        height: 59px;
+        gap: 12px;
+      }
+      .btn-learn-more .btn-text {
+        font-size: var(--text-xl);
+        font-weight: var(--font-weight-bold);
+        text-transform: uppercase;
+        color: var(--color-light);
+      }
+      .btn-learn-more .btn-circle {
+        width: 47px;
+        height: 47px;
+        background: var(--color-light);
+        border-radius: var(--radius-full);
+      }
+
+      /* Timer Button Component */
+      .btn-timer-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: var(--space-2);
+        min-width: 120px;
+        text-align: center;
+      }
+      .btn-timer {
+        background-color: var(--color-dark-alt);
+        border-radius: var(--radius-xl);
+        padding: 3px 10px;
+        transition: background-color 0.2s ease;
+      }
+      .btn-timer .btn-text {
+        font-family: var(--font-primary);
+        font-weight: var(--font-weight-medium);
+        color: var(--color-light);
+        line-height: 1.46;
+        font-size: var(--text-xl); /* Desktop size */
+      }
+      .timer-bar {
+        align-self: stretch;
+        height: 5px;
+        border-radius: 20px;
+        background-color: transparent;
+        transition: background-color 0.2s ease;
+      }
+      /* Hover State */
+      .btn-timer-container:not(.is-selected):hover .btn-timer {
+        background-color: var(--color-dark);
+      }
+      /* Selected State */
+      .btn-timer-container.is-selected .btn-timer {
+        background-color: var(--color-dark);
+      }
+      .btn-timer-container.is-selected .timer-bar {
+        background-color: var(--color-dark);
+      }
+      /* Mobile Variation */
+      .btn-timer-container.is-mobile .btn-timer .btn-text {
+        font-size: var(--text-lg); /* Mobile size */
+      }
+
+      /* Footer Component */
+      .footer {
+        background-color: var(--color-dark);
+        border-radius: var(--radius-lg);
+        padding: var(--space-5);
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-5);
+      }
+      .footer-content-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: var(--space-5);
+      }
+      .footer-column {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-4);
+        flex: 1;
+        min-width: 220px;
+      }
+      .footer-heading {
+        font-family: var(--font-secondary);
+        font-size: var(--text-xl);
+        font-weight: var(--font-weight-bold);
+        color: var(--color-light);
+      }
+      .footer-body {
+        font-family: var(--font-secondary);
+        font-size: var(--text-base);
+        font-weight: var(--font-weight-medium);
+        color: var(--color-light);
+        line-height: 1.6;
+        white-space: pre-wrap;
+      }
+      .footer-warning {
+        background-color: var(--color-accent);
+        border-radius: var(--radius-lg);
+        padding: var(--space-3);
+        display: flex;
+        align-items: center;
+        gap: var(--space-3);
+      }
+      .footer-warning-icon-wrapper {
+        background: var(--color-light);
+        border-radius: 10px;
+        flex-shrink: 0;
+      }
+      .icon-alarm {
+        width: 44px;
+        height: 44px;
+        position: relative;
+      }
+      .icon-alarm::before {
+        content: '';
+        position: absolute;
+        width: 14.67px;
+        height: 18.33px;
+        left: 14.67px;
+        top: 7.33px;
+        background: var(--color-dark);
+        border: 2px solid var(--color-dark);
+      }
+      .icon-alarm::after {
+        content: '';
+        position: absolute;
+        width: 7.33px;
+        height: 7.33px;
+        left: 18.33px;
+        top: 31.17px;
+        background: var(--color-dark);
+        border-radius: var(--radius-full);
+        border: 2px solid var(--color-dark);
+      }
+      .footer-warning-text {
+        font-family: var(--font-secondary);
+        font-size: var(--text-lg);
+        font-weight: var(--font-weight-bold);
+        color: var(--color-dark);
+        line-height: 1.4;
+      }
+
+      /* Paragraph Content Block */
+      .content-block {
+        display: flex;
+        align-items: stretch;
+        gap: 14px;
+      }
+      .content-block-line {
+        width: 12px;
+        background-color: var(--color-dark);
+        border-radius: var(--radius-line);
+        flex-shrink: 0;
+      }
+      .content-block-main {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-4);
+      }
+      .content-block-text {
+        font-family: var(--font-secondary);
+        font-size: var(--text-lg);
+        font-weight: var(--font-weight-medium);
+        line-height: 1.53;
+        color: var(--color-dark);
+      }
+      .content-block-video {
+        background: var(--color-primary);
+        border-radius: var(--radius-lg);
+        min-height: 250px;
+      }
+      .content-block-main.is-reversed {
+        flex-direction: column-reverse;
+      }
+      /* Mobile variations */
+      .content-block.is-mobile {
+        gap: 10px;
+      }
+      .content-block.is-mobile .content-block-line {
+        width: 10px;
+      }
+      .content-block.is-mobile .content-block-text {
+        font-size: var(--text-base);
+        line-height: 1.53;
+      }
+    </style>
+  </head>
+  <body x-data="styleGuide()">
+    <div class="container">
+      <h1
+        style="
+          font-family: var(--font-primary);
+          font-size: var(--text-4xl);
+          margin: var(--space-5) 0;
+          text-align: center;
+          color: var(--color-dark);
+        "
+      >
+        Brand Style Guide
+      </h1>
+
+      <!-- Colors Section -->
+      <div class="section">
+        <h2 class="section-title">Colors</h2>
+        <div class="color-grid">
+          <template x-for="color in colors">
+            <div class="color-swatch" @click="copyToClipboard(color.var)">
+              <div
+                class="color-preview"
+                :style="`background-color: var(${color.var})`"
+              ></div>
+              <div class="color-info">
+                <div class="color-name" x-text="color.name"></div>
+                <div class="color-value" x-text="color.hex"></div>
+              </div>
+            </div>
+          </template>
+        </div>
+      </div>
+
+      <!-- Typography Section -->
+      <div class="section">
+        <h2 class="section-title">Typography</h2>
+        <div class="subsection">
+          <h3 class="subsection-title">Fonts</h3>
+          <div class="type-sample">
+            <div class="type-label">Primary Font (Headings, Buttons)</div>
+            <div
+              class="font-montserrat"
+              style="
+                font-size: var(--text-2xl);
+                font-weight: var(--font-weight-bold);
+              "
+            >
+              Montserrat
+            </div>
+          </div>
+          <div class="type-sample">
+            <div class="type-label">Secondary Font (Navigation, Text)</div>
+            <div
+              class="font-hind"
+              style="
+                font-size: var(--text-2xl);
+                font-weight: var(--font-weight-medium);
+              "
+            >
+              Hind
+            </div>
+          </div>
+        </div>
+        <div class="subsection">
+          <h3 class="subsection-title">Headers</h3>
+          <div class="type-sample">
+            <div class="type-label">Header Large - 40px / 900</div>
+            <div
+              class="font-montserrat"
+              style="
+                font-size: var(--text-4xl);
+                font-weight: var(--font-weight-black);
+                text-transform: uppercase;
+              "
+            >
+              Page Header
+            </div>
+          </div>
+          <div class="type-sample">
+            <div class="type-label">Header Medium - 35px / 900</div>
+            <div
+              class="font-montserrat"
+              style="
+                font-size: var(--text-3xl);
+                font-weight: var(--font-weight-black);
+                text-transform: uppercase;
+              "
+            >
+              Section Header
+            </div>
+          </div>
+          <div class="type-sample">
+            <div class="type-label">Nav Link - 25px / 600 (Active)</div>
+            <div
+              class="font-hind"
+              style="
+                font-size: var(--text-2xl);
+                font-weight: var(--font-weight-semibold);
+              "
+            >
+              Navigation Link
+            </div>
+          </div>
+          <div class="type-sample">
+            <div class="type-label">Sub-Nav Link - 20px / 500</div>
+            <div
+              class="font-hind"
+              style="
+                font-size: var(--text-xl);
+                font-weight: var(--font-weight-medium);
+                text-transform: uppercase;
+              "
+            >
+              Sub-Nav Link
+            </div>
+          </div>
+        </div>
+        <div class="subsection">
+          <h3 class="subsection-title">Body Text</h3>
+          <div class="type-sample">
+            <div class="type-label">Desktop Paragraph - 18px / 500</div>
+            <div
+              class="font-hind"
+              style="
+                font-size: var(--text-lg);
+                font-weight: var(--font-weight-medium);
+              "
+            >
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            </div>
+          </div>
+          <div class="type-sample">
+            <div class="type-label">Mobile Paragraph - 16px / 500</div>
+            <div
+              class="font-hind"
+              style="
+                font-size: var(--text-base);
+                font-weight: var(--font-weight-medium);
+              "
+            >
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Components Section -->
+      <div class="section">
+        <h2 class="section-title">Components</h2>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Paragraph Content Block</h3>
+          <div
+            class="component-grid"
+            style="grid-template-columns: 1fr; gap: var(--space-6)"
+          >
+            <!-- Desktop / Normal -->
+            <div>
+              <div class="component-label">Desktop - Normal Layout</div>
+              <div class="content-block">
+                <div class="content-block-line"></div>
+                <div class="content-block-main">
+                  <p class="content-block-text">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                    do eiusmod tempor incididunt ut labore et dolore magna
+                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                  </p>
+                  <div class="content-block-video"></div>
+                </div>
+              </div>
+            </div>
+            <!-- Desktop / Reversed -->
+            <div>
+              <div class="component-label">Desktop - Reversed Layout</div>
+              <div class="content-block">
+                <div class="content-block-line"></div>
+                <div class="content-block-main is-reversed">
+                  <p class="content-block-text">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                    do eiusmod tempor incididunt ut labore et dolore magna
+                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                  </p>
+                  <div class="content-block-video"></div>
+                </div>
+              </div>
+            </div>
+            <!-- Mobile / Normal -->
+            <div>
+              <div class="component-label">Mobile - Normal Layout</div>
+              <div class="content-block is-mobile">
+                <div class="content-block-line"></div>
+                <div class="content-block-main">
+                  <p class="content-block-text">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                    do eiusmod tempor incididunt ut labore et dolore magna
+                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                  </p>
+                  <div class="content-block-video"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Navigation</h3>
+          <div class="component-preview">
+            <div
+              class="component-grid"
+              style="grid-template-columns: 1fr; gap: var(--space-6)"
+            >
+              <div>
+                <div class="component-label">Default State</div>
+                <div class="nav-item">
+                  <div class="nav-icon-container">
+                    <div class="nav-icon-placeholder"></div>
+                  </div>
+                  <span class="nav-text">Dashboard</span>
+                </div>
+              </div>
+              <div>
+                <div class="component-label">Hover State</div>
+                <div class="nav-item">
+                  <div class="nav-icon-container">
+                    <div class="nav-icon-placeholder"></div>
+                  </div>
+                  <span class="nav-text">Analytics</span>
+                </div>
+              </div>
+              <div>
+                <div class="component-label">Selected State</div>
+                <div class="nav-item is-selected">
+                  <div class="nav-icon-container">
+                    <div class="nav-icon-placeholder"></div>
+                  </div>
+                  <span class="nav-text">Settings</span>
+                </div>
+              </div>
+              <div>
+                <div class="component-label">
+                  Selected State with Sub-Navigation
+                </div>
+                <div class="nav-group">
+                  <div class="nav-item is-selected">
+                    <div class="nav-icon-container">
+                      <div class="nav-icon-placeholder"></div>
+                    </div>
+                    <span class="nav-text">Reports</span>
+                  </div>
+                  <div class="sub-nav">
+                    <div class="sub-nav-item is-selected">
+                      <div class="sub-nav-indicator"></div>
+                      <span class="sub-nav-text">Sales</span>
+                    </div>
+                    <div class="sub-nav-item">
+                      <div class="sub-nav-indicator"></div>
+                      <span class="sub-nav-text">Traffic</span>
+                    </div>
+                    <div class="sub-nav-item">
+                      <div class="sub-nav-indicator"></div>
+                      <span class="sub-nav-text">Users</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Buttons</h3>
+          <div class="component-grid" style="align-items: center">
+            <div>
+              <div class="component-label">Copy Button</div>
+              <button class="btn btn-copy">
+                <div class="icon-copy">
+                  <div class="icon-copy-rect1"></div>
+                  <div class="icon-copy-rect2"></div>
+                </div>
+                <span class="btn-text">Copy</span>
+              </button>
+            </div>
+            <div>
+              <div class="component-label">Copied State</div>
+              <button class="btn btn-copy is-copied">
+                <div class="icon-done"><div class="icon-done-check"></div></div>
+                <span class="btn-text">Copied</span>
+              </button>
+            </div>
+            <div>
+              <div class="component-label">Learn More Button</div>
+              <button class="btn btn-learn-more">
+                <span class="btn-text">Learn More</span>
+                <div class="btn-circle"></div>
+              </button>
+            </div>
+          </div>
+
+          <h3 class="subsection-title" style="margin-top: var(--space-6)">
+            Timer Buttons
+          </h3>
+          <p style="margin-bottom: var(--space-4); max-width: 60ch">
+            The default button uses the `Forest Shadow` color. It changes to
+            `Midnight Navy` on hover. When selected, it stays `Midnight Navy`
+            and the timer bar underneath becomes visible.
+          </p>
+          <div class="flex flex-wrap justify-center items-center gap-5">
+            <div class="btn-timer-container">
+              <div class="component-label">Desktop: Default & Hover</div>
+              <button class="btn btn-timer">
+                <span class="btn-text">Click</span>
+              </button>
+              <div class="timer-bar"></div>
+            </div>
+            <div class="btn-timer-container is-selected">
+              <div class="component-label">Desktop: Selected</div>
+              <button class="btn btn-timer">
+                <span class="btn-text">Click</span>
+              </button>
+              <div class="timer-bar"></div>
+            </div>
+            <div class="btn-timer-container is-mobile">
+              <div class="component-label">Mobile: Default & Hover</div>
+              <button class="btn btn-timer">
+                <span class="btn-text">Click</span>
+              </button>
+              <div class="timer-bar"></div>
+            </div>
+            <div class="btn-timer-container is-selected is-mobile">
+              <div class="component-label">Mobile: Selected</div>
+              <button class="btn btn-timer">
+                <span class="btn-text">Click</span>
+              </button>
+              <div class="timer-bar"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Cards</h3>
+          <div>
+            <div class="component-label">Info Card</div>
+            <div class="info-card">
+              <div class="info-card-header">
+                <button class="btn btn-copy">
+                  <div class="icon-copy">
+                    <div class="icon-copy-rect1"></div>
+                    <div class="icon-copy-rect2"></div>
+                  </div>
+                  <span class="btn-text">Copy</span>
+                </button>
+              </div>
+              <div class="info-card-content">
+                <div class="info-card-title">Local Tips</div>
+                <div class="info-card-phone">204-786-8477</div>
+                <div class="info-card-description">
+                  Call Locally within Winnipeg
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <h3 class="subsection-title" style="margin-top: var(--space-6)">
+            Success Cards
+          </h3>
+          <div class="component-grid">
+            <div>
+              <div class="component-label">Desktop: Number First</div>
+              <div class="success-card">
+                <div class="success-card-header">000</div>
+                <div class="success-card-body">This is some sentence</div>
+              </div>
+            </div>
+            <div>
+              <div class="component-label">Desktop: Text First</div>
+              <div class="success-card is-reversed">
+                <div class="success-card-header">000</div>
+                <div class="success-card-body">This is some sentence</div>
+              </div>
+            </div>
+            <div>
+              <div class="component-label">Mobile Version</div>
+              <div class="success-card is-mobile">
+                <div class="success-card-header">000</div>
+                <div class="success-card-body">This is some sentence</div>
+              </div>
+            </div>
+            <div>
+              <div class="component-label">With Icon (Bottom)</div>
+              <div class="success-card">
+                <div class="success-card-header">000</div>
+                <div class="success-card-body">This is some sentence</div>
+                <div class="success-card-icon"></div>
+              </div>
+            </div>
+            <div>
+              <div class="component-label">With Icon (Top)</div>
+              <div class="success-card is-reversed">
+                <div class="success-card-header">000</div>
+                <div class="success-card-body">This is some sentence</div>
+                <div class="success-card-icon"></div>
+              </div>
+            </div>
+            <div>
+              <div class="component-label">Sandwich Layout</div>
+              <div class="success-card">
+                <div class="success-card-body">Top sentence</div>
+                <div class="success-card-header">000</div>
+                <div class="success-card-body">Bottom sentence</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Footer</h3>
+          <div>
+            <div class="component-label">Site Footer</div>
+            <div class="footer">
+              <div class="footer-content-grid">
+                <div class="footer-column">
+                  <h4 class="footer-heading">Contact Information</h4>
+                  <p class="footer-body">
+                    204-986-5426 info@winnipegcrimestoppers.org
+                  </p>
+                </div>
+                <div class="footer-column">
+                  <h4 class="footer-heading">Mailing Address</h4>
+                  <p class="footer-body">
+                    Winnipeg Crime Stoppers PO Box 48089, RPO Lakewood Winnipeg
+                    Manitoba R2J 2M8
+                  </p>
+                </div>
+                <div class="footer-column">
+                  <h4 class="footer-heading">Follow Us</h4>
+                  <p class="footer-body">
+                    Facebook YouTube X (Formerly Known as Twitter)
+                  </p>
+                </div>
+              </div>
+              <div class="footer-warning">
+                <div class="footer-warning-icon-wrapper">
+                  <div class="icon-alarm"></div>
+                </div>
+                <p class="footer-warning-text">
+                  THE FOLLOWING CONTACTS ARE FOR ADMINISTRATIVE PURPOSES ONLY…
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function styleGuide() {
+        return {
+          colors: [
+            {
+              name: 'Primary (Fresh Lime)',
+              var: '--color-primary',
+              hex: '#8CC63F',
+            },
+            {
+              name: 'Secondary (Sage Mist)',
+              var: '--color-secondary',
+              hex: '#B8D9B4',
+            },
+            {
+              name: 'Accent (Storm Blue)',
+              var: '--color-accent',
+              hex: '#6F8EA7',
+            },
+            {
+              name: 'Dark (Midnight Navy)',
+              var: '--color-dark',
+              hex: '#09161C',
+            },
+            {
+              name: 'Dark Alt (Forest Shadow)',
+              var: '--color-dark-alt',
+              hex: '#42453E',
+            },
+            {
+              name: 'Light (Cool White)',
+              var: '--color-light',
+              hex: '#F7FAFC',
+            },
+            {
+              name: 'Danger (Crimson Red)',
+              var: '--color-danger',
+              hex: '#BF1E2E',
+            },
+          ],
+          copyToClipboard(cssVar) {
+            navigator.clipboard.writeText(`var(${cssVar})`)
+            alert(`Copied CSS Variable: var(${cssVar})`)
+          },
+        }
+      }
+    </script>
+  </body>
+</html>

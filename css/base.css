@@ -1,0 +1,68 @@
+/* Base Styles - CSS Reset and Global Typography */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-secondary);
+  font-size: var(--text-base);
+  line-height: 1.5;
+  color: var(--color-dark);
+  background-color: var(--color-light);
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-primary);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.2;
+  margin-bottom: var(--space-4);
+}
+
+h1 {
+  font-size: var(--text-4xl);
+  font-weight: var(--font-weight-black);
+  text-transform: uppercase;
+}
+
+h2 {
+  font-size: var(--text-3xl);
+  font-weight: var(--font-weight-black);
+  text-transform: uppercase;
+}
+
+h3 {
+  font-size: var(--text-2xl);
+  font-weight: var(--font-weight-bold);
+}
+
+h4 {
+  font-size: var(--text-xl);
+  font-weight: var(--font-weight-bold);
+}
+
+p {
+  margin-bottom: var(--space-4);
+  font-size: var(--text-lg);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.53;
+}
+
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--color-primary);
+}
+
+/* Responsive Typography */
+@media (max-width: 768px) {
+  p {
+    font-size: var(--text-base);
+  }
+}

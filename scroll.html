@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alpine.js Single Page App - Enhanced</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.13.3/cdn.min.js" defer></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .app-container {
+            display: flex;
+            min-height: 100vh;
+            max-width: 1400px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Sidebar Navigation */
+        .sidebar {
+            width: 280px;
+            background: linear-gradient(180deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 2rem 0;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar h2 {
+            padding: 0 2rem 2rem;
+            font-size: 1.5rem;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 2rem;
+            background: linear-gradient(45deg, #3498db, #2ecc71);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-section {
+            margin-bottom: 2rem;
+        }
+
+        .nav-section-title {
+            padding: 0 2rem 1rem;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .nav-list {
+            list-style: none;
+        }
+
+        .nav-item {
+            margin: 0.5rem 0;
+        }
+
+        .nav-link {
+            display: block;
+            padding: 1rem 2rem;
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .nav-link:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .nav-link.active {
+            background: linear-gradient(90deg, rgba(52, 152, 219, 0.2), rgba(46, 204, 113, 0.2));
+            border-left-color: #3498db;
+            color: white;
+            font-weight: 600;
+        }
+
+        .nav-link.active::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: linear-gradient(180deg, #3498db, #2ecc71);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            margin-left: 280px;
+            overflow-y: auto;
+            height: 100vh;
+            scroll-behavior: smooth;
+            position: relative;
+        }
+
+        /* Page Navigation Mode */
+        .page-content {
+            padding: 4rem 3rem;
+            min-height: calc(100vh - 8rem);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(240, 248, 255, 0.9));
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Scroll Mode */
+        .content-section {
+            min-height: 100vh;
+            padding: 4rem 3rem;
+            position: relative;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .content-section:nth-child(odd) {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(240, 248, 255, 0.9));
+        }
+
+        .content-section:nth-child(even) {
+            background: linear-gradient(135deg, rgba(248, 250, 252, 0.9), rgba(255, 255, 255, 0.9));
+        }
+
+        .section-header, .page-header {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            background: linear-gradient(45deg, #2c3e50, #3498db);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
+
+        .section-content, .page-text {
+            font-size: 1.1rem;
+            color: #444;
+            max-width: 800px;
+            line-height: 1.8;
+        }
+
+        .section-content p, .page-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(52, 152, 219, 0.1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #3498db, #2ecc71);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        /* Mode Toggle */
+        .mode-toggle {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            z-index: 1001;
+            background: #2c3e50;
+            color: white;
+            border: none;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .mode-toggle:hover {
+            background: #3498db;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Breadcrumb for page mode */
+        .breadcrumb {
+            background: rgba(52, 152, 219, 0.1);
+            padding: 1rem 3rem;
+            color: #2c3e50;
+            font-weight: 500;
+            border-bottom: 1px solid rgba(52, 152, 219, 0.2);
+        }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            z-index: 1001;
+            background: #2c3e50;
+            color: white;
+            border: none;
+            padding: 0.75rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
+        /* Scroll Progress Indicator */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 280px;
+            right: 0;
+            height: 4px;
+            background: rgba(52, 152, 219, 0.2);
+            z-index: 999;
+        }
+
+        .scroll-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #3498db, #2ecc71);
+            transition: width 0.1s ease;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: fixed;
+                top: 0;
+                transform: translateX(-100%);
+                z-index: 1000;
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .content-section, .page-content {
+                padding: 3rem 1.5rem;
+            }
+
+            .section-header, .page-header {
+                font-size: 2rem;
+            }
+
+            .scroll-progress {
+                left: 0;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .mode-toggle {
+                top: 1rem;
+                right: 1rem;
+                padding: 0.75rem 1rem;
+                font-size: 0.8rem;
+            }
+        }
+
+        /* Hide content based on mode */
+        .scroll-mode .page-content {
+            display: none;
+        }
+
+        .page-mode .content-section {
+            display: none;
+        }
+
+        .page-mode .scroll-progress {
+            display: none;
+        }
+
+        /* Overlay for mobile menu */
+        .mobile-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 99;
+            display: none;
+        }
+
+        .mobile-overlay.show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div x-data="spaApp()" x-init="init()" :class="currentMode + '-mode'">
+        <!-- Mode Toggle -->
+        <button class="mode-toggle" @click="toggleMode()" x-text="currentMode === 'scroll' ? 'Switch to Page Mode' : 'Switch to Scroll Mode'"></button>
+
+        <!-- Mobile Menu Toggle -->
+        <button class="menu-toggle" @click="toggleMobile()">☰</button>
+
+        <!-- Mobile Overlay -->
+        <div class="mobile-overlay" :class="{ 'show': mobileMenuOpen }" @click="mobileMenuOpen = false"></div>
+
+        <!-- Scroll Progress Indicator (only in scroll mode) -->
+        <div class="scroll-progress" x-show="currentMode === 'scroll'">
+            <div class="scroll-progress-bar" :style="`width: ${scrollProgress}%`"></div>
+        </div>
+
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar" :class="{ 'open': mobileMenuOpen }">
+            <h2>Navigation</h2>
+            
+            <!-- Scroll Mode Navigation -->
+            <div class="nav-section" x-show="currentMode === 'scroll'">
+                <div class="nav-section-title">Scroll Sections</div>
+                <ul class="nav-list">
+                    <template x-for="section in scrollSections" :key="section.id">
+                        <li class="nav-item">
+                            <a class="nav-link" 
+                               :class="{ 'active': activeSection === section.id }"
+                               @click="scrollToSection(section.id)"
+                               x-text="section.title">
+                            </a>
+                        </li>
+                    </template>
+                </ul>
+            </div>
+
+            <!-- Page Mode Navigation -->
+            <div class="nav-section" x-show="currentMode === 'page'">
+                <div class="nav-section-title">Pages</div>
+                <ul class="nav-list">
+                    <template x-for="page in pages" :key="page.id">
+                        <li class="nav-item">
+                            <a class="nav-link" 
+                               :class="{ 'active': currentPage === page.id }"
+                               @click="navigateToPage(page.id)"
+                               x-text="page.title">
+                            </a>
+                        </li>
+                    </template>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content" @scroll="handleScroll($event)" x-ref="mainContent">
+            <!-- Breadcrumb for Page Mode -->
+            <div class="breadcrumb" x-show="currentMode === 'page'">
+                <span>You are here: </span>
+                <template x-for="page in pages">
+                    <span x-show="currentPage === page.id" x-text="page.title"></span>
+                </template>
+            </div>
+
+            <!-- Page Mode Content -->
+            <template x-for="page in pages" :key="page.id">
+                <div class="page-content" x-show="currentMode === 'page' && currentPage === page.id">
+                    <h1 class="page-header" x-text="page.title"></h1>
+                    <div class="page-text" x-html="page.content"></div>
+                </div>
+            </template>
+
+            <!-- Scroll Mode Content -->
+            <div x-show="currentMode === 'scroll'">
+                <!-- Home Section -->
+                <section id="home" class="content-section">
+                    <h1 class="section-header">Welcome Home</h1>
+                    <div class="section-content">
+                        <p>This is a proof of concept single-page application built with Alpine.js that demonstrates two different navigation modes:</p>
+                        <p><strong>Scroll Mode:</strong> Traditional scrolling with dynamic navigation highlighting</p>
+                        <p><strong>Page Mode:</strong> Single-page app navigation that loads different "pages" without refresh</p>
+                        
+                        <div class="feature-grid">
+                            <div class="feature-card">
+                                <div class="feature-icon">🚀</div>
+                                <h3>Fast Performance</h3>
+                                <p>Built with Alpine.js for minimal overhead and lightning-fast interactions.</p>
+                            </div>
+                            <div class="feature-card">
+                                <div class="feature-icon">📱</div>
+                                <h3>Responsive Design</h3>
+                                <p>Looks great on desktop, tablet, and mobile devices with adaptive layouts.</p>
+                            </div>
+                            <div class="feature-card">
+                                <div class="feature-icon">🎯</div>
+                                <h3>Dual Navigation</h3>
+                                <p>Switch between scroll-based and page-based navigation modes instantly.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- About Section -->
+                <section id="about" class="content-section">
+                    <h1 class="section-header">About This App</h1>
+                    <div class="section-content">
+                        <p>This application showcases modern web development techniques using Alpine.js. In scroll mode, the navigation intelligently tracks which section is currently in view and updates accordingly.</p>
+                        <p>The scroll spy functionality uses proper intersection observer implementation with optimized thresholds to ensure accurate section detection.</p>
+                        <p>Click the toggle button in the top-right to switch to page mode and see how single-page app navigation works!</p>
+                        
+                        <div class="feature-grid">
+                            <div class="feature-card">
+                                <div class="feature-icon">🔧</div>
+                                <h3>Lightweight Framework</h3>
+                                <p>Alpine.js provides reactive and declarative nature with minimal footprint.</p>
+                            </div>
+                            <div class="feature-card">
+                                <div class="feature-icon">⚡</div>
+                                <h3>No Build Step</h3>
+                                <p>Works directly in the browser without complex build tools or compilation.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Services Section -->
+                <section id="services" class="content-section">
+                    <h1 class="section-header">Our Services</h1>
+                    <div class="section-content">
+                        <p>We offer comprehensive web development services that combine cutting-edge technology with thoughtful user experience design.</p>
+                        
+                        <div class="feature-grid">
+                            <div class="feature-card">
+                                <div class="feature-icon">💻</div>
+                                <h3>Web Development</h3>
+                                <p>Custom web applications built with modern frameworks and best practices.</p>
+                            </div>
+                            <div class="feature-card">
+                                <div class="feature-icon">🎨</div>
+                                <h3>UI/UX Design</h3>
+                                <p>Beautiful, intuitive interfaces designed with user-centered principles.</p>
+                            </div>
+                            <div class="feature-card">
+                                <div class="feature-icon">📊</div>
+                                <h3>Analytics & Optimization</h3>
+                                <p>Data-driven insights and performance optimization for peak efficiency.</p>
+                            </div>
+                            <div class="feature-card">
+                                <div class="feature-icon">🛡️</div>
+                                <h3>Security Audits</h3>
+                                <p>Comprehensive security assessments to protect your digital assets.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Portfolio Section -->
+                <section id="portfolio" class="content-section">
+                    <h1 class="section-header">Portfolio</h1>
+                    <div class="section-content">
+                        <p>Explore our portfolio of successful projects that demonstrate our expertise in creating engaging, high-performance web applications.</p>
+                        
+                        <div class="feature-grid">
+                            <div class="feature-card">
+                                <div class="feature-icon">🏢</div>
+                                <h3>Enterprise Dashboard</h3>
+                                <p>Comprehensive business intelligence dashboard with real-time data visualization.</p>
+                            </div>
+                            <div class="feature-card">
+                                <div class="feature-icon">🛒</div>
+                                <h3>E-commerce Platform</h3>
+                                <p>Modern online shopping experience with seamless checkout and inventory management.</p>
+                            </div>
+                            <div class="feature-card">
+                                <div class="feature-icon">📱</div>
+                                <h3>Mobile App</h3>
+                                <p>Cross-platform mobile application with native performance and offline capabilities.</p>
+                            </div>
+                            <div class="feature-card">
+                                <div class="feature-icon">🎮</div>
+                                <h3>Gaming Platform</h3>
+                                <p>Real-time multiplayer gaming platform with WebSocket integration.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Contact Section -->
+                <section id="contact" class="content-section">
+                    <h1 class="section-header">Get In Touch</h1>
+                    <div class="section-content">
+                        <p>Ready to start your next project? We'd love to hear from you! Our team is passionate about creating innovative web solutions.</p>
+                        
+                        <div class="feature-grid">
+                            <div class="feature-card">
+                                <div class="feature-icon">📧</div>
+                                <h3>Email Us</h3>
+                                <p>Send us a message and we'll get back to you within 24 hours.</p>
+                            </div>
+                            <div class="feature-card">
+                                <div class="feature-icon">📞</div>
+                                <h3>Call Us</h3>
+                                <p>Speak directly with our team to get immediate answers to your questions.</p>
+                            </div>
+                            <div class="feature-card">
+                                <div class="feature-icon">📍</div>
+                                <h3>Visit Us</h3>
+                                <p>Drop by our office for a coffee and a chat about your project.</p>
+                            </div>
+                            <div class="feature-card">
+                                <div class="feature-icon">💬</div>
+                                <h3>Live Chat</h3>
+                                <p>Get instant support through our live chat system, available 24/7.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        function spaApp() {
+            return {
+                currentMode: 'scroll',
+                activeSection: 'home',
+                currentPage: 'dashboard',
+                scrollProgress: 0,
+                mobileMenuOpen: false,
+                isScrolling: false,
+                scrollTimeout: null,
+                sectionVisibility: {},
+                
+                scrollSections: [
+                    { id: 'home', title: 'Home' },
+                    { id: 'about', title: 'About' },
+                    { id: 'services', title: 'Services' },
+                    { id: 'portfolio', title: 'Portfolio' },
+                    { id: 'contact', title: 'Contact' }
+                ],
+
+                pages: [
+                    {
+                        id: 'dashboard',
+                        title: 'Dashboard',
+                        content: `
+                            <p>Welcome to your dashboard! This is a complete page that loads without refreshing the browser. Notice how the URL updates to reflect the current page!</p>
+                            <div class="feature-grid">
+                                <div class="feature-card">
+                                    <div class="feature-icon">📊</div>
+                                    <h3>Analytics</h3>
+                                    <p>View real-time analytics and performance metrics for your projects.</p>
+                                </div>
+                                <div class="feature-card">
+                                    <div class="feature-icon">⚡</div>
+                                    <h3>Quick Actions</h3>
+                                    <p>Access frequently used features and shortcuts from your dashboard.</p>
+                                </div>
+                                <div class="feature-card">
+                                    <div class="feature-icon">🔔</div>
+                                    <h3>Notifications</h3>
+                                    <p>Stay updated with important alerts and system notifications.</p>
+                                </div>
+                            </div>
+                            <p>This demonstrates how single-page applications work - each "page" is actually loaded content within the same HTML document, providing instant navigation without the delay of traditional page loads.</p>
+                        `
+                    },
+                    {
+                        id: 'profile',
+                        title: 'User Profile',
+                        content: `
+                            <p>This is your user profile page. Again, notice how this loads instantly without any page refresh - that's the power of single-page applications!</p>
+                            <div class="feature-grid">
+                                <div class="feature-card">
+                                    <div class="feature-icon">👤</div>
+                                    <h3>Personal Info</h3>
+                                    <p>Manage your personal information, contact details, and preferences.</p>
+                                </div>
+                                <div class="feature-card">
+                                    <div class="feature-icon">🔒</div>
+                                    <h3>Security</h3>
+                                    <p>Update your password, enable two-factor authentication, and manage security settings.</p>
+                                </div>
+                                <div class="feature-card">
+                                    <div class="feature-icon">🎨</div>
+                                    <h3>Preferences</h3>
+                                    <p>Customize your interface, themes, and application behavior.</p>
+                                </div>
+                            </div>
+                            <p>Try clicking between different pages in the navigation to see how smooth and instant the transitions are compared to traditional websites.</p>
+                        `
+                    },
+                    {
+                        id: 'settings',
+                        title: 'Settings',
+                        content: `
+                            <p>Application settings and configuration options. This page loads immediately because it's all handled within the same application context.</p>
+                            <div class="feature-grid">
+                                <div class="feature-card">
+                                    <div class="feature-icon">⚙️</div>
+                                    <h3>General Settings</h3>
+                                    <p>Configure general application behavior, language, and regional settings.</p>
+                                </div>
+                                <div class="feature-card">
+                                    <div class="feature-icon">🔔</div>
+                                    <h3>Notifications</h3>
+                                    <p>Control which notifications you receive and how they're delivered.</p>
+                                </div>
+                                <div class="feature-card">
+                                    <div class="feature-icon">🔌</div>
+                                    <h3>Integrations</h3>
+                                    <p>Manage third-party integrations and API connections.</p>
+                                </div>
+                                <div class="feature-card">
+                                    <div class="feature-icon">💾</div>
+                                    <h3>Data & Storage</h3>
+                                    <p>Control data retention, export options, and storage preferences.</p>
+                                </div>
+                            </div>
+                            <p>The beauty of this approach is that users get instant feedback and navigation, creating a much more responsive and native app-like experience.</p>
+                        `
+                    },
+                    {
+                        id: 'help',
+                        title: 'Help & Support',
+                        content: `
+                            <p>Need help? You're in the right place! This help section demonstrates how different types of content can be loaded dynamically.</p>
+                            <div class="feature-grid">
+                                <div class="feature-card">
+                                    <div class="feature-icon">📚</div>
+                                    <h3>Documentation</h3>
+                                    <p>Browse comprehensive guides and tutorials to get the most out of the platform.</p>
+                                </div>
+                                <div class="feature-card">
+                                    <div class="feature-icon">💬</div>
+                                    <h3>Live Chat</h3>
+                                    <p>Get instant help from our support team through our live chat system.</p>
+                                </div>
+                                <div class="feature-card">
+                                    <div class="feature-icon">🎥</div>
+                                    <h3>Video Tutorials</h3>
+                                    <p>Watch step-by-step video guides for common tasks and features.</p>
+                                </div>
+                                <div class="feature-card">
+                                    <div class="feature-icon">❓</div>
+                                    <h3>FAQ</h3>
+                                    <p>Find quick answers to the most commonly asked questions.</p>
+                                </div>
+                            </div>
+                            <p>Notice how each page transition is instant and smooth. In a traditional website, each click would require a full page reload from the server.</p>
+                        `
+                    }
+                ],
+
+                init() {
+                    this.setupRouting();
+                    this.handleInitialRoute();
+                    
+                    // Initialize section visibility tracking
+                    this.scrollSections.forEach(section => {
+                        this.sectionVisibility[section.id] = 0;
+                    });
+                },
+
+                setupRouting() {
+                    window.addEventListener('popstate', (event) => {
+                        this.handleRouteChange();
+                    });
+                },
+
+                handleInitialRoute() {
+                    this.handleRouteChange();
+                },
+
+                handleRouteChange() {
+                    const hash = window.location.hash.substring(1);
+                    
+                    if (hash) {
+                        const scrollSection = this.scrollSections.find(s => s.id === hash);
+                        if (scrollSection) {
+                            this.currentMode = 'scroll';
+                            this.activeSection = hash;
+                            this.$nextTick(() => {
+                                this.scrollToSection(hash);
+                            });
+                            return;
+                        }
+
+                        const page = this.pages.find(p => p.id === hash);
+                        if (page) {
+                            this.currentMode = 'page';
+                            this.currentPage = hash;
+                            return;
+                        }
+                    }
+
+                    this.currentMode = 'page';
+                    this.currentPage = 'dashboard';
+                    this.updateURL('dashboard');
+                },
+
+                updateURL(route) {
+                    const newURL = `${window.location.pathname}#${route}`;
+                    window.history.pushState({ route }, '', newURL);
+                },
+
+                handleScroll(event) {
+                    if (this.currentMode === 'scroll') {
+                        const container = event.target;
+                        const scrollTop = container.scrollTop;
+                        const scrollHeight = container.scrollHeight - container.clientHeight;
+                        this.scrollProgress = Math.min((scrollTop / scrollHeight) * 100, 100);
+
+                        // Clear existing timeout
+                        if (this.scrollTimeout) {
+                            clearTimeout(this.scrollTimeout);
+                        }
+
+                        // Set scrolling state
+                        this.isScrolling = true;
+
+                        // Update active section based on scroll position
+                        this.updateActiveSection(container);
+
+                        // Reset scrolling state after scroll ends
+                        this.scrollTimeout = setTimeout(() => {
+                            this.isScrolling = false;
+                        }, 150);
+                    }
+                },
+
+                updateActiveSection(container) {
+                    const scrollTop = container.scrollTop;
+                    const containerHeight = container.clientHeight;
+                    const scrollCenter = scrollTop + (containerHeight / 2);
+
+                    let closestSection = null;
+                    let closestDistance = Infinity;
+
+                    // Find the section closest to the center of the viewport
+                    this.scrollSections.forEach(section => {
+                        const element = document.getElementById(section.id);
+                        if (element) {
+                            const rect = element.getBoundingClientRect();
+                            const absoluteTop = scrollTop + rect.top;
+                            const sectionCenter = absoluteTop + (element.offsetHeight / 2);
+                            const distance = Math.abs(scrollCenter - sectionCenter);
+
+                            if (distance < closestDistance) {
+                                closestDistance = distance;
+                                closestSection = section.id;
+                            }
+                        }
+                    });
+
+                    if (closestSection && closestSection !== this.activeSection) {
+                        this.activeSection = closestSection;
+                        if (!this.isScrolling) {
+                            this.updateURL(closestSection);
+                        }
+                    }
+                },
+
+                scrollToSection(sectionId) {
+                    if (this.currentMode === 'scroll') {
+                        const element = document.getElementById(sectionId);
+                        if (element) {
+                            const mainContent = this.$refs.mainContent;
+                            const offsetTop = element.offsetTop;
+                            
+                            // Temporarily set active section to prevent flickering
+                            this.activeSection = sectionId;
+                            
+                            mainContent.scrollTo({
+                                top: offsetTop,
+                                behavior: 'smooth'
+                            });
+                            
+                            this.mobileMenuOpen = false;
+                            this.updateURL(sectionId);
+                        }
+                    }
+                },
+
+                navigateToPage(pageId) {
+                    this.currentPage = pageId;
+                    this.mobileMenuOpen = false;
+                    this.updateURL(pageId);
+                },
+
+                toggleMode() {
+                    const newMode = this.currentMode === 'scroll' ? 'page' : 'scroll';
+                    this.currentMode = newMode;
+                    
+                    if (newMode === 'scroll') {
+                        this.$nextTick(() => {
+                            this.updateURL(this.activeSection);
+                        });
+                    } else {
+                        this.updateURL(this.currentPage);
+                    }
+                },
+
+                toggleMobile() {
+                    this.mobileMenuOpen = !this.mobileMenuOpen;
+                }
+            }
+        }
+    </script>
+</body>
+</html>

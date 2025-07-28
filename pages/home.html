@@ -1,0 +1,242 @@
+<div class="page-home">
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <h1>Stop Crime Anonymously</h1>
+            <p class="hero-description">
+                Your identity is protected when you provide information about crimes in Winnipeg. 
+                Help make your community safer by reporting what you know.
+            </p>
+            
+            <div class="hero-actions">
+                <div class="contact-cards">
+                    <!-- Phone Contact Card -->
+                    <div class="info-card">
+                        <div class="info-card-header">
+                            <button class="btn btn-copy" @click="copyToClipboard('204-786-8477')">
+                                <div class="icon-copy">
+                                    <div class="icon-copy-rect1"></div>
+                                    <div class="icon-copy-rect2"></div>
+                                </div>
+                                <span class="btn-text">Copy</span>
+                            </button>
+                        </div>
+                        <div class="info-card-content">
+                            <div class="info-card-title">Local Tips</div>
+                            <div class="info-card-phone">204-786-8477</div>
+                            <div class="info-card-description">
+                                Call Locally within Winnipeg
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Online Contact Card -->
+                    <div class="info-card">
+                        <div class="info-card-header">
+                            <button class="btn btn-learn-more" @click="window.open('https://winnipegcrimestoppers.org/submit-tip', '_blank')">
+                                <span class="btn-text">Submit Tip</span>
+                                <div class="btn-circle"></div>
+                            </button>
+                        </div>
+                        <div class="info-card-content">
+                            <div class="info-card-title">Online Tips</div>
+                            <div class="info-card-phone">24/7 Available</div>
+                            <div class="info-card-description">
+                                Submit tips securely online
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Who We Are Section -->
+    <section id="who-we-are" class="section">
+        <div class="container">
+            <h2>Who We Are</h2>
+            <div class="content-block">
+                <div class="content-block-line"></div>
+                <div class="content-block-main">
+                    <p class="content-block-text">
+                        Crime Stoppers is a community-based program that encourages members of the public 
+                        to assist local law enforcement agencies in the fight against crime. Our program 
+                        provides a telephone number and web tips to encourage citizens in the community 
+                        to volunteer vital information helpful to law enforcement agencies to fight against crime.
+                    </p>
+                    <div class="success-stats">
+                        <div class="success-card">
+                            <div class="success-card-header">25,000+</div>
+                            <div class="success-card-body">Tips Received Since 1982</div>
+                        </div>
+                        <div class="success-card is-reversed">
+                            <div class="success-card-header">$2.5M+</div>
+                            <div class="success-card-body">In Rewards Paid Out</div>
+                        </div>
+                        <div class="success-card">
+                            <div class="success-card-header">100%</div>
+                            <div class="success-card-body">Anonymous & Confidential</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="section">
+        <div class="container">
+            <h2>How It Works</h2>
+            <div class="content-block">
+                <div class="content-block-line"></div>
+                <div class="content-block-main is-reversed">
+                    <p class="content-block-text">
+                        Crime Stoppers works because it uses a unique three-way call system and special 
+                        computer technology to ensure anonymity. When you call Crime Stoppers, you are 
+                        not required to identify yourself or testify in court. You will be given a code 
+                        number instead of using your name. If your information leads to an arrest, 
+                        you may be eligible for a cash reward.
+                    </p>
+                    <div class="process-steps">
+                        <div class="btn-timer-container">
+                            <div class="btn-timer">
+                                <span class="btn-text">1. Call or Submit Online</span>
+                            </div>
+                            <div class="timer-bar"></div>
+                        </div>
+                        <div class="btn-timer-container is-selected">
+                            <div class="btn-timer">
+                                <span class="btn-text">2. Remain Anonymous</span>
+                            </div>
+                            <div class="timer-bar"></div>
+                        </div>
+                        <div class="btn-timer-container">
+                            <div class="btn-timer">
+                                <span class="btn-text">3. Get Code Number</span>
+                            </div>
+                            <div class="timer-bar"></div>
+                        </div>
+                        <div class="btn-timer-container">
+                            <div class="btn-timer">
+                                <span class="btn-text">4. Eligible for Reward</span>
+                            </div>
+                            <div class="timer-bar"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Methods Section -->
+    <section id="contact-methods" class="section">
+        <div class="container">
+            <h2>Contact Methods</h2>
+            <div class="content-block">
+                <div class="content-block-line"></div>
+                <div class="content-block-main">
+                    <p class="content-block-text">
+                        There are multiple ways to submit your tip to Crime Stoppers. Choose the method 
+                        that works best for you. All methods guarantee your anonymity and eligibility 
+                        for rewards.
+                    </p>
+                    
+                    <div class="contact-methods-grid">
+                        <div class="contact-method">
+                            <h3>Phone</h3>
+                            <p>Call <strong>204-786-8477</strong> to speak with an operator 24/7</p>
+                        </div>
+                        <div class="contact-method">
+                            <h3>Online</h3>
+                            <p>Submit tips through our secure online form available 24/7</p>
+                        </div>
+                        <div class="contact-method">
+                            <h3>Mobile App</h3>
+                            <p>Download the P3 Tips mobile app for iOS and Android devices</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<style>
+/* Page-specific styles */
+.hero-section {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+    padding: var(--space-6) 0;
+    text-align: center;
+    color: var(--color-dark);
+}
+
+.hero-description {
+    font-size: var(--text-xl);
+    max-width: 600px;
+    margin: 0 auto var(--space-6);
+}
+
+.hero-actions {
+    margin-top: var(--space-6);
+}
+
+.contact-cards {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-5);
+    flex-wrap: wrap;
+}
+
+.success-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--space-4);
+    margin-top: var(--space-5);
+}
+
+.process-steps {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+    margin-top: var(--space-5);
+}
+
+.contact-methods-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--space-5);
+    margin-top: var(--space-5);
+}
+
+.contact-method {
+    background: var(--color-light);
+    padding: var(--space-5);
+    border-radius: var(--radius-lg);
+    text-align: center;
+    box-shadow: var(--shadow-md);
+}
+
+.contact-method h3 {
+    color: var(--color-primary);
+    margin-bottom: var(--space-3);
+}
+
+@media (max-width: 768px) {
+    .contact-cards {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .process-steps {
+        flex-direction: column;
+        align-items: center;
+        gap: var(--space-3);
+    }
+    
+    .process-steps .btn-timer-container {
+        width: 100%;
+        max-width: 300px;
+    }
+}
+</style>
