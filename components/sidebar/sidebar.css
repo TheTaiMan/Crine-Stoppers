@@ -1,7 +1,7 @@
 /* Sidebar Component Styles */
 
 .sidebar {
-  width: 220px;
+  width: 240px;
   min-height: 100vh;
   background-color: var(--color-dark);
   padding: var(--space-5);
