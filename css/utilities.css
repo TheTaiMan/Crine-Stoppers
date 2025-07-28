@@ -9,7 +9,7 @@
 
 .section {
   margin-bottom: var(--space-6);
-  background: white;
+  background: var(--color-light);
   padding: var(--space-5);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-md);
