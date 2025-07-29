@@ -140,6 +140,9 @@
   flex-direction: column;
   gap: 1px;
   padding-left: 40px;
+  /* Fast closing for responsive hover behavior */
+  transition: max-height 0.05s ease, opacity 0.05s ease;
+  overflow: hidden;
 }
 
 .sub-nav-item {
@@ -213,12 +216,18 @@
   height: 75px;
   background-color: var(--color-dark);
   display: none;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  padding: 8px;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-end;
+  padding: 0;
   box-sizing: border-box;
   z-index: 50;
+  overflow: hidden;
+  transition: height 0.3s ease;
+}
+
+.mobile-navbar.expanded {
+  height: 100vh; /* Full screen when expanded */
 }
 
 .mobile-navbar-logo {
@@ -252,6 +261,37 @@
 
 .mobile-menu-toggle:hover {
   background-color: var(--color-primary);
+}
+
+.mobile-navbar-bottom-header {
+  height: 75px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px;
+  background-color: var(--color-dark);
+  flex-shrink: 0; /* Prevent shrinking */
+}
+
+.mobile-menu-toggle-right {
+  margin-left: auto; /* Always push to the right */
+}
+
+.menu-icon {
+  width: 45px;
+  height: 45px;
+  transition: transform 0.3s ease;
+}
+
+/* Rotate hamburger icon 90 degrees when menu is closed */
+.mobile-menu-toggle:not(.menu-open) .menu-icon {
+  transform: rotate(0deg);
+}
+
+/* Rotate cross icon 90 degrees when menu is open to form proper + shape */
+.mobile-menu-toggle.menu-open .menu-icon {
+  transform: rotate(90deg);
 }
 
 .hamburger-icon {
@@ -301,10 +341,28 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 0px 7px;
+  justify-content: flex-start; /* Changed from center to flex-start to prevent shifting */
+  padding: 100px 7px 0px; /* Added top padding to maintain visual spacing */
   gap: 20px;
   width: 100%;
+  overflow-y: auto; /* Allow scrolling if content exceeds container */
+}
+
+/* Mobile Sidebar Header Logo (expanded state) */
+.mobile-sidebar-header {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding-left: 1px; /* Align with collapsed logo position (8px container padding - 7px content padding = 1px) */
+  margin-bottom: 20px;
+}
+
+.mobile-sidebar-logo {
+  width: 170px;
+  height: auto;
+  max-height: 58px;
+  object-fit: cover;
 }
 
 .mobile-nav-group {
@@ -318,6 +376,42 @@
 
 .mobile-nav-item-wrapper {
   width: 100%;
+}
+
+.mobile-nav-item-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 5px;
+}
+
+.mobile-nav-arrow-btn {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-secondary);
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+  padding: 0;
+}
+
+.mobile-nav-arrow-btn:hover {
+  color: var(--color-primary);
+}
+
+.mobile-nav-arrow {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.15s ease;
+}
+
+.mobile-nav-arrow-btn.expanded .mobile-nav-arrow {
+  transform: rotate(180deg);
 }
 
 .mobile-nav-item {
@@ -379,6 +473,9 @@
   flex-direction: column;
   gap: 1px;
   padding-left: 40px;
+  overflow: hidden;
+  /* Very fast closing, smooth opening handled by Alpine.js */
+  transition: max-height 0.05s ease, opacity 0.05s ease;
 }
 
 .mobile-sub-nav-item {
@@ -390,9 +487,10 @@
   border-radius: var(--radius-md);
   text-decoration: none;
   color: inherit;
-  transition: all 0.2s ease;
+  transition: all 0.2s ease, transform 0.2s ease;
   overflow: visible;
   flex-shrink: 0;
+  transform: translateY(0);
 }
 
 .mobile-sub-nav-item:hover {

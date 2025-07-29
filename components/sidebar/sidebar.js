@@ -9,6 +9,9 @@ function sidebar() {
         initSidebar() {
             this.loadSidebarContent();
             
+            // Clean up any leftover mobile nav classes
+            document.body.classList.remove('mobile-nav-open');
+            
             // Listen for window resize
             window.addEventListener('resize', () => {
                 this.checkMobile();
@@ -28,6 +31,10 @@ function sidebar() {
                 this.isOpen = false;
             } else {
                 this.isOpen = true;
+                // Close mobile nav and restore scroll when switching to desktop
+                if (this.mobileNavOpen) {
+                    this.closeMobileNav();
+                }
             }
         },
         
@@ -45,14 +52,24 @@ function sidebar() {
         
         toggleMobileNav() {
             this.mobileNavOpen = !this.mobileNavOpen;
+            // Ensure body scroll state matches mobile nav state
+            if (this.mobileNavOpen) {
+                document.body.classList.add('mobile-nav-open');
+            } else {
+                document.body.classList.remove('mobile-nav-open');
+            }
         },
         
         openMobileNav() {
             this.mobileNavOpen = true;
+            // Ensure body scroll is disabled
+            document.body.classList.add('mobile-nav-open');
         },
         
         closeMobileNav() {
             this.mobileNavOpen = false;
+            // Ensure body scroll is restored
+            document.body.classList.remove('mobile-nav-open');
         },
         
         navigateToMobile(path) {
@@ -62,6 +79,7 @@ function sidebar() {
                 window.navigateTo(path);
             }
         },
+        
         
         scrollToSectionMobile(sectionId) {
             this.closeMobileNav();

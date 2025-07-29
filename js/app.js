@@ -367,3 +367,13 @@ function app() {
         }
     };
 }
+
+// Make navigateToSection available globally for mobile navigation
+window.navigateToSection = function(pageId, sectionId) {
+    const appElement = document.querySelector('[x-data*="app()"]');
+    if (appElement && appElement.__x && appElement.__x.$data) {
+        return appElement.__x.$data.navigateToSection(pageId, sectionId);
+    } else {
+        console.error('App instance not found for navigation');
+    }
+};
