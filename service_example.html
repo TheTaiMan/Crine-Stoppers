@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+    <link rel="stylesheet" href="./index.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Hind:wght@500&display=swap"
+    />
+
+    <style>
+      .click {
+        position: relative;
+        line-height: 146%;
+        font-weight: 500;
+      }
+      .button {
+        border-radius: 42px;
+        background-color: #09161c;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        padding: 3px 10px;
+      }
+      .timer {
+        align-self: stretch;
+        position: relative;
+        border-radius: 20px;
+        background-color: #09161c;
+        height: 5px;
+      }
+      .timer-button {
+        border-radius: 39px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+      }
+      .button1 {
+        border-radius: 42px;
+        background-color: #42453e;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        padding: 3px 10px;
+      }
+      .timer1 {
+        align-self: stretch;
+        position: relative;
+        border-radius: 20px;
+        height: 5px;
+      }
+      .selected-buttons {
+        align-self: stretch;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 30px;
+      }
+      .video-child {
+        width: 135.3px;
+        position: relative;
+        border-radius: 13px;
+        height: 152px;
+        object-fit: contain;
+      }
+      .video {
+        align-self: stretch;
+        border-radius: 16px;
+        background-color: #8cc63f;
+        height: 306.1px;
+        overflow: hidden;
+        flex-shrink: 0;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+      }
+      .video-block {
+        flex: 1;
+        border-radius: 16px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+      }
+      .lorem-ipsum-dolor {
+        flex: 1;
+        position: relative;
+        letter-spacing: -0.02em;
+        line-height: 153%;
+        font-weight: 500;
+      }
+      .paragraph {
+        align-self: stretch;
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: flex-start;
+      }
+      .learn-more {
+        flex: 1;
+        position: relative;
+        line-height: 146%;
+        text-transform: uppercase;
+      }
+      .learn-more-wrapper {
+        align-self: stretch;
+        flex: 1;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+      }
+      .arrow-icon {
+        width: 47px;
+        position: relative;
+        height: 47px;
+      }
+      .info-button {
+        width: 220px;
+        border-radius: 20px;
+        background-color: #6f8ea7;
+        height: 59px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 0px 6px 0px 12px;
+        box-sizing: border-box;
+        gap: 12px;
+        min-width: 220px;
+        max-height: 59px;
+        text-align: center;
+        font-size: 20px;
+        color: #f7fafc;
+        font-family: Montserrat;
+      }
+      .paragraph-parent {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: 10px;
+      }
+      .services1 {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: 20px;
+        max-width: 1100px;
+      }
+      .serve-section {
+        align-self: stretch;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        text-align: left;
+        font-size: 18px;
+        color: #09161c;
+        font-family: Hind;
+      }
+      .typetobacco-mobilefalse {
+        align-self: stretch;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: 10px;
+      }
+      .selected-buttons1 {
+        width: 544px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 20px;
+      }
+      .video1 {
+        align-self: stretch;
+        border-radius: 16px;
+        background-color: #8cc63f;
+        height: 283.5px;
+        overflow: hidden;
+        flex-shrink: 0;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+      }
+      .video-block1 {
+        align-self: stretch;
+        border-radius: 16px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+      }
+      .arrow-icon1 {
+        width: 40px;
+        position: relative;
+        height: 40px;
+      }
+      .info-button1 {
+        width: 190px;
+        border-radius: 15px;
+        background-color: #6f8ea7;
+        height: 52px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 6px 6px 6px 10px;
+        box-sizing: border-box;
+        gap: 12px;
+        max-width: 190px;
+        max-height: 52px;
+        text-align: center;
+        font-size: 17px;
+        color: #f7fafc;
+        font-family: Montserrat;
+      }
+      .services2 {
+        width: 500px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: 20px;
+        max-width: 500px;
+      }
+      .serve-section1 {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        text-align: left;
+        font-size: 16px;
+        color: #09161c;
+        font-family: Hind;
+      }
+      .typetobacco-mobiletrue {
+        align-self: stretch;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: 10px;
+        font-size: 18px;
+      }
+      .logo-hot-cars-1-1-icon {
+        flex: 1;
+        position: relative;
+        border-radius: 16px;
+        max-width: 100%;
+        overflow: hidden;
+        max-height: 100%;
+        object-fit: cover;
+      }
+      .selected-buttons3 {
+        width: 544px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-end;
+        padding: 0px 210px 0px 0px;
+        box-sizing: border-box;
+        gap: 20px;
+      }
+      .logo-hot-cars-1-1-icon1 {
+        align-self: stretch;
+        position: relative;
+        border-radius: 16px;
+        max-width: 100%;
+        overflow: hidden;
+        max-height: 100%;
+        object-fit: cover;
+      }
+      .selected-buttons5 {
+        width: 544px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-end;
+        padding: 0px 370px 0px 0px;
+        box-sizing: border-box;
+        gap: 20px;
+      }
+      .services {
+        width: 100%;
+        position: relative;
+        border-radius: 5px;
+        border: 1px dashed #8a38f5;
+        box-sizing: border-box;
+        height: 3002px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: space-between;
+        padding: 20px;
+        gap: 0px;
+        text-align: center;
+        font-size: 20px;
+        color: #f7fafc;
+        font-family: Montserrat;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="services">
+      <div class="typetobacco-mobilefalse">
+        <div class="selected-buttons">
+          <div class="timer-button">
+            <div class="button">
+              <div class="click">Contraband Tobacco</div>
+            </div>
+            <div class="timer"></div>
+          </div>
+          <div class="timer-button">
+            <div class="button1">
+              <div class="click">Stolen Vehicle</div>
+            </div>
+            <div class="timer1"></div>
+          </div>
+          <div class="timer-button">
+            <div class="button1">
+              <div class="click">Save Your Cat</div>
+            </div>
+            <div class="timer1"></div>
+          </div>
+        </div>
+        <div class="serve-section">
+          <div class="services1">
+            <div class="video-block">
+              <div class="video">
+                <img class="video-child" alt="" src="Polygon 3.svg" />
+              </div>
+            </div>
+            <div class="paragraph-parent">
+              <div class="paragraph">
+                <div class="lorem-ipsum-dolor">
+                  Contraband tobacco fuels organized crime and costs Canada an
+                  estimated $1 billion in lost tax revenue annually, with
+                  Manitoba alone losing $0.30 per cigarette or $60.00 a carton.
+                  These illegal products are unregulated, may contain harmful
+                  ingredients, and undermine public health efforts. Knowing how
+                  to identify legal tobacco—by looking for the excise duty paid
+                  stamp, Health Canada warning labels, and warnings on each
+                  filter—helps protect our communities.
+                </div>
+              </div>
+              <div class="info-button">
+                <div class="learn-more-wrapper">
+                  <b class="learn-more">Learn More</b>
+                </div>
+                <img class="arrow-icon" alt="" src="Arrow.svg" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="typetobacco-mobiletrue">
+        <div class="selected-buttons1">
+          <div class="timer-button">
+            <div class="button">
+              <div class="click">Contraband Tobacco</div>
+            </div>
+            <div class="timer"></div>
+          </div>
+          <div class="timer-button">
+            <div class="button1">
+              <div class="click">Stolen Vehicle</div>
+            </div>
+            <div class="timer1"></div>
+          </div>
+          <div class="timer-button">
+            <div class="button1">
+              <div class="click">Save Your Cat</div>
+            </div>
+            <div class="timer1"></div>
+          </div>
+        </div>
+        <div class="serve-section1">
+          <div class="services2">
+            <div class="video-block1">
+              <div class="video1">
+                <img class="video-child" alt="" src="Polygon 3.svg" />
+              </div>
+            </div>
+            <div class="typetobacco-mobilefalse">
+              <div class="paragraph">
+                <div class="lorem-ipsum-dolor">
+                  Contraband tobacco fuels organized crime and costs Canada an
+                  estimated $1 billion in lost tax revenue annually, with
+                  Manitoba alone losing $0.30 per cigarette or $60.00 a carton.
+                  These illegal products are unregulated, may contain harmful
+                  ingredients, and undermine public health efforts. Knowing how
+                  to identify legal tobacco—by looking for the excise duty paid
+                  stamp, Health Canada warning labels, and warnings on each
+                  filter—helps protect our communities.
+                </div>
+              </div>
+              <div class="info-button1">
+                <div class="learn-more-wrapper">
+                  <b class="learn-more">Learn More</b>
+                </div>
+                <img class="arrow-icon1" alt="" src="Arrow.svg" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="typetobacco-mobilefalse">
+        <div class="selected-buttons">
+          <div class="timer-button">
+            <div class="button1">
+              <div class="click">Contraband Tobacco</div>
+            </div>
+            <div class="timer1"></div>
+          </div>
+          <div class="timer-button">
+            <div class="button">
+              <div class="click">Stolen Vehicle</div>
+            </div>
+            <div class="timer"></div>
+          </div>
+          <div class="timer-button">
+            <div class="button1">
+              <div class="click">Save Your Cat</div>
+            </div>
+            <div class="timer1"></div>
+          </div>
+        </div>
+        <div class="serve-section">
+          <div class="services1">
+            <img
+              class="logo-hot-cars-1-1-icon"
+              alt=""
+              src="logo-hot-cars-1 1.png"
+            />
+
+            <div class="paragraph-parent">
+              <div class="paragraph">
+                <div class="lorem-ipsum-dolor">
+                  If you see a suspected stolen vehicle, do not approach or
+                  engage with anyone in it. Your safety is paramount. Instead,
+                  make the right call and report it to Crime Stoppers. Your tip
+                  remains anonymous and helps keep our community safe. You can
+                  also view a list of recently reported stolen vehicles in
+                  Winnipeg:
+                </div>
+              </div>
+              <div class="info-button">
+                <div class="learn-more-wrapper">
+                  <b class="learn-more">Click Here</b>
+                </div>
+                <img class="arrow-icon" alt="" src="Arrow.svg" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="typetobacco-mobiletrue">
+        <div class="selected-buttons3">
+          <div class="timer-button">
+            <div class="button1">
+              <div class="click">Contraband Tobacco</div>
+            </div>
+            <div class="timer1"></div>
+          </div>
+          <div class="timer-button">
+            <div class="button">
+              <div class="click">Stolen Vehicle</div>
+            </div>
+            <div class="timer"></div>
+          </div>
+          <div class="timer-button">
+            <div class="button1">
+              <div class="click">Save Your Cat</div>
+            </div>
+            <div class="timer1"></div>
+          </div>
+        </div>
+        <div class="serve-section1">
+          <div class="services2">
+            <img
+              class="logo-hot-cars-1-1-icon1"
+              alt=""
+              src="logo-hot-cars-1 1.png"
+            />
+
+            <div class="typetobacco-mobilefalse">
+              <div class="paragraph">
+                <div class="lorem-ipsum-dolor">
+                  If you see a suspected stolen vehicle, do not approach or
+                  engage with anyone in it. Your safety is paramount. Instead,
+                  make the right call and report it to Crime Stoppers. Your tip
+                  remains anonymous and helps keep our community safe. You can
+                  also view a list of recently reported stolen vehicles in
+                  Winnipeg:
+                </div>
+              </div>
+              <div class="info-button1">
+                <div class="learn-more-wrapper">
+                  <b class="learn-more">Click Here</b>
+                </div>
+                <img class="arrow-icon1" alt="" src="Arrow.svg" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="typetobacco-mobilefalse">
+        <div class="selected-buttons">
+          <div class="timer-button">
+            <div class="button1">
+              <div class="click">Contraband Tobacco</div>
+            </div>
+            <div class="timer1"></div>
+          </div>
+          <div class="timer-button">
+            <div class="button1">
+              <div class="click">Stolen Vehicle</div>
+            </div>
+            <div class="timer1"></div>
+          </div>
+          <div class="timer-button">
+            <div class="button">
+              <div class="click">Save Your Cat</div>
+            </div>
+            <div class="timer"></div>
+          </div>
+        </div>
+        <div class="serve-section">
+          <div class="services1">
+            <img
+              class="logo-hot-cars-1-1-icon"
+              alt=""
+              src="save-your-cat-hor 1.png"
+            />
+
+            <div class="paragraph-parent">
+              <div class="paragraph">
+                <div class="lorem-ipsum-dolor">
+                  Protect your vehicle from theft with The Program, a
+                  partnership between businesses, Winnipeg Crime Stoppers, and
+                  the Winnipeg Police. While your car's being serviced, we'll
+                  etch your vehicle identification number onto your catalytic
+                  converter and spray it with high-heat fluorescent paint,
+                  making it a clear deterrent to thieves. A window sticker will
+                  also mark your vehicle as protected, helping combat this
+                  growing issue that affected over 2200 motorists last year.
+                </div>
+              </div>
+              <div class="info-button">
+                <div class="learn-more-wrapper">
+                  <b class="learn-more">Learn More</b>
+                </div>
+                <img class="arrow-icon" alt="" src="Arrow.svg" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="typetobacco-mobiletrue">
+        <div class="selected-buttons5">
+          <div class="timer-button">
+            <div class="button1">
+              <div class="click">Contraband Tobacco</div>
+            </div>
+            <div class="timer1"></div>
+          </div>
+          <div class="timer-button">
+            <div class="button1">
+              <div class="click">Stolen Vehicle</div>
+            </div>
+            <div class="timer1"></div>
+          </div>
+          <div class="timer-button">
+            <div class="button">
+              <div class="click">Save Your Cat</div>
+            </div>
+            <div class="timer"></div>
+          </div>
+        </div>
+        <div class="serve-section1">
+          <div class="services2">
+            <img
+              class="logo-hot-cars-1-1-icon1"
+              alt=""
+              src="save-your-cat-hor 1.png"
+            />
+
+            <div class="typetobacco-mobilefalse">
+              <div class="paragraph">
+                <div class="lorem-ipsum-dolor">
+                  Protect your vehicle from theft with The Program, a
+                  partnership between businesses, Winnipeg Crime Stoppers, and
+                  the Winnipeg Police. While your car's being serviced, we'll
+                  etch your vehicle identification number onto your catalytic
+                  converter and spray it with high-heat fluorescent paint,
+                  making it a clear deterrent to thieves. A window sticker will
+                  also mark your vehicle as protected, helping combat this
+                  growing issue that affected over 2200 motorists last year.
+                </div>
+              </div>
+              <div class="info-button1">
+                <div class="learn-more-wrapper">
+                  <b class="learn-more">Learn More</b>
+                </div>
+                <img class="arrow-icon1" alt="" src="Arrow.svg" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

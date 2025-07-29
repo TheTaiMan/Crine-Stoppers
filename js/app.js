@@ -195,6 +195,7 @@ function app() {
                         // Load banner component if this is the home page
                         if (pageId === 'home') {
                             this.loadBannerComponent();
+                            this.loadServicesShowcaseComponent();
                             // Set up banner visibility observer after banner loads
                             setTimeout(() => {
                                 this.setupBannerVisibilityObserver();
@@ -226,6 +227,7 @@ function app() {
                     // Load banner component if this is the home page
                     if (pageId === 'home') {
                         this.loadBannerComponent();
+                        this.loadServicesShowcaseComponent();
                         // Set up banner visibility observer after banner loads
                         setTimeout(() => {
                             this.setupBannerVisibilityObserver();
@@ -257,6 +259,24 @@ function app() {
             } catch (error) {
                 console.error('Error loading footer:', error);
                 this.footerContent = '<div class="error">Unable to load footer</div>';
+            }
+        },
+
+        // Load Services Showcase component
+        async loadServicesShowcaseComponent() {
+            try {
+                const response = await fetch('components/services_showcase/services_showcase.html');
+                const showcaseHTML = await response.text();
+                const showcaseContainer = document.getElementById('services-showcase-component');
+                if (showcaseContainer) {
+                    showcaseContainer.innerHTML = showcaseHTML;
+                }
+            } catch (error) {
+                console.error('Error loading services showcase:', error);
+                const showcaseContainer = document.getElementById('services-showcase-component');
+                if (showcaseContainer) {
+                    showcaseContainer.innerHTML = '<div class="error">Unable to load services showcase</div>';
+                }
             }
         },
 

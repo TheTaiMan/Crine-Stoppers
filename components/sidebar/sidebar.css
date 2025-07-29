@@ -302,10 +302,11 @@
 
 /* Mobile Navbar */
 .mobile-navbar {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
+  position: fixed !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100vw !important;
   height: 75px;
   background-color: var(--color-dark);
   display: none;
@@ -314,13 +315,18 @@
   justify-content: flex-end;
   padding: 0;
   box-sizing: border-box;
-  z-index: 50;
+  z-index: 9999 !important;
   overflow: hidden;
   transition: height 0.3s ease;
 }
 
 .mobile-navbar.expanded {
-  height: 100vh; /* Full screen when expanded */
+  height: 100vh !important; /* Full screen when expanded */
+  position: fixed !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 9999 !important;
 }
 
 .mobile-navbar-logo {
@@ -357,6 +363,10 @@
 }
 
 .mobile-navbar-bottom-header {
+  position: absolute !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
   height: 75px;
   display: flex;
   flex-direction: row;
@@ -365,6 +375,8 @@
   padding: 8px;
   background-color: var(--color-dark);
   flex-shrink: 0; /* Prevent shrinking */
+  box-sizing: border-box;
+  z-index: 10000;
 }
 
 .mobile-menu-toggle-right {
@@ -464,7 +476,7 @@
   align-items: center;
   justify-content: center;
   gap: 20px;
-  width: 100%;
+  max-width: 240px;
 }
 
 .mobile-nav-item-wrapper {
@@ -629,10 +641,12 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 0px 0px 10px;
+  padding: 0px 20px 10px;
   gap: 25px;
   text-align: center;
   color: var(--color-light);
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .mobile-submit-tip-button {
@@ -799,7 +813,16 @@
   }
   
   .mobile-navbar {
-    display: flex;
+    display: flex !important;
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    z-index: 9999 !important;
+    overflow: hidden;
+    box-sizing: border-box;
   }
   
   .mobile-nav-buttons {
