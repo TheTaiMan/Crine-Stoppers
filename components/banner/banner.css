@@ -112,12 +112,16 @@
   display: inline-block;
 }
 
-.banner-title-line1 {
+.banner-title-line1,
+.banner-title-line2 {
   margin: 0;
+  color: var(--color-light) !important;
+  font-family: var(--font-primary);
+  font-weight: var(--font-weight-black);
+  text-transform: uppercase;
 }
 
 .banner-title-line2 {
-  margin: 0;
   text-decoration: underline;
 }
 

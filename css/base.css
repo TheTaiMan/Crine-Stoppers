@@ -108,11 +108,12 @@ body.mobile-nav-open {
 }
 
 /* Typography */
-/* h1, h2, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-primary);
-  font-weight: var(--font-weight-bold);
-  line-height: 1.2;
-  margin-bottom: var(--space-4);
+  font-weight: var(--font-weight-black);
+  line-height: 1.46;
+  margin-bottom: var(--space-5);
+  color: var(--color-dark);
 }
 
 h1 {
@@ -135,13 +136,25 @@ h3 {
 h4 {
   font-size: var(--text-xl);
   font-weight: var(--font-weight-bold);
-} */
+}
+
+h5 {
+  font-size: var(--text-lg);
+  font-weight: var(--font-weight-bold);
+}
+
+h6 {
+  font-size: var(--text-base);
+  font-weight: var(--font-weight-bold);
+}
 
 p {
   margin-bottom: var(--space-4);
   font-size: var(--text-lg);
   font-weight: var(--font-weight-medium);
   line-height: 1.53;
+  letter-spacing: -0.02em;
+  font-family: var(--font-secondary);
 }
 
 a {
@@ -196,6 +209,22 @@ input[type="reset"] {
 
 /* Responsive Typography */
 @media (max-width: 768px) {
+  h1 {
+    font-size: var(--text-3xl);
+  }
+  
+  h2 {
+    font-size: var(--text-2xl);
+  }
+  
+  h3 {
+    font-size: var(--text-xl);
+  }
+  
+  h4 {
+    font-size: var(--text-lg);
+  }
+  
   p {
     font-size: var(--text-base);
   }
