@@ -96,7 +96,7 @@ body {
   font-size: var(--text-base);
   line-height: 1.5;
   color: var(--color-dark);
-  background-color: var(--color-light);
+  background-color: var(--color-secondary);
 }
 
 /* Prevent scrolling when mobile navigation is open */
@@ -168,6 +168,30 @@ input[type="reset"] {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-dark-alt);
+  border-radius: var(--radius-md);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-dark);
+}
+
+/* Firefox scrollbar styling */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-dark-alt) var(--color-secondary);
 }
 
 /* Responsive Typography */

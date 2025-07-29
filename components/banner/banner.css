@@ -323,7 +323,7 @@
 
 @media (max-width: 768px) {
   .banner {
-    min-height: 480px;
+    min-height: 450px;
     flex-direction: column;
   }
   
