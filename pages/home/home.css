@@ -20,12 +20,6 @@
     margin-bottom: 0;
 }
 
-/* Arrow icon in Learn More button */
-.btn-arrow {
-    width: 24px;
-    height: 24px;
-    display: block;
-}
 
 .success-stats {
     display: grid;
