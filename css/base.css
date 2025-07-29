@@ -3,6 +3,10 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
 }
 
 body {
@@ -14,7 +18,7 @@ body {
 }
 
 /* Typography */
-h1, h2, h3, h4, h5, h6 {
+/* h1, h2, h4, h5, h6 {
   font-family: var(--font-primary);
   font-weight: var(--font-weight-bold);
   line-height: 1.2;
@@ -41,7 +45,7 @@ h3 {
 h4 {
   font-size: var(--text-xl);
   font-weight: var(--font-weight-bold);
-}
+} */
 
 p {
   margin-bottom: var(--space-4);
@@ -58,6 +62,22 @@ a {
 
 a:hover {
   color: var(--color-primary);
+}
+
+/* Disable text selection on interactive elements */
+button, 
+.btn,
+.nav-item,
+.sub-nav-item,
+.mobile-menu-toggle,
+[role="button"],
+input[type="button"],
+input[type="submit"],
+input[type="reset"] {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 /* Responsive Typography */

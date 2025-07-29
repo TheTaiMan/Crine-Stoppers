@@ -177,6 +177,11 @@ function app() {
                     this.updatePageTitle(pageId);
                     this.$nextTick(() => {
                         this.setupScrollSpy();
+                        
+                        // Load banner component if this is the home page
+                        if (pageId === 'home') {
+                            this.loadBannerComponent();
+                        }
                     });
                     return;
                 }
@@ -199,6 +204,11 @@ function app() {
                 // Setup scroll spy for this page
                 this.$nextTick(() => {
                     this.setupScrollSpy();
+                    
+                    // Load banner component if this is the home page
+                    if (pageId === 'home') {
+                        this.loadBannerComponent();
+                    }
                 });
                 
             } catch (error) {
@@ -225,6 +235,30 @@ function app() {
             } catch (error) {
                 console.error('Error loading footer:', error);
                 this.footerContent = '<div class="error">Unable to load footer</div>';
+            }
+        },
+
+        // Load banner component
+        async loadBannerComponent() {
+            try {
+                const response = await fetch('components/banner/banner.html');
+                const bannerHTML = await response.text();
+                const bannerContainer = document.getElementById('banner-component');
+                if (bannerContainer) {
+                    bannerContainer.innerHTML = bannerHTML;
+                    // Initialize banner copy buttons after HTML is loaded
+                    setTimeout(() => {
+                        if (window.initBannerButtons) {
+                            window.initBannerButtons();
+                        }
+                    }, 100);
+                }
+            } catch (error) {
+                console.error('Error loading banner:', error);
+                const bannerContainer = document.getElementById('banner-component');
+                if (bannerContainer) {
+                    bannerContainer.innerHTML = '<div class="error">Unable to load banner</div>';
+                }
             }
         },
         

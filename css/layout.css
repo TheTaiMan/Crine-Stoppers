@@ -1,0 +1,36 @@
+/* Main Layout Styles */
+
+/* Main Content Positioning */
+.main-content {
+  margin-left: 280px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  overflow-x: hidden;
+  transition: margin-left 0.3s ease-in-out;
+}
+
+.content-container {
+  flex-grow: 1;
+  padding: 26px;
+  width: 100%;
+}
+
+.page-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .main-content {
+    margin-left: 0;
+  }
+  
+  .content-container {
+    padding: 8px;
+    padding-top: 80px; /* Account for mobile menu toggle */
+  }
+}
