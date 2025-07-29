@@ -19,8 +19,10 @@
 }
 
 .sidebar-content {
-  height: 100%;
+  height: calc(100vh - 20px);
   overflow-y: auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .sidebar-header {
@@ -37,6 +39,13 @@
 }
 
 /* Navigation Styles */
+.sidebar-nav {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
 .nav-group {
   display: flex;
   flex-direction: column;
@@ -205,6 +214,48 @@
 
 .sub-nav-item.is-selected .sub-nav-indicator {
   background-color: var(--color-primary);
+}
+
+/* Desktop Donate Button */
+.sidebar-donate-section {
+  padding: var(--space-5) var(--space-3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.donate-button-desktop {
+  width: 100%;
+  border-radius: 18px;
+  background-color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 152px;
+  max-width: 180px;
+  min-height: 50px;
+  max-height: 70px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: var(--space-4) var(--space-5);
+}
+
+.donate-button-desktop:hover {
+  background-color: var(--color-secondary);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.donate-button-text {
+  font-family: var(--font-secondary);
+  font-size: 25px;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-dark);
+  letter-spacing: -0.02em;
+  line-height: 1.53;
+  text-transform: uppercase;
 }
 
 /* Mobile Navbar */
@@ -532,14 +583,14 @@
 /* Mobile Action Buttons */
 .mobile-nav-buttons {
   align-self: stretch;
-  display: flex;
+  display: none;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 0px 0px 10px;
   gap: 25px;
   text-align: center;
-  color: #f7fafc;
+  color: var(--color-light);
 }
 
 .mobile-tip-button {
@@ -623,7 +674,10 @@
   display: inline-block;
   height: 33px;
   font-weight: bold;
-  color: #09161c;
+  color: var(--color-dark);
+  font-family: var(--font-secondary);
+  font-size: 25px;
+  text-transform: uppercase;
 }
 
 .mobile-nav-close-btn {
@@ -650,7 +704,15 @@
     display: none;
   }
   
+  .sidebar-donate-section {
+    display: none;
+  }
+  
   .mobile-navbar {
+    display: flex;
+  }
+  
+  .mobile-nav-buttons {
     display: flex;
   }
   
