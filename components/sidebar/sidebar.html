@@ -70,6 +70,13 @@
         </div>
     </nav>
     
+    <!-- Submit Tip Button (Desktop) -->
+    <div class="sidebar-submit-tip-section" x-show="shouldShowSidebarTipButton()">
+        <button class="submit-tip-button-desktop" onclick="navigateTo('/submit-tip')">
+            <span class="submit-tip-button-text">SUBMIT A TIP</span>
+        </button>
+    </div>
+    
     <!-- Donate Button (Desktop) -->
     <div class="sidebar-donate-section">
         <button class="donate-button-desktop" onclick="navigateTo('/donate')">

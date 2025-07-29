@@ -7,6 +7,7 @@ function app() {
         currentPage: 'home',
         activeSection: '',
         pageCache: {},
+        isBannerInView: true,
         
         // Navigation configuration
         navigation: [
@@ -155,6 +156,19 @@ function app() {
                 // Reset active section
                 this.activeSection = '';
                 
+                // Handle banner visibility state based on page
+                if (pageId !== 'home') {
+                    this.isBannerInView = false; // Always show tip button on non-home pages
+                    // Clean up banner observer when leaving home page
+                    if (this.bannerObserver) {
+                        this.bannerObserver.disconnect();
+                        this.bannerObserver = null;
+                    }
+                } else {
+                    // Reset to true when entering home page (banner is initially visible)
+                    this.isBannerInView = true;
+                }
+                
                 // Scroll to top
                 window.scrollTo(0, 0);
                 
@@ -181,6 +195,10 @@ function app() {
                         // Load banner component if this is the home page
                         if (pageId === 'home') {
                             this.loadBannerComponent();
+                            // Set up banner visibility observer after banner loads
+                            setTimeout(() => {
+                                this.setupBannerVisibilityObserver();
+                            }, 200);
                         }
                     });
                     return;
@@ -208,6 +226,10 @@ function app() {
                     // Load banner component if this is the home page
                     if (pageId === 'home') {
                         this.loadBannerComponent();
+                        // Set up banner visibility observer after banner loads
+                        setTimeout(() => {
+                            this.setupBannerVisibilityObserver();
+                        }, 200);
                     }
                 });
                 
@@ -364,6 +386,65 @@ function app() {
         // Get current page navigation data
         getCurrentPageData() {
             return this.navigation.find(nav => nav.id === this.currentPage);
+        },
+        
+        // Check if sidebar tip button should be visible
+        shouldShowSidebarTipButton() {
+            // Always show on non-home pages
+            if (this.currentPage !== 'home') {
+                return true;
+            }
+            
+            // On home page, show sidebar button when banner is out of view
+            return !this.isBannerInView;
+        },
+        
+        // Setup banner visibility observer for tip button
+        setupBannerVisibilityObserver() {
+            // Only set up on home page
+            if (this.currentPage !== 'home') {
+                return;
+            }
+            
+            // Clean up existing observer
+            if (this.bannerObserver) {
+                this.bannerObserver.disconnect();
+            }
+            
+            // Find the banner element
+            const banner = document.querySelector('.banner');
+            if (!banner) {
+                return;
+            }
+            
+            // Create intersection observer for banner
+            this.bannerObserver = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach(entry => {
+                        this.isBannerInView = entry.isIntersecting;
+                    });
+                },
+                {
+                    root: null,
+                    rootMargin: '0px',
+                    threshold: 0.1 // Trigger when 10% of banner is visible
+                }
+            );
+            
+            // Start observing the banner
+            this.bannerObserver.observe(banner);
+        },
+        
+        // Force re-check banner visibility (useful when transitioning from mobile to desktop)
+        recheckBannerVisibility() {
+            if (this.currentPage === 'home') {
+                const banner = document.querySelector('.banner');
+                if (banner) {
+                    const rect = banner.getBoundingClientRect();
+                    const isIntersecting = rect.top < window.innerHeight && rect.bottom > 0;
+                    this.isBannerInView = isIntersecting;
+                }
+            }
         }
     };
 }
@@ -375,5 +456,15 @@ window.navigateToSection = function(pageId, sectionId) {
         return appElement.__x.$data.navigateToSection(pageId, sectionId);
     } else {
         console.error('App instance not found for navigation');
+    }
+};
+
+// Make recheckBannerVisibility available globally for sidebar
+window.recheckBannerVisibility = function() {
+    const appElement = document.querySelector('[x-data*="app()"]');
+    if (appElement && appElement.__x && appElement.__x.$data) {
+        return appElement.__x.$data.recheckBannerVisibility();
+    } else {
+        console.error('App instance not found for banner visibility check');
     }
 };

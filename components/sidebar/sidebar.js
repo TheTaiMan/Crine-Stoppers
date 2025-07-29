@@ -35,6 +35,13 @@ function sidebar() {
                 if (this.mobileNavOpen) {
                     this.closeMobileNav();
                 }
+                
+                // Re-check banner visibility when switching from mobile to desktop
+                setTimeout(() => {
+                    if (window.recheckBannerVisibility) {
+                        window.recheckBannerVisibility();
+                    }
+                }, 100);
             }
         },
         
@@ -70,6 +77,13 @@ function sidebar() {
             this.mobileNavOpen = false;
             // Ensure body scroll is restored
             document.body.classList.remove('mobile-nav-open');
+            
+            // Re-check banner visibility when closing mobile nav (switching to desktop view)
+            setTimeout(() => {
+                if (window.recheckBannerVisibility) {
+                    window.recheckBannerVisibility();
+                }
+            }, 100);
         },
         
         navigateToMobile(path) {

@@ -216,9 +216,51 @@
   background-color: var(--color-primary);
 }
 
+/* Desktop Submit Tip Button */
+.sidebar-submit-tip-section {
+  padding: var(--space-3) var(--space-3) var(--space-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.submit-tip-button-desktop {
+  width: 100%;
+  border-radius: 18px;
+  background-color: var(--color-danger);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 200px;
+  max-width: 240px;
+  min-height: 50px;
+  max-height: 70px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: var(--space-4) var(--space-5);
+}
+
+.submit-tip-button-desktop:hover {
+  background-color: var(--color-primary);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.submit-tip-button-text {
+  font-family: var(--font-secondary);
+  font-size: 25px;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-light);
+  letter-spacing: -0.02em;
+  line-height: 1.53;
+  text-transform: uppercase;
+}
+
 /* Desktop Donate Button */
 .sidebar-donate-section {
-  padding: var(--space-5) var(--space-3);
+  padding: var(--space-2) var(--space-3) var(--space-5);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -232,8 +274,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-width: 152px;
-  max-width: 180px;
+  min-width: 200px;
+  max-width: 240px;
   min-height: 50px;
   max-height: 70px;
   border: none;
@@ -593,6 +635,50 @@
   color: var(--color-light);
 }
 
+.mobile-submit-tip-button {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.mobile-submit-tip-button-bg {
+  width: 100%;
+  border-radius: 10px;
+  background-color: var(--color-danger);
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  min-width: 200px;
+  max-width: 240px;
+  min-height: 40px;
+  max-height: 50px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.mobile-submit-tip-button-bg:hover {
+  background-color: var(--color-primary);
+}
+
+.mobile-submit-tip-button-text {
+  flex: 1;
+  position: relative;
+  letter-spacing: -0.02em;
+  line-height: 153%;
+  display: inline-block;
+  height: 31px;
+  font-weight: bold;
+  color: var(--color-light);
+  font-family: var(--font-secondary);
+  font-size: 25px;
+  text-transform: uppercase;
+}
+
 .mobile-tip-button {
   align-self: stretch;
   display: flex;
@@ -653,8 +739,8 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  min-width: 152px;
-  max-width: 180px;
+  min-width: 200px;
+  max-width: 240px;
   min-height: 40px;
   max-height: 50px;
   border: none;
@@ -701,6 +787,10 @@
 /* Mobile Responsive */
 @media (max-width: 768px) {
   .sidebar {
+    display: none;
+  }
+  
+  .sidebar-submit-tip-section {
     display: none;
   }
   
