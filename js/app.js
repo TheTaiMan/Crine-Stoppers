@@ -89,7 +89,7 @@ function app() {
             for (const pageId of commonPages) {
                 if (!this.pageCache[pageId]) {
                     try {
-                        const response = await fetch(`pages/${pageId}.html`);
+                        const response = await fetch(`pages/${pageId}/${pageId}.html`);
                         if (response.ok) {
                             this.pageCache[pageId] = await response.text();
                         }
@@ -205,7 +205,7 @@ function app() {
                 }
                 
                 // Load page from file if not cached
-                const response = await fetch(`pages/${pageId}.html`);
+                const response = await fetch(`pages/${pageId}/${pageId}.html`);
                 if (!response.ok) {
                     throw new Error(`Failed to load page: ${response.status}`);
                 }

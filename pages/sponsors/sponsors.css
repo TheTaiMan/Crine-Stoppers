@@ -1,0 +1,301 @@
+/* Page-specific styles */
+.page-intro {
+    font-size: var(--text-lg);
+    color: var(--color-accent);
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto var(--space-6);
+}
+
+.support-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--space-4);
+    margin-top: var(--space-5);
+}
+
+.sponsor-tiers {
+    margin-top: var(--space-5);
+}
+
+.tier-card {
+    
+    border-radius: var(--radius-lg);
+    margin-bottom: var(--space-5);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+}
+
+.tier-card.platinum {
+    border: 3px solid #e5e7eb;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+}
+
+.tier-card.gold {
+    border: 3px solid #fbbf24;
+    background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+}
+
+.tier-card.silver {
+    border: 3px solid #94a3b8;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+}
+
+.tier-card.bronze {
+    border: 3px solid #a78bfa;
+    background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%);
+}
+
+.tier-header {
+    padding: var(--space-4);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.tier-header h3 {
+    color: var(--color-dark);
+    margin: 0;
+    font-size: var(--text-2xl);
+}
+
+.tier-amount {
+    background: var(--color-primary);
+    color: var(--color-light);
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--radius-full);
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-bold);
+}
+
+.tier-benefits {
+    padding: var(--space-4);
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.tier-benefits h4 {
+    color: var(--color-accent);
+    margin-bottom: var(--space-3);
+    font-size: var(--text-lg);
+}
+
+.tier-benefits ul {
+    list-style: none;
+    padding: 0;
+}
+
+.tier-benefits li {
+    padding: var(--space-1) 0;
+    position: relative;
+    padding-left: var(--space-4);
+}
+
+.tier-benefits li:before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--color-primary);
+    font-weight: bold;
+}
+
+.current-sponsors {
+    padding: var(--space-4);
+}
+
+.current-sponsors h4 {
+    color: var(--color-dark);
+    margin-bottom: var(--space-3);
+    font-size: var(--text-lg);
+}
+
+.sponsor-logos {
+    display: grid;
+    gap: var(--space-3);
+}
+
+.platinum-logos {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+
+.gold-logos,
+.silver-logos {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+}
+
+.sponsor-placeholder {
+    background: var(--color-secondary);
+    color: var(--color-dark);
+    padding: var(--space-3);
+    border-radius: var(--radius-md);
+    text-align: center;
+    font-weight: var(--font-weight-semibold);
+    border: 2px dashed var(--color-primary);
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.supporter-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+}
+
+.supporter-name {
+    background: var(--color-secondary);
+    color: var(--color-dark);
+    padding: var(--space-1) var(--space-3);
+    border-radius: var(--radius-full);
+    font-size: var(--text-sm);
+    font-weight: var(--font-weight-medium);
+}
+
+.partnership-types {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--space-5);
+    margin-top: var(--space-5);
+}
+
+.partnership-card {
+    
+    padding: var(--space-5);
+    border-radius: var(--radius-lg);
+    text-align: center;
+    box-shadow: var(--shadow-md);
+    border-top: 4px solid var(--color-primary);
+}
+
+.partnership-icon {
+    font-size: 3rem;
+    margin-bottom: var(--space-3);
+}
+
+.partnership-card h3 {
+    color: var(--color-dark);
+    margin-bottom: var(--space-3);
+    font-size: var(--text-xl);
+}
+
+.partnership-card p {
+    margin-bottom: var(--space-4);
+    font-size: var(--text-base);
+    line-height: 1.5;
+}
+
+.partnership-examples {
+    background: var(--color-secondary);
+    padding: var(--space-3);
+    border-radius: var(--radius-md);
+    font-size: var(--text-sm);
+    text-align: left;
+}
+
+.partnership-examples strong {
+    display: block;
+    margin-bottom: var(--space-1);
+    color: var(--color-dark);
+}
+
+.partnership-examples span {
+    color: var(--color-accent);
+    font-style: italic;
+}
+
+.sponsor-benefits-overview {
+    margin-top: var(--space-5);
+}
+
+.sponsor-benefits-overview h3 {
+    color: var(--color-primary);
+    margin-bottom: var(--space-4);
+    font-size: var(--text-2xl);
+    text-align: center;
+}
+
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--space-4);
+}
+
+.benefit-item {
+    text-align: center;
+    padding: var(--space-3);
+}
+
+.benefit-item h4 {
+    color: var(--color-primary);
+    margin-bottom: var(--space-2);
+    font-size: var(--text-lg);
+}
+
+.benefit-item p {
+    margin: 0;
+    font-size: var(--text-base);
+    line-height: 1.5;
+}
+
+.sponsor-cta {
+    margin-top: var(--space-6);
+}
+
+.cta-card {
+    background: var(--color-primary);
+    color: var(--color-dark);
+    padding: var(--space-6);
+    border-radius: var(--radius-lg);
+    text-align: center;
+}
+
+.cta-card h2 {
+    color: var(--color-dark);
+    margin-bottom: var(--space-3);
+}
+
+.cta-card p {
+    margin-bottom: var(--space-4);
+    font-size: var(--text-lg);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cta-actions {
+    margin-top: var(--space-4);
+}
+
+.contact-details {
+    margin-top: var(--space-4);
+    background: rgba(255, 255, 255, 0.1);
+    padding: var(--space-4);
+    border-radius: var(--radius-md);
+    display: inline-block;
+}
+
+.contact-details p {
+    margin: var(--space-1) 0;
+    font-size: var(--text-base);
+}
+
+@media (max-width: 768px) {
+    .tier-header {
+        flex-direction: column;
+        gap: var(--space-2);
+        text-align: center;
+    }
+    
+    .sponsor-logos {
+        grid-template-columns: 1fr;
+    }
+    
+    .partnership-types {
+        grid-template-columns: 1fr;
+    }
+    
+    .benefits-grid {
+        grid-template-columns: 1fr;
+    }
+}

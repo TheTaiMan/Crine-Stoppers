@@ -9,10 +9,6 @@
 
 .section {
   margin-bottom: var(--space-6);
-  background: var(--color-light);
-  padding: var(--space-5);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-md);
 }
 
 /* Flexbox Utilities */
