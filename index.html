@@ -45,8 +45,13 @@
         <!-- Main Content Area -->
         <main class="main-content flex-grow">
             <!-- Dynamic Content Container -->
-            <div id="content-area" class="content-container">
+            <div id="content-area" class="content-container" style="position: relative;">
                 <div x-html="pageContent" class="page-content"></div>
+                
+                <!-- Content Loading Indicator -->
+                <div x-show="isLoading" class="content-loading-overlay">
+                    <div class="loading-spinner"></div>
+                </div>
             </div>
             
             <!-- Footer -->
@@ -154,11 +159,6 @@
                 <img class="menu-icon" src="Menu.svg" alt="Menu">
             </button>
         </div>
-    </div>
-    
-    <!-- Loading Indicator -->
-    <div x-show="isLoading" class="loading-overlay">
-        <div class="loading-spinner"></div>
     </div>
 </body>
 </html>
