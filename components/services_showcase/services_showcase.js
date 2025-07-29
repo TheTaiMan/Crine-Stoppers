@@ -12,7 +12,7 @@ function servicesShowcase() {
                 title: 'Contraband Tobacco',
                 description: 'Contraband tobacco fuels organized crime and costs Canada an estimated $1 billion in lost tax revenue annually, with Manitoba alone losing $0.30 per cigarette or $60.00 a carton. These illegal products are unregulated, may contain harmful ingredients, and undermine public health efforts. Knowing how to identify legal tobacco—by looking for the excise duty paid stamp, Health Canada warning labels, and warnings on each filter—helps protect our communities.',
                 buttonText: 'Learn More',
-                media: '<div class="video-placeholder"><img src="assets/icons/play-button.svg" alt="Play Video" /></div>'
+                media: '<video controls width="100%" height="100%" style="border-radius: 16px; object-fit: contain;"><source src="assets/videos/contraband_tobacco.mp4" type="video/mp4">Your browser does not support the video tag.</video>'
             },
             {
                 id: 'stolen-vehicle',

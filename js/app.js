@@ -18,7 +18,7 @@ function app() {
                 icon: 'home_icon.svg',
                 sections: [
                     { id: 'who-we-are', title: 'Who We Are' },
-                    { id: 'how-it-works', title: 'How It Works' },
+                    { id: 'services', title: 'Services' },
                     { id: 'contact-methods', title: 'Contact Methods' }
                 ]
             },
