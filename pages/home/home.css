@@ -6,9 +6,9 @@
 }
 
 /* Banner Section */
-/* .banner-section {
-    padding: var(--space-6) 0;
-} */
+.banner-section {
+    padding: 0;
+}
 
 .banner-section .container {
     max-width: none;

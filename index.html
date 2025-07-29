@@ -41,16 +41,6 @@
             <div x-html="sidebarContent"></div>
         </aside>
         
-        <!-- Mobile Menu Toggle -->
-        <button 
-            @click="toggle()"
-            class="mobile-menu-toggle"
-            :class="{ 'hidden': !isMobile }"
-        >
-            <span class="hamburger-line"></span>
-            <span class="hamburger-line"></span>
-            <span class="hamburger-line"></span>
-        </button>
         
         <!-- Main Content Area -->
         <main class="main-content flex-grow">
@@ -62,6 +52,108 @@
             <!-- Footer -->
             <footer x-html="footerContent" class="footer-container"></footer>
         </main>
+    </div>
+    
+    <!-- Mobile Navbar (Bottom Bar) -->
+    <div 
+        class="mobile-navbar"
+        :class="{ 'expanded': mobileNavOpen }"
+    >
+        <!-- Expanded content (only visible when mobileNavOpen is true) -->
+        <div 
+            class="mobile-nav-content"
+            x-show="mobileNavOpen"
+            x-transition:enter="transition ease-out duration-300"
+            x-transition:enter-start="opacity-0 transform translate-y-4"
+            x-transition:enter-end="opacity-100 transform translate-y-0"
+            x-transition:leave="transition ease-in duration-200"
+            x-transition:leave-start="opacity-100 transform translate-y-0"
+            x-transition:leave-end="opacity-0 transform translate-y-4"
+        >
+            <!-- Mobile Sidebar Header with Logo -->
+            <div class="mobile-sidebar-header">
+                <img src="Crime Stoppers Logo.png" alt="Crime Stoppers Logo" class="mobile-sidebar-logo">
+            </div>
+            
+            <!-- Mobile Navigation -->
+            <nav class="mobile-sidebar-nav" x-data="{ openSubMenuId: null }">
+                <div class="mobile-nav-group">
+                    <template x-for="page in navigation" :key="page.id">
+                        <div class="mobile-nav-item-wrapper">
+                            <!-- Main Navigation Item with Arrow -->
+                            <div class="mobile-nav-item-container">
+                                <a 
+                                    :href="page.path"
+                                    @click.prevent="navigateTo(page.path); closeMobileNav()"
+                                    class="mobile-nav-item"
+                                    :class="{ 'is-selected': currentPage === page.id }"
+                                >
+                                    <div class="mobile-nav-icon-container">
+                                        <img 
+                                            :src="`assets/icons/${page.icon}`" 
+                                            :alt="`${page.name} icon`"
+                                            class="mobile-nav-icon"
+                                            @error="showPlaceholderIcon($event)"
+                                        >
+                                    </div>
+                                    <span class="mobile-nav-text" x-text="page.name"></span>
+                                </a>
+                                
+                                <!-- Expand/Collapse Arrow Button (only show if page has sections) -->
+                                <button 
+                                    x-show="page.sections && page.sections.length > 0"
+                                    @click="openSubMenuId = (openSubMenuId === page.id) ? null : page.id"
+                                    class="mobile-nav-arrow-btn"
+                                    :class="{ 'expanded': openSubMenuId === page.id }"
+                                >
+                                    <svg class="mobile-nav-arrow" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            
+                            <!-- Mobile Sub-navigation -->
+                            <div 
+                                x-show="openSubMenuId === page.id && page.sections && page.sections.length > 0"
+                                x-transition:enter="transition ease-out duration-200"
+                                x-transition:enter-start="opacity-0 transform -translate-y-2"
+                                x-transition:enter-end="opacity-100 transform translate-y-0"
+                                x-transition:leave="transition ease-in duration-150"
+                                x-transition:leave-start="opacity-100 transform translate-y-0"
+                                x-transition:leave-end="opacity-0 transform -translate-y-2"
+                                class="mobile-sub-nav"
+                            >
+                                <template x-for="section in page.sections" :key="section.id">
+                                    <a 
+                                        :href="`#${section.id}`"
+                                        @click.prevent="navigateToSection(page.id, section.id); closeMobileNav()"
+                                        class="mobile-sub-nav-item"
+                                        :class="{ 'is-selected': activeSection === section.id }"
+                                    >
+                                        <div class="mobile-sub-nav-indicator"></div>
+                                        <span class="mobile-sub-nav-text" x-text="section.title"></span>
+                                    </a>
+                                </template>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </nav>
+        </div>
+        
+        <!-- Always visible bottom header with logo and hamburger -->
+        <div class="mobile-navbar-bottom-header">
+            <div class="mobile-navbar-logo">
+                <img src="Crime Stoppers Logo.png" alt="Crime Stoppers Logo">
+            </div>
+            <button 
+                @click="toggleMobileNav()"
+                class="mobile-menu-toggle"
+                :class="{ 'menu-open': mobileNavOpen }"
+            >
+                <img class="menu-icon" src="Menu.svg" alt="Menu">
+            </button>
+        </div>
     </div>
     
     <!-- Loading Indicator -->

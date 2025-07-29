@@ -3,6 +3,7 @@ function sidebar() {
     return {
         isOpen: true,
         isMobile: false,
+        mobileNavOpen: false,
         sidebarContent: '',
         
         initSidebar() {
@@ -40,6 +41,45 @@ function sidebar() {
         
         close() {
             this.isOpen = false;
+        },
+        
+        toggleMobileNav() {
+            this.mobileNavOpen = !this.mobileNavOpen;
+        },
+        
+        openMobileNav() {
+            this.mobileNavOpen = true;
+        },
+        
+        closeMobileNav() {
+            this.mobileNavOpen = false;
+        },
+        
+        navigateToMobile(path) {
+            this.closeMobileNav();
+            // Use existing navigation logic from app.js
+            if (window.navigateTo) {
+                window.navigateTo(path);
+            }
+        },
+        
+        scrollToSectionMobile(sectionId) {
+            this.closeMobileNav();
+            // Use existing scroll logic from app.js
+            if (window.scrollToSection) {
+                window.scrollToSection(sectionId);
+            }
+        },
+        
+        openTipSubmission() {
+            this.closeMobileNav();
+            window.open('https://winnipegcrimestoppers.org/submit-tip', '_blank');
+        },
+        
+        openDonation() {
+            this.closeMobileNav();
+            // Add donation URL when available
+            console.log('Donation button clicked');
         },
         
         async loadSidebarContent() {

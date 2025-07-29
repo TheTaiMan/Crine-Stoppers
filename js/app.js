@@ -299,6 +299,32 @@ function app() {
                 this.activeSection = sectionId;
             }
         },
+
+        // Navigate to a page and then scroll to a specific section
+        async navigateToSection(pageId, sectionId) {
+            // If we're already on the target page, just scroll to the section
+            if (this.currentPage === pageId) {
+                this.scrollToSection(sectionId);
+                return;
+            }
+            
+            // Find the page data
+            const page = this.navigation.find(nav => nav.id === pageId);
+            if (!page) {
+                console.error('Page not found:', pageId);
+                return;
+            }
+            
+            // Navigate to the page first
+            await this.navigateTo(page.path);
+            
+            // Wait for the page to load and then scroll to the section
+            this.$nextTick(() => {
+                setTimeout(() => {
+                    this.scrollToSection(sectionId);
+                }, 100); // Small delay to ensure DOM is ready
+            });
+        },
         
         // Setup scroll spy functionality
         setupScrollSpy() {

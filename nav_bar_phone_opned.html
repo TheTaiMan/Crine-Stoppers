@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+    <link rel="stylesheet" href="./index.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Hind:wght@400;500;600;700&display=swap"
+    />
+
+    <style>
+      .crime-stoppers-logo {
+        width: 170px;
+        position: relative;
+        max-height: 100%;
+        object-fit: cover;
+      }
+      .logo {
+        align-self: stretch;
+        height: 58px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+      }
+      .home-fill-icon {
+        width: 24px;
+        position: relative;
+        height: 24px;
+        object-fit: cover;
+      }
+      .nav-icons {
+        border-radius: 16px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        padding: 0px 0px 3px;
+      }
+      .background {
+        width: 32px;
+        border-radius: 8px;
+        background-color: #8cc63f;
+        height: 32px;
+        overflow: hidden;
+        flex-shrink: 0;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        padding: 3px;
+        box-sizing: border-box;
+      }
+      .icon-background {
+        width: 34px;
+        overflow: hidden;
+        flex-shrink: 0;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        padding: 1px;
+        box-sizing: border-box;
+      }
+      .text {
+        flex: 1;
+        position: relative;
+        letter-spacing: -0.02em;
+        line-height: 153%;
+        font-weight: 600;
+        display: inline-block;
+        height: 30px;
+      }
+      .nav-title1 {
+        flex: 1;
+        height: 40px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 0px 0px 4px;
+        box-sizing: border-box;
+      }
+      .nav-group {
+        align-self: stretch;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 0px 0px 0px 3px;
+        gap: 5px;
+      }
+      .nav-title-child {
+        align-self: stretch;
+        width: 3px;
+        position: relative;
+        border-radius: 88px;
+        background-color: #8cc63f;
+      }
+      .text1 {
+        align-self: stretch;
+        flex: 1;
+        position: relative;
+        line-height: 0%;
+        text-transform: uppercase;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+      }
+      .nav-title2 {
+        align-self: stretch;
+        height: 25px;
+        overflow: hidden;
+        flex-shrink: 0;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 10px;
+        color: #8cc63f;
+      }
+      .nav-title-item {
+        align-self: stretch;
+        width: 3px;
+        position: relative;
+        border-radius: 88px;
+        background-color: #42453e;
+      }
+      .text2 {
+        align-self: stretch;
+        flex: 1;
+        position: relative;
+        letter-spacing: -0.02em;
+        line-height: 153%;
+        text-transform: uppercase;
+        display: flex;
+        align-items: center;
+      }
+      .nav-title3 {
+        align-self: stretch;
+        height: 25px;
+        overflow: hidden;
+        flex-shrink: 0;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 10px;
+      }
+      .sub-nav {
+        align-self: stretch;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        padding: 0px 0px 0px 40px;
+        gap: 10px;
+        font-size: 20px;
+        color: #b8d9b4;
+      }
+      .nav-title {
+        width: 100%;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        min-width: 152px;
+        max-width: 180px;
+        color: #8cc63f;
+      }
+      .group-icon {
+        width: 25px;
+        position: relative;
+        height: 25px;
+        object-fit: cover;
+      }
+      .nav-icons1 {
+        border-radius: 16px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+      }
+      .background1 {
+        width: 32px;
+        border-radius: 8px;
+        background-color: #b8d9b4;
+        height: 32px;
+        overflow: hidden;
+        flex-shrink: 0;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        padding: 3px;
+        box-sizing: border-box;
+      }
+      .text5 {
+        flex: 1;
+        position: relative;
+        letter-spacing: -0.02em;
+        line-height: 153%;
+        font-weight: 500;
+        display: inline-block;
+        height: 30px;
+      }
+      .nav-title6 {
+        width: 100%;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-width: 152px;
+        max-width: 180px;
+      }
+      .file-fill-icon {
+        width: 23px;
+        position: relative;
+        height: 23px;
+        object-fit: cover;
+      }
+      .nav-icons2 {
+        width: 24px;
+        border-radius: 16px;
+        height: 27px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+      }
+      .view-fill-icon {
+        width: 27px;
+        position: relative;
+        height: 27px;
+        object-fit: cover;
+      }
+      .user-fill-icon {
+        width: 24px;
+        position: relative;
+        height: 24px;
+      }
+      .nav-options {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 0px 7px;
+        gap: 20px;
+      }
+      .nav-options-wrapper {
+        align-self: stretch;
+        height: 580px;
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: center;
+        padding: 20px 0px 0px;
+        box-sizing: border-box;
+      }
+      .title {
+        flex: 1;
+        position: relative;
+        letter-spacing: -0.02em;
+        line-height: 153%;
+        display: inline-block;
+        height: 31px;
+      }
+      .background7 {
+        width: 100%;
+        border-radius: 10px;
+        background-color: #bf1e2e;
+        height: 50px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        min-width: 152px;
+        max-width: 180px;
+        min-height: 40px;
+        max-height: 50px;
+      }
+      .tip-button {
+        align-self: stretch;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+      .title1 {
+        flex: 1;
+        position: relative;
+        letter-spacing: -0.02em;
+        line-height: 153%;
+        display: inline-block;
+        height: 33px;
+      }
+      .background8 {
+        width: 100%;
+        border-radius: 10px;
+        background-color: #8cc63f;
+        height: 50px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        min-width: 152px;
+        max-width: 180px;
+        min-height: 40px;
+        max-height: 50px;
+      }
+      .donate-button {
+        align-self: stretch;
+        border-radius: 17px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: #09161c;
+      }
+      .buttons {
+        align-self: stretch;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 0px 0px 10px;
+        gap: 25px;
+        text-align: center;
+        color: #f7fafc;
+      }
+      .menu-icon {
+        width: 45px;
+        position: relative;
+        height: 45px;
+      }
+      .menu-button {
+        width: 55px;
+        border-radius: 17px;
+        background-color: #b8d9b4;
+        height: 55px;
+        overflow: hidden;
+        flex-shrink: 0;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+        box-sizing: border-box;
+      }
+      .menu-button-wrapper {
+        align-self: stretch;
+        flex: 1;
+        overflow: hidden;
+        display: flex;
+        flex-direction: row;
+        align-items: flex-end;
+        justify-content: flex-end;
+        padding: 8px 3px;
+      }
+      .mobiletrue-closedfalse {
+        width: 100%;
+        position: relative;
+        background-color: #09161c;
+        height: 883px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 20px 5px 0px;
+        box-sizing: border-box;
+        text-align: left;
+        font-size: 25px;
+        color: #b8d9b4;
+        font-family: Hind;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="mobiletrue-closedfalse">
+      <div class="logo">
+        <img class="crime-stoppers-logo" alt="" src="Crime Stoppers Logo.png" />
+      </div>
+      <div class="nav-options-wrapper">
+        <div class="nav-options">
+          <div class="nav-title">
+            <div class="nav-group">
+              <div class="icon-background">
+                <div class="background">
+                  <div class="nav-icons">
+                    <img class="home-fill-icon" alt="" src="Home_fill.png" />
+                  </div>
+                </div>
+              </div>
+              <div class="nav-title1">
+                <div class="text">Home</div>
+              </div>
+            </div>
+            <div class="sub-nav">
+              <div class="nav-title2">
+                <div class="nav-title-child"></div>
+                <div class="text1">Text</div>
+              </div>
+              <div class="nav-title3">
+                <div class="nav-title-item"></div>
+                <div class="text2">Text</div>
+              </div>
+              <div class="nav-title3">
+                <div class="nav-title-item"></div>
+                <div class="text2">Text</div>
+              </div>
+              <div class="nav-title3">
+                <div class="nav-title-item"></div>
+                <div class="text2">Text</div>
+              </div>
+            </div>
+          </div>
+          <div class="nav-title6">
+            <div class="nav-group">
+              <div class="icon-background">
+                <div class="background1">
+                  <div class="nav-icons1">
+                    <img class="group-icon" alt="" src="Group.png" />
+                  </div>
+                </div>
+              </div>
+              <div class="nav-title1">
+                <div class="text5">About Us</div>
+              </div>
+            </div>
+          </div>
+          <div class="nav-title6">
+            <div class="nav-group">
+              <div class="icon-background">
+                <div class="background1">
+                  <div class="nav-icons2">
+                    <img class="file-fill-icon" alt="" src="File_fill.png" />
+                  </div>
+                </div>
+              </div>
+              <div class="nav-title1">
+                <div class="text5">Resources</div>
+              </div>
+            </div>
+          </div>
+          <div class="nav-title6">
+            <div class="nav-group">
+              <div class="icon-background">
+                <div class="background1">
+                  <div class="nav-icons2">
+                    <img class="view-fill-icon" alt="" src="View_fill.png" />
+                  </div>
+                </div>
+              </div>
+              <div class="nav-title1">
+                <div class="text5">News</div>
+              </div>
+            </div>
+          </div>
+          <div class="nav-title6">
+            <div class="nav-group">
+              <div class="icon-background">
+                <div class="background1">
+                  <div class="nav-icons2">
+                    <img class="user-fill-icon" alt="" src="User_fill.svg" />
+                  </div>
+                </div>
+              </div>
+              <div class="nav-title1">
+                <div class="text5">Volunteer</div>
+              </div>
+            </div>
+          </div>
+          <div class="nav-title6">
+            <div class="nav-group">
+              <div class="icon-background">
+                <div class="background1">
+                  <div class="nav-icons2">
+                    <img class="user-fill-icon" alt="" src="Date_fill.svg" />
+                  </div>
+                </div>
+              </div>
+              <div class="nav-title1">
+                <div class="text5">Events</div>
+              </div>
+            </div>
+          </div>
+          <div class="nav-title6">
+            <div class="nav-group">
+              <div class="icon-background">
+                <div class="background1">
+                  <div class="nav-icons2">
+                    <img class="view-fill-icon" alt="" src="GIft_fill.png" />
+                  </div>
+                </div>
+              </div>
+              <div class="nav-title1">
+                <div class="text5">Sponsors</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="buttons">
+        <div class="tip-button">
+          <div class="background7">
+            <b class="title">SUBMIT A TIP</b>
+          </div>
+        </div>
+        <div class="donate-button">
+          <div class="background8">
+            <b class="title1">DONATE</b>
+          </div>
+        </div>
+      </div>
+      <div class="menu-button-wrapper">
+        <div class="menu-button">
+          <img class="menu-icon" alt="" src="Menu.svg" />
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

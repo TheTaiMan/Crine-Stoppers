@@ -4,30 +4,47 @@
     </div>
     
     <nav class="sidebar-nav">
-        <div class="nav-group">
+        <div class="nav-group" x-data="{ hoveredItemId: null }">
             <template x-for="page in navigation" :key="page.id">
-                <div class="nav-item-wrapper">
-                    <!-- Main Navigation Item -->
-                    <a 
-                        :href="page.path"
-                        @click.prevent="navigateTo(page.path)"
-                        class="nav-item"
-                        :class="{ 'is-selected': currentPage === page.id }"
-                    >
-                        <div class="nav-icon-container">
-                            <img 
-                                :src="`assets/icons/${page.icon}`" 
-                                :alt="`${page.name} icon`"
-                                class="nav-icon"
-                                @error="showPlaceholderIcon($event)"
-                            >
+                <div 
+                    class="nav-item-wrapper"
+                    @mouseenter="hoveredItemId = page.id"
+                    @mouseleave="hoveredItemId = null"
+                >
+                    <!-- Main Navigation Item with Arrow -->
+                    <div class="nav-item-container">
+                        <a 
+                            :href="page.path"
+                            @click.prevent="navigateTo(page.path)"
+                            class="nav-item"
+                            :class="{ 'is-selected': currentPage === page.id }"
+                        >
+                            <div class="nav-icon-container">
+                                <img 
+                                    :src="`assets/icons/${page.icon}`" 
+                                    :alt="`${page.name} icon`"
+                                    class="nav-icon"
+                                    @error="showPlaceholderIcon($event)"
+                                >
+                            </div>
+                            <span class="nav-text" x-text="page.name"></span>
+                        </a>
+                        
+                        <!-- Arrow Indicator (show if page has sections) -->
+                        <div 
+                            x-show="page.sections && page.sections.length > 0"
+                            class="nav-arrow-indicator"
+                            :class="{ 'expanded': hoveredItemId === page.id || currentPage === page.id }"
+                        >
+                            <svg class="nav-arrow" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
+                            </svg>
                         </div>
-                        <span class="nav-text" x-text="page.name"></span>
-                    </a>
+                    </div>
                     
                     <!-- Sub-navigation (Table of Contents) -->
                     <div 
-                        x-show="currentPage === page.id && page.sections && page.sections.length > 0"
+                        x-show="(currentPage === page.id || hoveredItemId === page.id) && page.sections && page.sections.length > 0"
                         x-transition:enter="transition ease-out duration-200"
                         x-transition:enter-start="opacity-0 transform -translate-y-2"
                         x-transition:enter-end="opacity-100 transform translate-y-0"
@@ -39,7 +56,7 @@
                         <template x-for="section in page.sections" :key="section.id">
                             <a 
                                 :href="`#${section.id}`"
-                                @click.prevent="scrollToSection(section.id)"
+                                @click.prevent="navigateToSection(page.id, section.id)"
                                 class="sub-nav-item"
                                 :class="{ 'is-selected': activeSection === section.id }"
                             >
@@ -53,3 +70,4 @@
         </div>
     </nav>
 </div>
+
