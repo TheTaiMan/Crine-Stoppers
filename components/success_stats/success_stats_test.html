@@ -1,23 +1,35 @@
-<div class="success-stats-container">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Success Stats Mobile Test</title>
+    <link rel="stylesheet" href="success_stats.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="success_stats.js"></script>
+</head>
+<body>
+<div class="success-stats-container" x-data="successStats()" x-init="init()">
+    <h1>Mobile Chrome Animation Test</h1>
     <div class="success-stats-grid">
 
         <!-- Card 1: $150,000,000+ -->
         <article class="stat-card">
-            <h2 class="stat-number">$150,000,000+</h2>
+            <h2 class="stat-number" x-text="'$' + formatNumber(counters.value1) + '+'">$0+</h2>
             <p class="stat-description">In value of solved crime</p>
         </article>
 
         <!-- Card 2: 14,500 cases -->
         <article class="stat-card">
             <p class="stat-prefix">More than</p>
-            <h2 class="stat-number">14,500 cases</h2>
+            <h2 class="stat-number" x-text="formatNumber(counters.value2) + ' cases'">0 cases</h2>
             <p class="stat-description">solved and cleared</p>
         </article>
 
         <!-- Card 3: 1,275 -->
         <article class="stat-card">
             <p class="stat-prefix">Over</p>
-            <h2 class="stat-number">1,275</h2>
+            <h2 class="stat-number" x-text="formatNumber(counters.value3)">0</h2>
             <p class="stat-description">break and entry cases solved</p>
         </article>
 
@@ -107,3 +119,13 @@
 
     </div>
 </div>
+
+<div style="margin: 20px; padding: 20px; background: #f0f0f0; border-radius: 8px;">
+    <h3>Debug Info (Check Console for Animation Logs)</h3>
+    <p>This test page will help verify that the animation works on mobile Chrome.</p>
+    <p>Expected behavior: Numbers should animate from 0 to their target values when the component comes into view.</p>
+    <p>Check the browser console for animation debug logs.</p>
+</div>
+
+</body>
+</html>

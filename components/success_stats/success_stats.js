@@ -51,13 +51,23 @@ function successStats() {
             
             // Set up intersection observer to trigger animation when component comes into view
             this.setupIntersectionObserver();
+            
+            // Add fallback for mobile Chrome issues
+            this.setupMobileFallback();
         },
         
         setupIntersectionObserver() {
+            // Check if IntersectionObserver is supported
+            if (!window.IntersectionObserver) {
+                console.log('Success Stats: IntersectionObserver not supported, using fallback');
+                this.triggerAnimationWithDelay();
+                return;
+            }
+
             const options = {
                 root: null, 
-                rootMargin: '-100px 0px -100px 0px', // Trigger when component is well into view
-                threshold: 0.5 // Trigger when 50% of component is visible
+                rootMargin: '-50px 0px -50px 0px', // More lenient for mobile
+                threshold: [0.1, 0.3, 0.5] // Multiple thresholds for better mobile detection
             };
             
             this.observer = new IntersectionObserver((entries) => {
@@ -65,10 +75,16 @@ function successStats() {
                     console.log('Success Stats: Intersection observed', {
                         isIntersecting: entry.isIntersecting,
                         intersectionRatio: entry.intersectionRatio,
-                        hasAnimated: this.hasAnimated
+                        hasAnimated: this.hasAnimated,
+                        isMobile: this.isMobileDevice()
                     });
                     
-                    if (entry.isIntersecting && !this.hasAnimated) {
+                    // More lenient conditions for mobile
+                    const shouldAnimate = entry.isIntersecting && 
+                                        (entry.intersectionRatio > 0.1) && 
+                                        !this.hasAnimated;
+                    
+                    if (shouldAnimate) {
                         console.log('🎯 Success Stats: Component in view, starting animation...');
                         this.startCountAnimation();
                         this.hasAnimated = true;
@@ -79,23 +95,108 @@ function successStats() {
                 });
             }, options);
             
-            // Start observing the component after a short delay
+            // Enhanced initialization with mobile-specific timing
             this.$nextTick(() => {
+                const delay = this.isMobileDevice() ? 500 : 100; // Longer delay for mobile
                 setTimeout(() => {
                     if (this.$el) {
                         console.log('Success Stats: Starting to observe element for scroll animation');
                         this.observer.observe(this.$el);
                     }
-                }, 100);
+                }, delay);
             });
+        },
+        
+        isMobileDevice() {
+            return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+                   (window.innerWidth <= 768) ||
+                   ('ontouchstart' in window);
+        },
+        
+        setupMobileFallback() {
+            // For mobile Chrome, add additional trigger mechanisms
+            if (this.isMobileDevice()) {
+                console.log('Success Stats: Setting up mobile fallback mechanisms');
+                
+                // Fallback 1: Trigger on page scroll (with throttle)
+                let scrollTimeout;
+                const handleScroll = () => {
+                    if (this.hasAnimated) return;
+                    
+                    clearTimeout(scrollTimeout);
+                    scrollTimeout = setTimeout(() => {
+                        if (this.isElementInViewport() && !this.hasAnimated) {
+                            console.log('🎯 Success Stats: Mobile scroll fallback triggered');
+                            this.startCountAnimation();
+                            this.hasAnimated = true;
+                            window.removeEventListener('scroll', handleScroll);
+                        }
+                    }, 150);
+                };
+                
+                window.addEventListener('scroll', handleScroll, { passive: true });
+                
+                // Fallback 2: Trigger after longer delay if still not animated
+                setTimeout(() => {
+                    if (!this.hasAnimated && this.isElementInViewport()) {
+                        console.log('🎯 Success Stats: Mobile timeout fallback triggered');
+                        this.startCountAnimation();
+                        this.hasAnimated = true;
+                    }
+                }, 3000);
+                
+                // Fallback 3: Trigger on touch events
+                const handleTouch = () => {
+                    if (this.hasAnimated) return;
+                    
+                    setTimeout(() => {
+                        if (this.isElementInViewport() && !this.hasAnimated) {
+                            console.log('🎯 Success Stats: Mobile touch fallback triggered');
+                            this.startCountAnimation();
+                            this.hasAnimated = true;
+                            document.removeEventListener('touchstart', handleTouch);
+                        }
+                    }, 100);
+                };
+                
+                document.addEventListener('touchstart', handleTouch, { passive: true });
+            }
+        },
+        
+        isElementInViewport() {
+            if (!this.$el) return false;
+            
+            const rect = this.$el.getBoundingClientRect();
+            const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+            const windowWidth = window.innerWidth || document.documentElement.clientWidth;
+            
+            // Element is in viewport if any part is visible
+            return (
+                rect.top < windowHeight &&
+                rect.bottom > 0 &&
+                rect.left < windowWidth &&
+                rect.right > 0
+            );
+        },
+        
+        triggerAnimationWithDelay() {
+            // Immediate fallback for unsupported browsers
+            setTimeout(() => {
+                if (!this.hasAnimated) {
+                    console.log('🎯 Success Stats: Fallback animation triggered');
+                    this.startCountAnimation();
+                    this.hasAnimated = true;
+                }
+            }, 1000);
         },
         
         startCountAnimation() {
             if (this.isAnimating) return;
             
             this.isAnimating = true;
-            const duration = 2500; // 2.5 seconds for better visibility
-            const steps = 80; // More steps for smoother animation
+            // Shorter duration for mobile for better performance
+            const duration = this.isMobileDevice() ? 2000 : 2500;
+            const steps = this.isMobileDevice() ? 60 : 80; // Fewer steps on mobile
             const stepDuration = duration / steps;
             
             console.log('🚀 Success Stats: Starting count animation...');
@@ -107,17 +208,19 @@ function successStats() {
             });
             
             let currentStep = 0;
+            let startTime = performance.now();
             
-            const animate = () => {
-                currentStep++;
+            const animate = (timestamp) => {
+                if (!startTime) startTime = timestamp;
+                const elapsed = timestamp - startTime;
+                const progress = Math.min(elapsed / duration, 1);
                 
                 // Apply easing function (ease-out)
-                const progress = currentStep / steps;
                 const easedProgress = 1 - Math.pow(1 - progress, 3); // Cubic ease-out
                 
                 // Update all counters
                 Object.keys(this.targets).forEach(key => {
-                    if (currentStep >= steps) {
+                    if (progress >= 1) {
                         // Final step - set to exact target
                         this.counters[key] = this.targets[key];
                     } else {
@@ -126,8 +229,14 @@ function successStats() {
                     }
                 });
                 
-                if (currentStep < steps) {
-                    setTimeout(animate, stepDuration);
+                if (progress < 1) {
+                    // Use requestAnimationFrame for smoother animation on mobile
+                    if (window.requestAnimationFrame) {
+                        requestAnimationFrame(animate);
+                    } else {
+                        // Fallback for older browsers
+                        setTimeout(() => animate(performance.now()), 16);
+                    }
                 } else {
                     this.isAnimating = false;
                     console.log('✅ Success Stats: Animation complete!');
@@ -136,7 +245,11 @@ function successStats() {
             
             // Small delay before starting animation for better effect
             setTimeout(() => {
-                animate();
+                if (window.requestAnimationFrame) {
+                    requestAnimationFrame(animate);
+                } else {
+                    animate(performance.now());
+                }
             }, 200);
         },
         
@@ -165,6 +278,11 @@ function successStats() {
             if (this.observer) {
                 this.observer.disconnect();
             }
+            
+            // Clean up mobile fallback event listeners
+            window.removeEventListener('scroll', this.handleScroll);
+            document.removeEventListener('touchstart', this.handleTouch);
+            
             console.log('Success Stats: Component destroyed');
         }
     }

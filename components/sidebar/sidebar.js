@@ -17,6 +17,8 @@ function sidebar() {
                 this.checkMobile();
             });
             
+            // Simplified: CSS env() handles viewport changes automatically
+            
             // Close sidebar when clicking outside on mobile
             document.addEventListener('click', (e) => {
                 if (this.isMobile && this.isOpen && !e.target.closest('.sidebar') && !e.target.closest('.mobile-menu-toggle')) {
@@ -29,6 +31,7 @@ function sidebar() {
             this.isMobile = window.innerWidth <= 768;
             if (this.isMobile) {
                 this.isOpen = false;
+                // CSS env() handles safe areas automatically
             } else {
                 this.isOpen = true;
                 // Close mobile nav and restore scroll when switching to desktop

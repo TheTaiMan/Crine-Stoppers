@@ -207,3 +207,5 @@ const storage = {
         }
     }
 };
+
+// Simplified mobile viewport handling using CSS env() - no complex JavaScript needed

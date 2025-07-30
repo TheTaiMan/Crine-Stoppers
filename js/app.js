@@ -4,6 +4,7 @@ function app() {
         isLoading: false,
         pageContent: '',
         footerContent: '',
+        underConstructionContent: '',
         currentPage: 'home',
         activeSection: '',
         pageCache: {},
@@ -83,6 +84,7 @@ function app() {
         // Initialize the application
         init() {
             this.loadFooter();
+            this.loadUnderConstructionComponent();
             this.handleInitialRoute();
             this.setupHashChangeListener();
             this.setupScrollSpy();
@@ -267,6 +269,17 @@ function app() {
             } catch (error) {
                 console.error('Error loading footer:', error);
                 this.footerContent = '<div class="error">Unable to load footer</div>';
+            }
+        },
+
+        // Load under construction component content
+        async loadUnderConstructionComponent() {
+            try {
+                const response = await fetch('components/under_construction/under_construction.html');
+                this.underConstructionContent = await response.text();
+            } catch (error) {
+                console.error('Error loading under construction component:', error);
+                this.underConstructionContent = '<div class="error">Unable to load under construction banner</div>';
             }
         },
 
