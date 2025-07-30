@@ -1,0 +1,115 @@
+/* Success Statistics Component Styles */
+
+/* Main container matching other content areas */
+.success-stats-container {
+    width: 100%;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+/* Flexbox layout with wrapping */
+.success-stats-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    align-items: stretch;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Card Styling */
+.stat-card {
+    background-color: var(--color-light);
+    border-radius: var(--radius-lg);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    min-height: 120px;
+    /* Flexible width with constraints */
+    flex: 1 1 280px;
+    max-width: 320px;
+    min-width: 250px;
+    box-sizing: border-box;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Text elements inside the card */
+.stat-prefix {
+    font-size: var(--text-base);
+    color: var(--color-dark-alt);
+    font-family: var(--font-primary);
+    margin: 0;
+}
+
+.stat-number {
+    font-size: clamp(1.75rem, 5vw, 2.5rem); /* Responsive font size */
+    font-weight: var(--font-weight-bold);
+    color: var(--color-dark);
+    line-height: 1.2;
+    font-family: var(--font-primary);
+    margin: 0;
+}
+
+.stat-description {
+    font-size: var(--text-base);
+    color: var(--color-dark-alt);
+    line-height: 1.5;
+    font-family: var(--font-primary);
+    margin: 0;
+}
+
+.stat-description strong {
+    display: block; /* Puts the number on its own line in some cards */
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-dark);
+    margin-bottom: 4px;
+    font-family: var(--font-primary);
+}
+
+/* Icon Styling */
+.stat-icon {
+    color: var(--color-dark);
+    width: clamp(50px, 10vw, 70px);
+    height: auto;
+    margin-bottom: 12px;
+}
+
+/* Mobile specific adjustments */
+@media (max-width: 768px) {
+    .success-stats-grid {
+        gap: 16px;
+    }
+    
+    .stat-card {
+        flex: 1 1 100%;
+        max-width: 100%;
+        min-width: 100%;
+        padding: 16px;
+        min-height: 100px;
+    }
+    
+    .stat-number {
+        font-size: clamp(1.25rem, 5vw, 1.75rem);
+    }
+    
+    .stat-description strong {
+        font-size: clamp(1.1rem, 4vw, 1.5rem);
+    }
+    
+    .stat-icon {
+        width: clamp(35px, 7vw, 50px);
+        margin-bottom: 6px;
+    }
+}

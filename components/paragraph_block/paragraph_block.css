@@ -39,7 +39,7 @@
 
 /* Video embed styles */
 .paragraph-block-video {
-  background: var(--color-primary, #8cc63f);
+/*   background: var(--color-primary, #8cc63f); */
   border-radius: var(--radius-lg, 16px);
   min-height: 250px;
   display: flex;

@@ -3,6 +3,9 @@
     max-width: 1100px;
     width: 100%;
     overflow: hidden; /* Prevent horizontal overflow */
+    background-color: transparent;
+    position: relative;
+    z-index: 1; /* Keep below nav bar */
 }
 
 /* Navigation Tabs */
@@ -13,10 +16,27 @@
     overflow-x: auto;
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none; /* IE and Edge */
+    background-color: transparent;
 }
 
 .services-tabs::-webkit-scrollbar {
     display: none; /* Hide scrollbar for Chrome, Safari, Opera */
+}
+
+/* Force hide scrollbar on mobile Chrome */
+@media (max-width: 768px) {
+    .services-tabs::-webkit-scrollbar {
+        display: none !important;
+        width: 0 !important;
+        height: 0 !important;
+        background: transparent !important;
+    }
+    
+    .services-tabs {
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none !important;
+        -ms-overflow-style: none !important;
+    }
 }
 
 .service-tab {
@@ -177,6 +197,9 @@
         width: 100%;
         overflow: hidden; /* Prevent overall overflow */
         box-sizing: border-box;
+        /* Prevent Chrome from showing native scrollbar */
+        overflow-x: hidden !important;
+        contain: layout style paint;
     }
     
     .services-tabs {
@@ -185,7 +208,13 @@
         scroll-behavior: smooth;
         max-width: calc(100vw - calc(var(--space-3) * 2)); /* Account for container padding */
         overflow-x: auto; /* Keep horizontal scrolling for tabs only */
+        overflow-y: hidden; /* Prevent any vertical overflow */
         box-sizing: border-box;
+        position: relative;
+        z-index: 1; /* Stay behind nav bar in mobile */
+        /* Force Chrome to respect our scrollbar hiding */
+        overscroll-behavior-x: contain;
+        touch-action: pan-x;
     }
     
     .service-tab {
@@ -256,7 +285,7 @@
 /* Enhanced hover states for desktop */
 @media (min-width: 769px) {
     .service-tab:hover .tab-button {
-        background-color: var(--color-primary, #8cc63f);
+        background-color: var(--color-dark);
         transition: background-color 0.2s ease;
     }
     

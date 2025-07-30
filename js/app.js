@@ -19,7 +19,7 @@ function app() {
                 sections: [
                     { id: 'who-we-are', title: 'Who We Are' },
                     { id: 'services', title: 'Services' },
-                    { id: 'contact-methods', title: 'Contact Methods' }
+                    { id: 'our-successes', title: 'Our Successes' }
                 ]
             },
             {
@@ -27,7 +27,12 @@ function app() {
                 name: 'About Us',
                 path: '#about_us',
                 icon: 'about_us_icon.svg',
-                sections: []
+                sections: [
+                    { id: 'crime-prevention', title: 'Anonymity' },
+                    { id: 'safety-tips', title: 'How it works' },
+                    { id: 'community-programs', title: 'Faq' },
+                    { id: 'community-program1s', title: 'In Memory Of' }
+                ]
             },
             {
                 id: 'resources',
@@ -35,9 +40,10 @@ function app() {
                 path: '#resources',
                 icon: 'resources_icon.svg',
                 sections: [
-                    { id: 'crime-prevention', title: 'Crime Prevention' },
-                    { id: 'safety-tips', title: 'Safety Tips' },
-                    { id: 'community-programs', title: 'Community Programs' }
+                    { id: 'crime-prevention', title: 'Wanted' },
+                    { id: 'safety-tips', title: 'Countraband Tobacco' },
+                    { id: 'community-programs', title: 'Important Numbers' },
+                    { id: 'community-program1s', title: 'Links' }
                 ]
             },
             {
@@ -196,6 +202,7 @@ function app() {
                         if (pageId === 'home') {
                             this.loadBannerComponent();
                             this.loadServicesShowcaseComponent();
+                            this.loadSuccessStatsComponent();
                             // Set up banner visibility observer after banner loads
                             setTimeout(() => {
                                 this.setupBannerVisibilityObserver();
@@ -228,6 +235,7 @@ function app() {
                     if (pageId === 'home') {
                         this.loadBannerComponent();
                         this.loadServicesShowcaseComponent();
+                        this.loadSuccessStatsComponent();
                         // Set up banner visibility observer after banner loads
                         setTimeout(() => {
                             this.setupBannerVisibilityObserver();
@@ -276,6 +284,24 @@ function app() {
                 const showcaseContainer = document.getElementById('services-showcase-component');
                 if (showcaseContainer) {
                     showcaseContainer.innerHTML = '<div class="error">Unable to load services showcase</div>';
+                }
+            }
+        },
+
+        // Load Success Statistics component
+        async loadSuccessStatsComponent() {
+            try {
+                const response = await fetch('components/success_stats/success_stats.html');
+                const statsHTML = await response.text();
+                const statsContainer = document.getElementById('success-stats-component');
+                if (statsContainer) {
+                    statsContainer.innerHTML = statsHTML;
+                }
+            } catch (error) {
+                console.error('Error loading success stats:', error);
+                const statsContainer = document.getElementById('success-stats-component');
+                if (statsContainer) {
+                    statsContainer.innerHTML = '<div class="error">Unable to load success statistics</div>';
                 }
             }
         },

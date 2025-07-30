@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Important Phone Numbers - Winnipeg Crime Stoppers</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hind:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Variables - Root Level */
+        :root {
+            /* Brand Colors */
+            --color-primary: #8cc63f; /* Fresh Lime */
+            --color-secondary: #b8d9b4; /* Sage Mist */
+            --color-accent: #6f8ea7; /* Storm Blue */
+            --color-dark: #09161c; /* Midnight Navy */
+            --color-dark-alt: #42453e; /* Forest Shadow */
+            --color-light: #f7fafc; /* Cool White */
+            --color-danger: #bf1e2e; /* Crimson Red */
+
+            /* Typography */
+            --font-primary: 'Montserrat', sans-serif;
+            --font-secondary: 'Hind', sans-serif;
+
+            /* Font Sizes */
+            --text-xs: 0.5rem; /* 8px */
+            --text-sm: 0.625rem; /* 10px */
+            --text-base: 1rem; /* 16px - Base */
+            --text-lg: 1.125rem; /* 18px */
+            --text-xl: 1.25rem; /* 20px */
+            --text-2xl: 1.563rem; /* 25px */
+            --text-3xl: 2.188rem; /* 35px */
+            --text-4xl: 2.5rem; /* 40px */
+
+            /* Font Weights */
+            --font-weight-regular: 400;
+            --font-weight-medium: 500;
+            --font-weight-semibold: 600;
+            --font-weight-bold: 700;
+            --font-weight-black: 900;
+
+            /* Spacing */
+            --space-1: 0.25rem; /* 4px */
+            --space-2: 0.5rem; /* 8px */
+            --space-3: 0.625rem; /* 10px */
+            --space-4: 0.75rem; /* 12px */
+            --space-5: 1.25rem; /* 20px */
+            --space-6: 1.5rem; /* 24px */
+
+            /* Border Radius */
+            --radius-sm: 2px;
+            --radius-md: 8px;
+            --radius-lg: 16px;
+            --radius-line: 13px;
+            --radius-xl: 42px;
+            --radius-full: 9999px;
+
+            /* Shadows */
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-secondary);
+            font-size: var(--text-base);
+            line-height: 1.5;
+            color: var(--color-dark);
+            background-color: var(--color-secondary);
+        }
+
+        /* Layout */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--space-4);
+        }
+
+        .section {
+            margin-bottom: var(--space-6);
+            padding: var(--space-5);
+        }
+
+        /* Header */
+        h1 {
+            font-family: var(--font-primary);
+            font-size: var(--text-4xl);
+            font-weight: var(--font-weight-black);
+            text-transform: uppercase;
+            text-align: center;
+            color: var(--color-dark);
+            margin-bottom: var(--space-6);
+        }
+
+        h2 {
+            font-family: var(--font-primary);
+            font-size: var(--text-3xl);
+            font-weight: var(--font-weight-black);
+            text-transform: uppercase;
+            margin-bottom: var(--space-5);
+            color: var(--color-dark);
+        }
+
+        /* Emergency Banner */
+        .emergency-banner {
+            background: linear-gradient(135deg, var(--color-danger) 0%, #9a1a24 100%);
+            color: var(--color-light);
+            padding: var(--space-5);
+            border-radius: var(--radius-lg);
+            margin-bottom: var(--space-6);
+            box-shadow: var(--shadow-md);
+            text-align: center;
+        }
+
+        .emergency-banner h2 {
+            font-size: var(--text-2xl);
+            margin-bottom: var(--space-3);
+            color: var(--color-light);
+        }
+
+        .emergency-number {
+            font-family: var(--font-primary);
+            font-size: var(--text-4xl);
+            font-weight: var(--font-weight-black);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-4);
+            margin-bottom: var(--space-3);
+        }
+
+        .emergency-description {
+            font-family: var(--font-secondary);
+            font-size: var(--text-lg);
+            font-weight: var(--font-weight-medium);
+            opacity: 0.9;
+        }
+
+        /* Search */
+        .search-container {
+            margin-bottom: var(--space-6);
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: var(--space-4) var(--space-5) var(--space-4) 50px;
+            border: none;
+            border-radius: var(--radius-md);
+            font-family: var(--font-secondary);
+            font-size: var(--text-lg);
+            font-weight: var(--font-weight-medium);
+            transition: all 0.2s ease;
+            background-color: var(--color-dark-alt);
+            color: var(--color-light);
+        }
+
+        .search-input:focus {
+            outline: none;
+            background-color: var(--color-dark);
+            color: var(--color-light);
+            box-shadow: 0 0 0 3px rgba(140, 198, 63, 0.1);
+        }
+
+        .search-input::placeholder {
+            color: var(--color-secondary);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: var(--space-4);
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--color-accent);
+            width: 20px;
+            height: 20px;
+        }
+
+        /* Category Sections */
+        .category-section {
+            display: flex;
+            align-items: stretch;
+            gap: 14px;
+            margin-bottom: var(--space-6);
+        }
+
+        .category-line {
+            width: 12px;
+            background-color: var(--color-dark);
+            border-radius: var(--radius-line);
+            flex-shrink: 0;
+        }
+
+        .category-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-4);
+        }
+
+        .category-title {
+            font-family: var(--font-primary);
+            font-size: var(--text-2xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--color-dark);
+        }
+
+        .number-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: var(--space-4);
+        }
+
+        .number-card {
+            background: var(--color-dark-alt);
+            border-radius: var(--radius-md);
+            padding: var(--space-4);
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .number-card:hover {
+            background: var(--color-dark-alt);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .service-name {
+            font-family: var(--font-secondary);
+            font-weight: var(--font-weight-bold);
+            color: var(--color-light);
+            margin-bottom: var(--space-2);
+            font-size: var(--text-lg);
+            line-height: 1.4;
+        }
+
+        .phone-number {
+            font-family: var(--font-primary);
+            font-size: var(--text-xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--color-light);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: var(--space-3);
+        }
+
+        /* Copy Button */
+        .btn-copy {
+            background-color: var(--color-accent);
+            border: none;
+            padding: var(--space-2) var(--space-3);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+        }
+
+        .btn-copy:hover {
+            background-color: var(--color-primary);
+            transform: scale(1.05);
+        }
+
+        .btn-copy:active {
+            transform: scale(0.95);
+        }
+
+        .btn-copy.copied {
+            background-color: var(--color-primary);
+        }
+
+        .btn-text {
+            color: var(--color-light);
+            font-family: var(--font-primary);
+            font-size: var(--text-sm);
+            font-weight: var(--font-weight-semibold);
+            text-transform: uppercase;
+        }
+
+        .copy-icon {
+            width: 16px;
+            height: 16px;
+            stroke: var(--color-light);
+            stroke-width: 2;
+        }
+
+        /* Tooltip */
+        .tooltip {
+            position: absolute;
+            bottom: calc(100% + 8px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--color-dark);
+            color: var(--color-light);
+            padding: var(--space-2) var(--space-3);
+            border-radius: var(--radius-sm);
+            font-family: var(--font-secondary);
+            font-size: var(--text-xs);
+            font-weight: var(--font-weight-medium);
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease;
+            z-index: 10;
+        }
+
+        .tooltip::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 4px solid transparent;
+            border-top-color: var(--color-dark);
+        }
+
+        .btn-copy:hover .tooltip {
+            opacity: 1;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: var(--space-3);
+            }
+
+            h1 {
+                font-size: var(--text-3xl);
+                margin-bottom: var(--space-5);
+            }
+
+            .emergency-number {
+                font-size: var(--text-3xl);
+                flex-direction: column;
+                gap: var(--space-3);
+            }
+
+            .category-section {
+                gap: 10px;
+            }
+
+            .category-line {
+                width: 10px;
+            }
+
+            .number-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .phone-number {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: var(--space-3);
+            }
+
+            .search-input {
+                font-size: var(--text-base);
+                padding: var(--space-3) var(--space-4) var(--space-3) 45px;
+            }
+
+            .search-icon {
+                left: var(--space-3);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Important Phone Numbers</h1>
+
+        <div class="search-container">
+            <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"/>
+                <path d="m21 21-4.35-4.35"/>
+            </svg>
+            <input type="text" class="search-input" id="searchInput" placeholder="Search for a service or phone number...">
+        </div>
+
+        <div class="emergency-banner">
+            <h2>Emergency Services</h2>
+            <div class="emergency-number">
+                <span>911</span>
+                <button class="btn-copy" onclick="copyToClipboard('911', this)">
+                    <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                    </svg>
+                    <span class="btn-text">Copy</span>
+                    <span class="tooltip">Copy to clipboard</span>
+                </button>
+            </div>
+            <p class="emergency-description">Police, Fire, Ambulance, Poison</p>
+        </div>
+
+        <div id="categoriesContainer">
+            <!-- Categories will be dynamically inserted here -->
+        </div>
+    </div>
+
+    <script>
+        const phoneData = [
+            {
+                category: "Police Services",
+                numbers: [
+                    { name: "Winnipeg Police Non-Emergency", number: "204-986-6222" },
+                    { name: "Animal Control Services (The Pound)", number: "204-986-2155" },
+                    { name: "Bicycle Recovery", number: "204-986-2473" }
+                ]
+            },
+            {
+                category: "Health & Crisis Support",
+                numbers: [
+                    { name: "Addictions Foundation of Manitoba", number: "204-944-6200" },
+                    { name: "Crisis Line Deaf Access Line TTY", number: "204-784-4097" },
+                    { name: "Domestic Violence Crisis Line", number: "1-877-977-0007" },
+                    { name: "Gambling Addiction Help Line", number: "204-944-6382" },
+                    { name: "Health Links (Non-Emergency)", number: "204-788-8200" },
+                    { name: "City Hall Information: Crisis Line (24 Hours)", number: "204-786-8686" },
+                    { name: "Call Before You Dig", number: "www.callb4udig.mb.ca" }
+                ]
+            },
+            {
+                category: "Shelters & Support Services",
+                numbers: [
+                    { name: "Ikwe-Widdjiitiwin Crisis Line & Shelter for Abused Women", number: "204-987-2780" },
+                    { name: "Osborne House Crisis Line and Shelter for Abused Women", number: "204-942-3052" },
+                    { name: "Missing Persons", number: "204-986-6250" },
+                    { name: "Photo Radar Enforcement", number: "204-986-5445" },
+                    { name: "Poison Help Line", number: "204-787-2591" }
+                ]
+            },
+            {
+                category: "Manitoba Crime Stoppers",
+                numbers: [
+                    { name: "Manitoba Crime Stoppers (Outside of Winnipeg)", number: "1-800-782-8477" },
+                    { name: "Manitoba Hydro (Electricity & Gas)", number: "204-480-5900" },
+                    { name: "Manitoba Suicide Help Line", number: "1-877-435-7170" }
+                ]
+            },
+            {
+                category: "Youth & Family Services",
+                numbers: [
+                    { name: "Kids Help Phone Line", number: "1-800-668-6868" },
+                    { name: "Pot Holes (City of Winnipeg)", number: "204-986-4653" },
+                    { name: "Public Works (Emergency)", number: "204-986-2626" },
+                    { name: "Sexual Assault Crisis Line (KLINIC)", number: "204-786-8631" },
+                    { name: "Veterinary Services (24 Hours)", number: "204-452-9427" }
+                ]
+            },
+            {
+                category: "Government Services",
+                numbers: [
+                    { name: "Government of Canada", number: "1-800-622-6232" },
+                    { name: "Government of Manitoba", number: "1-866-626-4862" }
+                ]
+            },
+            {
+                category: "Crime Stoppers & Reporting",
+                numbers: [
+                    { name: "Winnipeg Crime Stoppers", number: "204-786-8477 (TIPS)" },
+                    { name: "Winnipeg Humane Society (Injured Animal Hotline)", number: "204-982-2020" },
+                    { name: "Winnipeg Parking Authority", number: "204-986-6281" }
+                ]
+            }
+        ];
+
+        function copyToClipboard(text, button) {
+            navigator.clipboard.writeText(text).then(() => {
+                const originalHTML = button.innerHTML;
+                button.classList.add('copied');
+                button.innerHTML = `
+                    <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                    <span class="btn-text">Copied!</span>
+                `;
+                
+                setTimeout(() => {
+                    button.classList.remove('copied');
+                    button.innerHTML = originalHTML;
+                }, 2000);
+            });
+        }
+
+        function renderCategories(data) {
+            const container = document.getElementById('categoriesContainer');
+            container.innerHTML = '';
+
+            data.forEach(category => {
+                const section = document.createElement('div');
+                section.className = 'category-section';
+
+                // Create the vertical line
+                const line = document.createElement('div');
+                line.className = 'category-line';
+                section.appendChild(line);
+
+                // Create the content container
+                const content = document.createElement('div');
+                content.className = 'category-content';
+                
+                const title = document.createElement('h2');
+                title.className = 'category-title';
+                title.textContent = category.category;
+                content.appendChild(title);
+
+                const grid = document.createElement('div');
+                grid.className = 'number-grid';
+
+                category.numbers.forEach(item => {
+                    const card = document.createElement('div');
+                    card.className = 'number-card';
+                    card.innerHTML = `
+                        <div class="service-name">${item.name}</div>
+                        <div class="phone-number">
+                            <span>${item.number}</span>
+                            ${item.number !== 'www.callb4udig.mb.ca' ? `
+                                <button class="btn-copy" onclick="copyToClipboard('${item.number}', this)">
+                                    <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                                    </svg>
+                                    <span class="btn-text">Copy</span>
+                                    <span class="tooltip">Copy to clipboard</span>
+                                </button>
+                            ` : ''}
+                        </div>
+                    `;
+                    grid.appendChild(card);
+                });
+
+                content.appendChild(grid);
+                section.appendChild(content);
+                container.appendChild(section);
+            });
+        }
+
+        // Search functionality
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            
+            if (!searchTerm) {
+                renderCategories(phoneData);
+                return;
+            }
+
+            const filteredData = phoneData.map(category => {
+                const filteredNumbers = category.numbers.filter(item => 
+                    item.name.toLowerCase().includes(searchTerm) || 
+                    item.number.includes(searchTerm)
+                );
+
+                return {
+                    category: category.category,
+                    numbers: filteredNumbers
+                };
+            }).filter(category => category.numbers.length > 0);
+
+            renderCategories(filteredData);
+        });
+
+        // Initial render
+        renderCategories(phoneData);
+    </script>
+</body>
+</html>

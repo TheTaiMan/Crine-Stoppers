@@ -38,7 +38,7 @@ function servicesShowcase() {
                 title: 'Stolen Vehicle',
                 description: 'If you see a suspected stolen vehicle, do not approach or engage with anyone in it. Your safety is paramount. Instead, make the right call and report it to Crime Stoppers. Your tip remains anonymous and helps keep our community safe. You can also view a list of recently reported stolen vehicles in Winnipeg:',
                 buttonText: 'Click Here',
-                media: '<img src="assets/images/logo-hot-cars-placeholder.svg" alt="Hot Cars Logo" />'
+                media: '<img src="assets/images/stolen_cars.jpg" alt="Hot Cars Logo" />'
             },
             {
                 id: 'save-your-cat',
