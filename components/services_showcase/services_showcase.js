@@ -21,7 +21,8 @@ function servicesShowcase() {
         touchHoldThreshold: 500,
         
         // Video monitoring
-        videoCheckInterval: null,
+        youtubeIsPlaying: false,
+        youtubePlayers: new Map(),
         lastVideoStates: new Map(),
         
         services: [
@@ -44,19 +45,30 @@ function servicesShowcase() {
                 title: 'Save Your Cat',
                 description: 'Protect your vehicle from theft with The Program, a partnership between businesses, Winnipeg Crime Stoppers, and the Winnipeg Police. While your car\'s being serviced, we\'ll etch your vehicle identification number onto your catalytic converter and spray it with high-heat fluorescent paint, making it a clear deterrent to thieves. A window sticker will also mark your vehicle as protected, helping combat this growing issue that affected over 2200 motorists last year.',
                 buttonText: 'Learn More',
-                media: '<img src="assets/images/save-your-cat-placeholder.svg" alt="Save Your Cat Program" />'
+                media: '<iframe width="100%" height="100%" src="https://www.youtube.com/embed/n6NFQm9NH5I?si=Bb8Nnh-dgUTY9Ahb&enablejsapi=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="border-radius: 16px; object-fit: contain;"></iframe>'
             }
         ],
 
         init() {
             console.log('Services Showcase: Initializing with simple width control...');
-            this.setupMobileInteractions();
             
-            this.$nextTick(() => {
-                this.startTimer();
-                this.startVideoMonitoring();
-                console.log('Services Showcase: Timer started');
-            });
+            try {
+                console.log('🔧 Setting up mobile interactions...');
+                this.setupMobileInteractions();
+                
+                console.log('🔧 Loading YouTube API...');
+                this.loadYouTubeAPI();
+                
+                console.log('🔧 Setting up nextTick callback...');
+                this.$nextTick(() => {
+                    console.log('🔧 Starting timer and video listeners...');
+                    this.startTimer();
+                    this.setupVideoEventListeners();
+                    console.log('Services Showcase: Timer started');
+                });
+            } catch (error) {
+                console.error('❌ Error in init():', error);
+            }
         },
 
         // =============== SIMPLE TIMER SYSTEM ===============
@@ -158,11 +170,13 @@ function servicesShowcase() {
             if (index !== this.currentIndex) {
                 console.log(`🔄 Switching from service ${this.currentIndex} to ${index}`);
                 
-                // Pause any videos in current service
-                this.pauseCurrentVideos();
-                
                 // Clear video-related pause reasons
                 this.resumeTimer('video-playing');
+                this.resumeTimer('youtube-interaction');
+                this.resumeTimer('youtube-playing');
+                
+                // Reset YouTube state
+                this.youtubeIsPlaying = false;
                 
                 // Reset progress width to full
                 this.progressWidth = 100;
@@ -173,11 +187,6 @@ function servicesShowcase() {
                 // Start new timer
                 this.startTimer();
                 this.scrollTabIntoView(index);
-                
-                // Check for videos in new service
-                setTimeout(() => {
-                    this.checkCurrentServiceVideos();
-                }, 100);
             }
         },
 
@@ -187,77 +196,198 @@ function servicesShowcase() {
             this.selectService(nextIndex);
         },
 
-        // =============== VIDEO MONITORING ===============
-        startVideoMonitoring() {
-            this.videoCheckInterval = setInterval(() => {
-                this.checkCurrentServiceVideos();
+        // =============== YOUTUBE IFRAME API ===============
+        loadYouTubeAPI() {
+            console.log('🔍 loadYouTubeAPI called');
+            console.log('🔍 window.YT exists:', !!window.YT);
+            console.log('🔍 window.YT.Player exists:', !!(window.YT && window.YT.Player));
+            console.log('🔍 window.onYouTubeIframeAPIReady exists:', !!window.onYouTubeIframeAPIReady);
+            
+            // Check if YouTube API is already loaded
+            if (window.YT && window.YT.Player) {
+                console.log('📺 YouTube API already loaded');
+                this.setupYouTubePlayer();
+                return;
+            }
+            
+            // Check if API is already being loaded
+            if (window.onYouTubeIframeAPIReady) {
+                console.log('📺 YouTube API loading in progress - replacing callback');
+            }
+            
+            console.log('📺 Loading YouTube IFrame API...');
+            
+            // Store reference to this component instance
+            const componentInstance = this;
+            
+            // Set up the callback for when API is ready
+            window.onYouTubeIframeAPIReady = function() {
+                console.log('📺 YouTube API loaded successfully - callback fired!');
+                componentInstance.setupYouTubePlayer();
+            };
+            
+            // Load the YouTube API script
+            const tag = document.createElement('script');
+            tag.src = 'https://www.youtube.com/iframe_api';
+            tag.onload = () => console.log('📺 YouTube API script loaded');
+            tag.onerror = () => console.error('❌ Failed to load YouTube API script');
+            
+            const firstScriptTag = document.getElementsByTagName('script')[0];
+            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+            
+            console.log('📺 YouTube API script tag added to DOM');
+        },
+
+        setupYouTubePlayer() {
+            // Wait a bit for DOM to be ready
+            setTimeout(() => {
+                this.createYouTubePlayerInstances();
             }, 500);
         },
 
-        checkCurrentServiceVideos() {
-            const videos = this.getCurrentServiceVideos();
+        createYouTubePlayerInstances() {
+            console.log('📺 Setting up YouTube player instances...');
             
-            videos.forEach((video, videoIndex) => {
-                const videoKey = `${this.currentIndex}-${videoIndex}`;
-                const wasPlaying = this.lastVideoStates.get(videoKey) === 'playing';
-                const isPlaying = !video.paused && !video.ended;
-                
-                if (!wasPlaying && isPlaying) {
-                    console.log(`📹 Video started playing in service ${this.currentIndex}`);
-                    this.pauseTimer('video-playing');
-                    this.lastVideoStates.set(videoKey, 'playing');
+            // Find all YouTube iframes
+            const youtubeIframes = this.$el.querySelectorAll('iframe[src*="youtube.com"]');
+            console.log(`Found ${youtubeIframes.length} YouTube iframes`);
+            
+            youtubeIframes.forEach((iframe, index) => {
+                // Give iframe an ID if it doesn't have one
+                if (!iframe.id) {
+                    iframe.id = `youtube-player-${index}`;
                 }
-                else if (wasPlaying && !isPlaying) {
-                    console.log(`📹 Video stopped playing in service ${this.currentIndex}`);
-                    this.resumeTimer('video-playing');
-                    this.lastVideoStates.set(videoKey, 'paused');
+                
+                console.log(`📺 Creating YT.Player for iframe ID: ${iframe.id}`);
+                
+                try {
+                    const player = new YT.Player(iframe.id, {
+                        events: {
+                            'onStateChange': (event) => this.onYouTubeStateChange(event, index)
+                        }
+                    });
+                    
+                    // Store player reference
+                    if (!this.youtubePlayers) this.youtubePlayers = new Map();
+                    this.youtubePlayers.set(iframe.id, player);
+                    
+                    console.log(`✅ YouTube player created successfully for ${iframe.id}`);
+                } catch (error) {
+                    console.error('❌ Failed to create YouTube player:', error);
                 }
             });
         },
 
-        getCurrentServiceVideos() {
-            const videos = [];
-            try {
-                const servicePanel = this.$el.querySelector(`.service-panel:nth-child(${this.currentIndex + 1})`);
-                if (servicePanel) {
-                    const videoElements = servicePanel.querySelectorAll('video');
-                    videoElements.forEach(video => videos.push(video));
-                }
-            } catch (error) {
-                console.warn('Error finding videos:', error);
+        onYouTubeStateChange(event, playerIndex) {
+            console.log(`📺 YouTube player ${playerIndex} state changed:`, event.data);
+            
+            switch(event.data) {
+                case YT.PlayerState.PLAYING:
+                    if (!this.youtubeIsPlaying) {
+                        this.youtubeIsPlaying = true;
+                        console.log('📹 YouTube video started playing - PAUSING TIMER');
+                        this.pauseTimer('youtube-playing');
+                    }
+                    break;
+                    
+                case YT.PlayerState.PAUSED:
+                    if (this.youtubeIsPlaying) {
+                        this.youtubeIsPlaying = false;
+                        console.log('📹 YouTube video paused - RESUMING TIMER');
+                        this.resumeTimer('youtube-playing');
+                    }
+                    break;
+                    
+                case YT.PlayerState.ENDED:
+                    if (this.youtubeIsPlaying) {
+                        this.youtubeIsPlaying = false;
+                        console.log('📹 YouTube video ended - RESUMING TIMER');
+                        this.resumeTimer('youtube-playing');
+                    }
+                    break;
+                    
+                case YT.PlayerState.BUFFERING:
+                    console.log('📹 YouTube video buffering');
+                    break;
+                    
+                case YT.PlayerState.CUED:
+                    console.log('📹 YouTube video cued');
+                    break;
+                    
+                case YT.PlayerState.UNSTARTED:
+                    console.log('📹 YouTube video unstarted');
+                    break;
             }
-            return videos;
         },
 
-        pauseCurrentVideos() {
-            const videos = this.getCurrentServiceVideos();
-            videos.forEach(video => {
-                if (!video.paused) {
-                    video.pause();
-                }
+        // =============== DIRECT VIDEO EVENT LISTENERS ===============
+        setupVideoEventListeners() {
+            // Wait for DOM to be fully ready
+            setTimeout(() => {
+                this.attachVideoListeners();
+            }, 1000);
+        },
+
+        attachVideoListeners() {
+            console.log('🎬 Setting up direct video event listeners...');
+            
+            // Find ALL videos and iframes in the component
+            const allVideos = this.$el.querySelectorAll('video');
+            const allIframes = this.$el.querySelectorAll('iframe[src*="youtube.com"]');
+            
+            console.log(`Found ${allVideos.length} HTML5 videos and ${allIframes.length} YouTube iframes`);
+            
+            // Attach listeners to HTML5 videos
+            allVideos.forEach((video, index) => {
+                console.log(`📽️ Attaching listeners to HTML5 video ${index}`);
+                
+                video.addEventListener('play', () => {
+                    console.log(`📹 HTML5 video ${index} started playing - PAUSING TIMER`);
+                    this.pauseTimer('video-playing');
+                });
+                
+                video.addEventListener('pause', () => {
+                    console.log(`📹 HTML5 video ${index} paused - RESUMING TIMER`);
+                    this.resumeTimer('video-playing');
+                });
+                
+                video.addEventListener('ended', () => {
+                    console.log(`📹 HTML5 video ${index} ended - RESUMING TIMER`);
+                    this.resumeTimer('video-playing');
+                });
+            });
+            
+            // For YouTube iframes, we'll use a different approach
+            allIframes.forEach((iframe, index) => {
+                console.log(`📺 Found YouTube iframe ${index}`);
+                
+                // Add click listener to iframe container to detect when user interacts
+                iframe.addEventListener('mouseenter', () => {
+                    console.log(`📹 User hovering over YouTube iframe ${index} - PAUSING TIMER`);
+                    this.pauseTimer('youtube-interaction');
+                });
+                
+                iframe.addEventListener('mouseleave', () => {
+                    console.log(`📹 User left YouTube iframe ${index} - RESUMING TIMER`);
+                    this.resumeTimer('youtube-interaction');
+                });
             });
         },
 
         // =============== DESKTOP HOVER INTERACTIONS ===============
         handleTabHover(index, isEntering) {
+            console.log(`🖱️ Tab hover: index=${index}, isEntering=${isEntering}, currentIndex=${this.currentIndex}, screenWidth=${window.innerWidth}`);
             if (window.innerWidth > 768) {
                 if (isEntering && index === this.currentIndex) {
+                    console.log('⏸️ Pausing timer due to tab hover');
                     this.pauseTimer('tab-hover');
                 } else if (!isEntering) {
+                    console.log('▶️ Resuming timer after tab hover');
                     this.resumeTimer('tab-hover');
                 }
             }
         },
 
-        handleContentHover(isEntering) {
-            if (window.innerWidth > 768) {
-                if (isEntering) {
-                    this.pauseTimer('content-hover');
-                } else {
-                    this.resumeTimer('content-hover');
-                }
-            }
-        },
 
         // =============== MOBILE TOUCH INTERACTIONS ===============
         setupMobileInteractions() {
@@ -324,17 +454,18 @@ function servicesShowcase() {
             
             this.clearTimers();
             
-            if (this.videoCheckInterval) {
-                clearInterval(this.videoCheckInterval);
-                this.videoCheckInterval = null;
-            }
-            
             if (this.touchHoldTimeout) {
                 clearTimeout(this.touchHoldTimeout);
                 this.touchHoldTimeout = null;
             }
             
-            this.lastVideoStates.clear();
+            if (this.lastVideoStates) {
+                this.lastVideoStates.clear();
+            }
+            
+            if (this.youtubePlayers) {
+                this.youtubePlayers.clear();
+            }
         }
     }
 }

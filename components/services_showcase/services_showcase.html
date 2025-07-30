@@ -22,9 +22,7 @@
     </div>
 
     <!-- Content Panel -->
-    <div class="services-content" 
-         @mouseenter="handleContentHover(true)" 
-         @mouseleave="handleContentHover(false)">
+    <div class="services-content">
         <div class="content-slider" 
              :style="`transform: translateX(-${currentIndex * 100}%)`">
             <template x-for="(service, index) in services" :key="service.id">
