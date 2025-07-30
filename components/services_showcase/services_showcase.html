@@ -4,21 +4,27 @@
         <template x-for="(service, index) in services" :key="service.id">
             <div class="service-tab" 
                  :class="{ 'active': currentIndex === index }"
-                 @click="selectService(index)">
+                 @click="selectService(index)"
+                 @mouseenter="handleTabHover(index, true)"
+                 @mouseleave="handleTabHover(index, false)">
                 <div class="tab-button">
                     <span class="tab-text" x-text="service.title"></span>
                 </div>
                 <div class="timer-bar" 
-                     :class="{ 'active': currentIndex === index }"
-                     x-ref="`timer-${index}`"></div>
+                     :class="{ 'active': currentIndex === index }">
+                    <div class="timer-progress" 
+                         x-show="currentIndex === index"
+                         x-ref="`progress-${index}`"
+                         :style="`width: ${currentIndex === index ? progressWidth : 0}%; background: #09161c; height: 5px; border-radius: 20px; transition: width 0.1s;`"></div>
+                </div>
             </div>
         </template>
     </div>
 
     <!-- Content Panel -->
     <div class="services-content" 
-         @mouseenter="pauseTimer()" 
-         @mouseleave="resumeTimer()">
+         @mouseenter="handleContentHover(true)" 
+         @mouseleave="handleContentHover(false)">
         <div class="content-slider" 
              :style="`transform: translateX(-${currentIndex * 100}%)`">
             <template x-for="(service, index) in services" :key="service.id">

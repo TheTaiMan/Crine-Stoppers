@@ -55,24 +55,20 @@
     background-color: transparent;
     position: relative;
     overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .timer-bar.active {
-    background-color: var(--color-secondary);
+    background-color: var(--color-secondary, #b8d9b4);
 }
 
-.timer-bar.active::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 50%;
-    height: 100%;
-    background-color: var(--color-dark);
-    border-radius: 20px;
-    transform: translateX(-50%);
-    animation: timer-progress 8s linear forwards;
+.timer-progress {
+    /* All styling done inline in HTML for reliability */
 }
 
+/* Simple timer bar animation */
 @keyframes timer-progress {
     from { 
         width: 100%;
@@ -224,7 +220,48 @@
     }
 }
 
-/* Pause animation when timer is paused */
+/* Timer bar stops changing when paused */
 .services-showcase.paused .timer-bar.active::before {
-    animation-play-state: paused !important;
+    /* Width controlled by JavaScript based on remaining time */
+}
+
+/* Touch interaction feedback */
+@media (max-width: 768px) {
+    .services-content {
+        user-select: none;
+        -webkit-user-select: none;
+        -webkit-touch-callout: none;
+    }
+    
+    .service-tab:active {
+        transform: scale(0.98);
+        transition: transform 0.1s ease;
+    }
+    
+    .services-content:active {
+        background-color: rgba(0, 0, 0, 0.02);
+        transition: background-color 0.1s ease;
+    }
+}
+
+/* Video loading and error states */
+.media-container video {
+    background-color: #000;
+}
+
+.media-container video:not([src]) {
+    background-color: var(--color-primary, #8cc63f);
+}
+
+/* Enhanced hover states for desktop */
+@media (min-width: 769px) {
+    .service-tab:hover .tab-button {
+        background-color: var(--color-primary, #8cc63f);
+        transition: background-color 0.2s ease;
+    }
+    
+    .services-content:hover {
+        background-color: rgba(255, 255, 255, 0.02);
+        transition: background-color 0.2s ease;
+    }
 }
