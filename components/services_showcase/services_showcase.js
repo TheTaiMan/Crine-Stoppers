@@ -3,8 +3,10 @@ function servicesShowcase() {
     return {
         currentIndex: 0,
         isPaused: false,
+        isActive: false,
         timerInterval: null,
         progressInterval: null,
+        pageCheckInterval: null,
         timerDuration: 8000, // 8 seconds
         pauseReasons: new Set(),
         
@@ -50,7 +52,18 @@ function servicesShowcase() {
         ],
 
         init() {
-            console.log('Services Showcase: Initializing with simple width control...');
+            console.log('Services Showcase: Checking if should initialize...');
+            
+            // Check if we're on the home page
+            if (!this.isHomePage()) {
+                console.log('❌ Not on home page - Services Showcase will not activate');
+                return;
+            }
+            
+            console.log('✅ On home page - Services Showcase initializing with simple width control...');
+            
+            // Mark component as active
+            this.isActive = true;
             
             try {
                 console.log('🔧 Setting up mobile interactions...');
@@ -64,6 +77,7 @@ function servicesShowcase() {
                     console.log('🔧 Starting timer and video listeners...');
                     this.startTimer();
                     this.setupVideoEventListeners();
+                    this.setupPageNavigationListeners();
                     console.log('Services Showcase: Timer started');
                 });
             } catch (error) {
@@ -71,8 +85,98 @@ function servicesShowcase() {
             }
         },
 
+        // =============== PAGE DETECTION ===============
+        isHomePage() {
+            // Check multiple ways to determine if we're on the home page
+            const currentPath = window.location.pathname;
+            const currentFile = window.location.pathname.split('/').pop();
+            const currentHash = window.location.hash;
+            
+            // Check if we can access the app's currentPage directly
+            const appElement = document.querySelector('[x-data*="app()"]');
+            if (appElement && appElement.__x && appElement.__x.$data && appElement.__x.$data.currentPage) {
+                const isHome = appElement.__x.$data.currentPage === 'home';
+                console.log(`📍 Page detection via app.currentPage: ${appElement.__x.$data.currentPage}, IsHome: ${isHome}`);
+                return isHome;
+            }
+            
+            // Fallback to hash-based detection
+            const isHomeByHash = !currentHash || currentHash === '#' || currentHash === '#home';
+            console.log(`📍 Page detection via hash - Hash: ${currentHash}, IsHome: ${isHomeByHash}`);
+            
+            return isHomeByHash;
+        },
+
+        setupPageNavigationListeners() {
+            console.log('🔧 Setting up page navigation listeners...');
+            
+            // Listen for page visibility changes
+            document.addEventListener('visibilitychange', () => {
+                if (document.hidden) {
+                    console.log('📄 Page hidden - pausing services showcase');
+                    this.pauseTimer('page-hidden');
+                } else {
+                    console.log('📄 Page visible - checking if still on home page');
+                    if (this.isHomePage()) {
+                        this.resumeTimer('page-hidden');
+                    } else {
+                        console.log('❌ No longer on home page - destroying services showcase');
+                        this.destroy();
+                    }
+                }
+            });
+
+            // Listen for beforeunload to cleanup
+            window.addEventListener('beforeunload', () => {
+                console.log('📄 Page unloading - cleaning up services showcase');
+                this.destroy();
+            });
+
+            // Listen for hashchange (for single-page apps)
+            window.addEventListener('hashchange', () => {
+                console.log('📄 Hash changed - checking if still on home page');
+                setTimeout(() => {
+                    if (!this.isHomePage()) {
+                        console.log('❌ No longer on home page - destroying services showcase');
+                        this.destroy();
+                    } else if (!this.isActive) {
+                        console.log('✅ Back on home page - reinitializing services showcase');
+                        this.init();
+                    }
+                }, 100); // Small delay to let app update
+            });
+
+            // Listen for popstate (browser back/forward)
+            window.addEventListener('popstate', () => {
+                console.log('📄 Popstate event - checking if still on home page');
+                setTimeout(() => {
+                    if (!this.isHomePage()) {
+                        console.log('❌ No longer on home page - destroying services showcase');
+                        this.destroy();
+                    } else if (!this.isActive) {
+                        console.log('✅ Back on home page - reinitializing services showcase');
+                        this.init();
+                    }
+                }, 100); // Small delay to let app update
+            });
+
+            // Add a periodic check as a backup
+            this.pageCheckInterval = setInterval(() => {
+                if (this.isActive && !this.isHomePage()) {
+                    console.log('🔍 Periodic check: No longer on home page - destroying services showcase');
+                    this.destroy();
+                }
+            }, 1000); // Check every second
+        },
+
         // =============== SIMPLE TIMER SYSTEM ===============
         startTimer() {
+            // Don't start timer if component is not active
+            if (!this.isActive) {
+                console.log('⚠️ Component not active - skipping timer start');
+                return;
+            }
+            
             this.clearTimers();
             this.startTime = Date.now();
             this.pausedTime = 0;
@@ -81,6 +185,11 @@ function servicesShowcase() {
             
             // Main timer - switches services after 8 seconds
             this.timerInterval = setInterval(() => {
+                if (!this.isActive) {
+                    console.log('⚠️ Component no longer active - clearing timer');
+                    this.clearTimers();
+                    return;
+                }
                 if (!this.isPaused) {
                     const elapsedTime = Date.now() - this.startTime - this.pausedTime;
                     if (elapsedTime >= this.timerDuration) {
@@ -91,6 +200,11 @@ function servicesShowcase() {
             
             // Progress bar updater - updates every 50ms for smooth animation
             this.progressInterval = setInterval(() => {
+                if (!this.isActive) {
+                    console.log('⚠️ Component no longer active - clearing progress timer');
+                    this.clearTimers();
+                    return;
+                }
                 this.updateProgressBar();
             }, 50);
             
@@ -98,8 +212,8 @@ function servicesShowcase() {
         },
 
         updateProgressBar() {
-            if (this.isPaused) {
-                // Don't update width when paused, just keep current state
+            if (!this.isActive || this.isPaused) {
+                // Don't update width when not active or paused
                 return;
             }
             
@@ -130,6 +244,8 @@ function servicesShowcase() {
 
         // =============== PAUSE/RESUME SYSTEM ===============
         pauseTimer(reason = 'unknown') {
+            if (!this.isActive) return;
+            
             const wasAlreadyPaused = this.isPaused;
             this.pauseReasons.add(reason);
             
@@ -142,6 +258,8 @@ function servicesShowcase() {
         },
 
         resumeTimer(reason = 'unknown') {
+            if (!this.isActive) return;
+            
             this.pauseReasons.delete(reason);
             
             if (this.pauseReasons.size === 0 && this.isPaused) {
@@ -167,6 +285,8 @@ function servicesShowcase() {
 
         // =============== SERVICE NAVIGATION ===============
         selectService(index) {
+            if (!this.isActive) return;
+            
             if (index !== this.currentIndex) {
                 console.log(`🔄 Switching from service ${this.currentIndex} to ${index}`);
                 
@@ -452,7 +572,16 @@ function servicesShowcase() {
         destroy() {
             console.log('Services Showcase: Cleaning up...');
             
+            // Mark component as inactive
+            this.isActive = false;
+            
             this.clearTimers();
+            
+            // Clear page check interval
+            if (this.pageCheckInterval) {
+                clearInterval(this.pageCheckInterval);
+                this.pageCheckInterval = null;
+            }
             
             if (this.touchHoldTimeout) {
                 clearTimeout(this.touchHoldTimeout);
@@ -473,7 +602,27 @@ function servicesShowcase() {
 // Auto-initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
     if (typeof Alpine !== 'undefined') {
-        Alpine.data('servicesShowcase', servicesShowcase);
+        // Wrap the component to add additional page checking
+        Alpine.data('servicesShowcase', function() {
+            const component = servicesShowcase();
+            
+            // Override init to add additional safety checks
+            const originalInit = component.init;
+            component.init = function() {
+                console.log('🔧 Alpine.js initializing servicesShowcase component...');
+                
+                // Double-check if we should run
+                if (!this.isHomePage()) {
+                    console.log('❌ Alpine init: Not on home page - component will remain inactive');
+                    return;
+                }
+                
+                // Call original init
+                return originalInit.call(this);
+            };
+            
+            return component;
+        });
     }
 });
 
