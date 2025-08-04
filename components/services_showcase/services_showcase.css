@@ -175,9 +175,7 @@
     gap: var(--space-3);
 }
 
-.service-description {
-    flex: 1;
-}
+
 
 .service-description p {
     font-family: var(--font-secondary, 'Hind', sans-serif);
@@ -224,7 +222,14 @@
     .tab-text {
         font-size: var(--text-lg, 1.125rem);
     }
+
     
+    .service-description p {
+        font-size: var(--text-base, 1rem);
+    }
+}
+
+@media (max-width: 1060px) {
     .service-panel {
         flex-direction: column;
         gap: var(--space-4);
@@ -242,10 +247,6 @@
     .service-text {
         order: 2;
         width: 100%;
-    }
-    
-    .service-description p {
-        font-size: var(--text-base, 1rem);
     }
 }
 
