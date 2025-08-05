@@ -18,6 +18,63 @@
   contain: layout; /* Optimize layout recalculation */
 }
 
+/* Success Card Component from style guide */
+.success-card {
+  background: var(--color-light);
+  border-radius: var(--radius-lg);
+  padding: 12px 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  text-align: center;
+  box-shadow: var(--shadow-md);
+  transition: transform 0.2s ease;
+}
+
+.success-card:hover {
+  transform: translateY(-2px);
+}
+
+.success-card.is-reversed {
+  flex-direction: column-reverse;
+}
+
+.success-card-header {
+  font-family: var(--font-primary);
+  font-size: 25px;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-dark);
+  line-height: 1.46;
+}
+
+.success-card-body {
+  font-family: var(--font-primary);
+  font-family: 18px;
+  font-size: var(--text-lg);
+  font-weight: var(--font-weight-regular);
+  color: #000;
+  line-height: 1.46;
+}
+
+.success-card-icon {
+  width: 84px;
+  height: 76px;
+  border-radius: 4px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.success-card-icon img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+}
+
 /* Card Styling */
 .stat-card {
   background-color: var(--color-light);
@@ -59,7 +116,7 @@
 }
 
 .stat-description {
-  font-size: var(--text-base);
+  font-size: 18px;
   color: var(--color-dark-alt);
   line-height: 1.5;
   font-family: var(--font-primary);
@@ -68,7 +125,6 @@
 
 .stat-description strong {
   display: block; /* Puts the number on its own line in some cards */
-  font-size: clamp(1.5rem, 4vw, 2rem);
   font-weight: var(--font-weight-bold);
   color: var(--color-dark);
   margin-bottom: 4px;
@@ -102,7 +158,6 @@
 }
 
 .success-card.card6 .success-card-body {
-  font-size: 18px !important;
   color: #000 !important;
   line-height: 1.46 !important;
   margin: 0 !important;
@@ -110,7 +165,6 @@
 }
 
 .success-card.card6 .success-card-header {
-  font-size: 25px !important;
   color: #09161c !important;
   line-height: 1.46 !important;
   margin: 0 !important;
@@ -120,6 +174,9 @@
 /* Styles for screens larger than 1235px */
 @media (min-width: 1235px) {
   /* Individual card grid positions and minimum widths */
+
+  /* Text elements inside the card */
+
   .success-stats-grid {
     grid-template-columns: repeat(14, 1fr);
     grid-template-rows: repeat(12, auto);
@@ -205,6 +262,7 @@
 
 @media (max-width: 1235px) {
   /* Individual card grid positions and minimum widths for smaller screens */
+
   .success-stats-grid {
     grid-template-columns: repeat(12, 1fr);
     grid-template-rows: repeat(13, auto);
@@ -286,7 +344,7 @@
     grid-row: 8 / 11;
     grid-column: 7 / 9;
     min-width: 50px;
-  } 
+  }
 }
 
 @media (max-width: 1018px) {
@@ -372,13 +430,25 @@
     grid-row: 5 / 8;
     grid-column: 8 / 11;
     min-width: 50px;
-  }  
+  }
 }
 
 /* Mobile specific adjustments */
 @media (max-width: 768px) {
+  /* Individual card grid positions and minimum widths for smaller screens */
+
   .success-stats-grid {
-    gap: 16px;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(20, auto);
+    gap: 8px;
+  }
+
+  .success-card-header {
+    font-size: 20px;
+  }
+
+  .success-card-body {
+    font-size: 16px;
   }
 
   .stat-card {
@@ -394,11 +464,20 @@
   }
 
   .stat-description strong {
-    font-size: clamp(1.1rem, 4vw, 1.5rem);
+    font-size: 16px;
   }
 
   .stat-icon {
     width: clamp(35px, 7vw, 50px);
     margin-bottom: 6px;
+  }
+
+  .success-card {
+    padding: 10px 12px;
+  }
+
+  .success-card-icon {
+    width: 64px;
+    height: 58px;
   }
 }
