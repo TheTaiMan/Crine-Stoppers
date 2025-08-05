@@ -9,6 +9,25 @@ function app() {
         activeSection: '',
         pageCache: {},
         isBannerInView: true,
+        showSidebarTipButton: false, // Initialize as false since banner starts in view
+        
+        // Update tip button visibility based on banner state
+        updateTipButtonVisibility() {
+            console.log('updateTipButtonVisibility called - currentPage:', this.currentPage, 'isBannerInView:', this.isBannerInView);
+            
+            // Always show on non-home pages
+            if (this.currentPage !== 'home') {
+                console.log('Not home page, showing button');
+                this.showSidebarTipButton = true;
+                return;
+            }
+            
+            // On home page, hide sidebar button when banner is in view
+            // Show sidebar button when banner is out of view (scrolled past)
+            const shouldShow = !this.isBannerInView;
+            console.log('Home page - shouldShow:', shouldShow);
+            this.showSidebarTipButton = shouldShow;
+        },
         
         // Navigation configuration
         navigation: [
@@ -89,6 +108,9 @@ function app() {
             this.setupHashChangeListener();
             this.setupScrollSpy();
             this.preloadCommonPages();
+            
+            // Initialize tip button visibility
+            this.updateTipButtonVisibility();
         },
         
         // Pre-load common pages for instant navigation
@@ -176,6 +198,9 @@ function app() {
                     // Reset to true when entering home page (banner is initially visible)
                     this.isBannerInView = true;
                 }
+                
+                // Update tip button visibility after page change
+                this.updateTipButtonVisibility();
                 
                 // Scroll to top
                 window.scrollTo(0, 0);
@@ -454,7 +479,8 @@ function app() {
                 return true;
             }
             
-            // On home page, show sidebar button when banner is out of view
+            // On home page, hide sidebar button when banner is in view
+            // Show sidebar button when banner is out of view (scrolled past)
             return !this.isBannerInView;
         },
         
@@ -470,38 +496,72 @@ function app() {
                 this.bannerObserver.disconnect();
             }
             
-            // Find the banner element
-            const banner = document.querySelector('.banner');
-            if (!banner) {
+            // Find the banner submit tip button element specifically
+            const bannerTipButton = document.querySelector('.banner-tip-submit');
+            if (!bannerTipButton) {
+                // Fallback to banner if tip button not found
+                const banner = document.querySelector('.banner');
+                if (!banner) {
+                    return;
+                }
+                
+                // Create intersection observer for banner (fallback)
+                this.bannerObserver = new IntersectionObserver(
+                    (entries) => {
+                        entries.forEach(entry => {
+                            this.isBannerInView = entry.isIntersecting;
+                        });
+                    },
+                    {
+                        root: null,
+                        rootMargin: '0px',
+                        threshold: 0.1 // Trigger when 10% of banner is visible
+                    }
+                );
+                
+                this.bannerObserver.observe(banner);
                 return;
             }
             
-            // Create intersection observer for banner
+            // Create intersection observer for the submit tip button specifically
             this.bannerObserver = new IntersectionObserver(
                 (entries) => {
                     entries.forEach(entry => {
                         this.isBannerInView = entry.isIntersecting;
+                        console.log('Banner tip button visibility changed:', entry.isIntersecting);
+                        
+                        // Update tip button visibility
+                        this.updateTipButtonVisibility();
                     });
                 },
                 {
                     root: null,
                     rootMargin: '0px',
-                    threshold: 0.1 // Trigger when 10% of banner is visible
+                    threshold: 0.1 // Trigger when 10% of submit tip button is visible
                 }
             );
             
-            // Start observing the banner
-            this.bannerObserver.observe(banner);
+            // Start observing the banner submit tip button
+            this.bannerObserver.observe(bannerTipButton);
         },
         
         // Force re-check banner visibility (useful when transitioning from mobile to desktop)
         recheckBannerVisibility() {
             if (this.currentPage === 'home') {
-                const banner = document.querySelector('.banner');
-                if (banner) {
-                    const rect = banner.getBoundingClientRect();
+                // Check the specific submit tip button first
+                const bannerTipButton = document.querySelector('.banner-tip-submit');
+                if (bannerTipButton) {
+                    const rect = bannerTipButton.getBoundingClientRect();
                     const isIntersecting = rect.top < window.innerHeight && rect.bottom > 0;
                     this.isBannerInView = isIntersecting;
+                } else {
+                    // Fallback to banner element
+                    const banner = document.querySelector('.banner');
+                    if (banner) {
+                        const rect = banner.getBoundingClientRect();
+                        const isIntersecting = rect.top < window.innerHeight && rect.bottom > 0;
+                        this.isBannerInView = isIntersecting;
+                    }
                 }
             }
         }
@@ -525,5 +585,16 @@ window.recheckBannerVisibility = function() {
         return appElement.__x.$data.recheckBannerVisibility();
     } else {
         console.error('App instance not found for banner visibility check');
+    }
+};
+
+// Make shouldShowSidebarTipButton available globally
+window.shouldShowSidebarTipButton = function() {
+    const appElement = document.querySelector('body[x-data]');
+    if (appElement && appElement.__x && appElement.__x.$data) {
+        return appElement.__x.$data.shouldShowSidebarTipButton();
+    } else {
+        console.error('App instance not found for shouldShowSidebarTipButton check');
+        return true; // Default to showing the button if function is not accessible
     }
 };

@@ -322,10 +322,12 @@
 
 .mobile-navbar.expanded {
   height: 100dvh !important; /* Dynamic viewport height - automatically handles address bar */
+  min-height: 100dvh !important; /* Ensure it always fills the full dynamic viewport */
   position: fixed !important;
-  bottom: 0 !important;
+  top: 0 !important; /* Start from top instead of bottom */
   left: 0 !important;
   right: 0 !important;
+  bottom: 0 !important;
   z-index: 9999 !important;
 }
 
@@ -411,6 +413,7 @@
   left: 0;
   width: 100%;
   height: 100dvh;
+  min-height: 100dvh; /* Ensure it always fills the full dynamic viewport */
   background-color: var(--color-dark);
   display: none;
   flex-direction: column;
@@ -819,10 +822,12 @@
   /* Fallback for browsers without dvh support */
   .mobile-navbar.expanded {
     height: 100vh !important;
+    min-height: 100vh !important;
   }
   
   .mobile-nav-overlay {
     height: 100vh;
+    min-height: 100vh;
   }
   
   .sidebar::before {
