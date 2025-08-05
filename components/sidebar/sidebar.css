@@ -410,7 +410,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 100vh;
+  height: 100dvh;
   background-color: var(--color-dark);
   display: none;
   flex-direction: column;
@@ -820,6 +820,14 @@
   .mobile-navbar.expanded {
     height: 100vh !important;
   }
+  
+  .mobile-nav-overlay {
+    height: 100vh;
+  }
+  
+  .sidebar::before {
+    height: 100vh;
+  }
 }
 
 /* Fallback for browsers without svh support */
@@ -888,7 +896,7 @@
     top: 0;
     left: 280px;
     width: calc(100vw - 280px);
-    height: 100vh;
+    height: 100dvh;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: -1;
     opacity: 0;
