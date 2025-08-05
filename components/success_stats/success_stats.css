@@ -46,14 +46,14 @@
 
 /* Text elements inside the card */
 .stat-prefix {
-    font-size: var(--text-base);
+    font-size: 18px;
     color: var(--color-dark-alt);
     font-family: var(--font-primary);
     margin: 0;
 }
 
 .stat-number {
-    font-size: clamp(1.75rem, 5vw, 2.5rem); /* Responsive font size */
+    font-size: 25px; /* Responsive font size */
     font-weight: var(--font-weight-bold);
     color: var(--color-dark);
     line-height: 1.2;

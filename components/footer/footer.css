@@ -2,7 +2,7 @@
 
 /* Footer Container - matches main content structure */
 .footer-container {
-  padding: 26px;
+  padding: 0px 26px 26px 26px;
   width: 100%;
 }
 
@@ -23,7 +23,6 @@
   font-size: 20px;
   color: var(--color-light);
   font-family: var(--font-secondary);
-  margin-top: var(--space-6);
   width: 100%;
 }
 

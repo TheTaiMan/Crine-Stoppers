@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Success Blocks Grid Guide - Crime Stoppers</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Hind:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* CSS Variables - Root Level */
+      :root {
+        /* Brand Colors */
+        --color-primary: #8cc63f; /* Fresh Lime */
+        --color-secondary: #b8d9b4; /* Sage Mist */
+        --color-accent: #6f8ea7; /* Storm Blue */
+        --color-dark: #09161c; /* Midnight Navy */
+        --color-dark-alt: #42453e; /* Forest Shadow */
+        --color-light: #f7fafc; /* Cool White */
+        --color-danger: #bf1e2e; /* Crimson Red */
+
+        /* Typography */
+        --font-primary: 'Montserrat', sans-serif;
+        --font-secondary: 'Hind', sans-serif;
+
+        /* Font Sizes */
+        --text-xs: 0.5rem; /* 8px */
+        --text-sm: 0.625rem; /* 10px */
+        --text-base: 1rem; /* 16px - Base */
+        --text-lg: 1.125rem; /* 18px */
+        --text-xl: 1.25rem; /* 20px */
+        --text-2xl: 1.563rem; /* 25px */
+        --text-3xl: 2.188rem; /* 35px */
+        --text-4xl: 2.5rem; /* 40px */
+
+        /* Font Weights */
+        --font-weight-regular: 400;
+        --font-weight-medium: 500;
+        --font-weight-semibold: 600;
+        --font-weight-bold: 700;
+        --font-weight-black: 900;
+
+        /* Spacing */
+        --space-1: 0.25rem; /* 4px */
+        --space-2: 0.5rem; /* 8px */
+        --space-3: 0.625rem; /* 10px */
+        --space-4: 0.75rem; /* 12px */
+        --space-5: 1.25rem; /* 20px */
+        --space-6: 1.5rem; /* 24px */
+
+        /* Border Radius */
+        --radius-sm: 2px;
+        --radius-md: 8px;
+        --radius-lg: 16px;
+        --radius-line: 13px;
+        --radius-xl: 42px;
+        --radius-full: 9999px;
+
+        /* Shadows */
+        --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Base Styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: var(--font-secondary);
+        font-size: var(--text-base);
+        line-height: 1.5;
+        color: var(--color-dark);
+        background-color: var(--color-light);
+        padding: var(--space-5);
+      }
+
+      /* Success Card Component from style guide */
+      .success-card {
+        background: var(--color-light);
+        border-radius: var(--radius-lg);
+        padding: 12px 15px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 4px;
+        text-align: center;
+        box-shadow: var(--shadow-md);
+        transition: transform 0.2s ease;
+      }
+      
+      .success-card:hover {
+        transform: translateY(-2px);
+      }
+      
+      .success-card.is-reversed {
+        flex-direction: column-reverse;
+      }
+      
+      .success-card-header {
+        font-family: var(--font-primary);
+        font-size: var(--text-2xl);
+        font-weight: var(--font-weight-bold);
+        color: var(--color-dark);
+        line-height: 1.46;
+      }
+      
+      .success-card-body {
+        font-family: var(--font-primary);
+        font-size: var(--text-lg);
+        font-weight: var(--font-weight-regular);
+        color: #000;
+        line-height: 1.46;
+      }
+      
+      .success-card-icon {
+        width: 84px;
+        height: 76px;
+        border-radius: 4px;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(140, 198, 63, 0.1);
+        border: 2px dashed var(--color-primary);
+      }
+      
+      .success-card-icon img {
+        max-width: 70%;
+        max-height: 70%;
+        width: auto;
+        height: auto;
+      }
+      
+      .success-card.is-mobile .success-card-header {
+        font-size: var(--text-xl);
+      }
+      
+      .success-card.is-mobile .success-card-body {
+        font-size: var(--text-base);
+      }
+
+      /* Container Styles */
+      .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: var(--space-5);
+      }
+
+      /* Section Headers */
+      h1 {
+        font-family: var(--font-primary);
+        font-size: var(--text-4xl);
+        font-weight: var(--font-weight-black);
+        text-align: center;
+        color: var(--color-dark);
+        margin-bottom: var(--space-6);
+        text-transform: uppercase;
+      }
+
+      h2 {
+        font-family: var(--font-primary);
+        font-size: var(--text-3xl);
+        font-weight: var(--font-weight-bold);
+        color: var(--color-dark);
+        margin: var(--space-6) 0 var(--space-5) 0;
+        text-transform: uppercase;
+        border-bottom: 3px solid var(--color-primary);
+        padding-bottom: var(--space-2);
+      }
+
+      h3 {
+        font-family: var(--font-primary);
+        font-size: var(--text-2xl);
+        font-weight: var(--font-weight-semibold);
+        color: var(--color-dark-alt);
+        margin: var(--space-5) 0 var(--space-4) 0;
+      }
+
+      /* Grid Layout Variations */
+      .grid-1-col {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: var(--space-5);
+      }
+
+      .grid-2-col {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-5);
+      }
+
+      .grid-3-col {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--space-5);
+      }
+
+      .grid-4-col {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: var(--space-5);
+      }
+
+      .grid-5-col {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: var(--space-5);
+      }
+
+      .grid-auto-fit {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: var(--space-5);
+      }
+
+      .grid-auto-fill {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: var(--space-5);
+      }
+
+      /* Mobile responsive overrides */
+      @media (max-width: 768px) {
+        .grid-2-col,
+        .grid-3-col,
+        .grid-4-col,
+        .grid-5-col {
+          grid-template-columns: 1fr;
+        }
+        
+        .grid-auto-fit {
+          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+        
+        .success-card {
+          padding: 10px 12px;
+        }
+        
+        .success-card-icon {
+          width: 64px;
+          height: 58px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .grid-auto-fit,
+        .grid-auto-fill {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* Demo Section Styling */
+      .demo-section {
+        background: white;
+        border-radius: var(--radius-lg);
+        padding: var(--space-6);
+        margin-bottom: var(--space-6);
+        box-shadow: var(--shadow-md);
+      }
+
+      .grid-label {
+        background: var(--color-accent);
+        color: white;
+        padding: var(--space-2) var(--space-4);
+        border-radius: var(--radius-md);
+        font-weight: var(--font-weight-semibold);
+        display: inline-block;
+        margin-bottom: var(--space-4);
+        font-size: var(--text-sm);
+        text-transform: uppercase;
+      }
+
+      /* Code Examples */
+      .code-example {
+        background: var(--color-dark);
+        color: var(--color-light);
+        padding: var(--space-4);
+        border-radius: var(--radius-md);
+        font-family: 'Courier New', monospace;
+        font-size: var(--text-sm);
+        margin: var(--space-4) 0;
+        overflow-x: auto;
+      }
+
+      /* Special Grid Demonstrations */
+      .grid-asymmetric {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr;
+        gap: var(--space-5);
+      }
+
+      .grid-mixed {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        gap: var(--space-5);
+      }
+
+      .grid-mixed .span-2 {
+        grid-column: span 2;
+      }
+
+      .grid-mixed .span-3 {
+        grid-column: span 3;
+      }
+
+      /* Visual Grid Overlay */
+      .show-grid {
+        position: relative;
+      }
+
+      .show-grid::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: 
+          repeating-linear-gradient(
+            90deg,
+            rgba(140, 198, 63, 0.1) 0px,
+            rgba(140, 198, 63, 0.1) 1px,
+            transparent 1px,
+            transparent 20px
+          ),
+          repeating-linear-gradient(
+            0deg,
+            rgba(140, 198, 63, 0.1) 0px,
+            rgba(140, 198, 63, 0.1) 1px,
+            transparent 1px,
+            transparent 20px
+          );
+        pointer-events: none;
+        z-index: -1;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Success Blocks Grid System Guide</h1>
+      
+      <!-- Basic Grid Layouts -->
+      <div class="demo-section">
+        <h2>Basic Grid Layouts</h2>
+        
+        <h3>1 Column Layout</h3>
+        <div class="grid-label">grid-template-columns: 1fr</div>
+        <div class="code-example">.grid-1-col { display: grid; grid-template-columns: 1fr; gap: 20px; }</div>
+        <div class="grid-1-col">
+          <div class="success-card">
+            <div class="success-card-header">$150,000,000+</div>
+            <div class="success-card-body">In value of solved crime</div>
+          </div>
+          <div class="success-card">
+            <div class="success-card-header">14,500</div>
+            <div class="success-card-body">Cases solved and cleared</div>
+          </div>
+        </div>
+
+        <h3>2 Column Layout</h3>
+        <div class="grid-label">grid-template-columns: repeat(2, 1fr)</div>
+        <div class="code-example">.grid-2-col { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }</div>
+        <div class="grid-2-col">
+          <div class="success-card">
+            <div class="success-card-header">$150,000,000+</div>
+            <div class="success-card-body">In value of solved crime</div>
+          </div>
+          <div class="success-card">
+            <div class="success-card-header">$1,304,000+</div>
+            <div class="success-card-body">In rewards authorized</div>
+          </div>
+          <div class="success-card">
+            <div class="success-card-body">More than</div>
+            <div class="success-card-header">14,500 cases</div>
+            <div class="success-card-body">solved and cleared</div>
+          </div>
+          <div class="success-card">
+            <div class="success-card-body">Over</div>
+            <div class="success-card-header">1,275</div>
+            <div class="success-card-body">break and entry cases solved</div>
+          </div>
+        </div>
+
+        <h3>3 Column Layout</h3>
+        <div class="grid-label">grid-template-columns: repeat(3, 1fr)</div>
+        <div class="code-example">.grid-3-col { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }</div>
+        <div class="grid-3-col">
+          <div class="success-card">
+            <div class="success-card-header">$150,000,000+</div>
+            <div class="success-card-body">In value of solved crime</div>
+          </div>
+          <div class="success-card">
+            <div class="success-card-header">$1,304,000+</div>
+            <div class="success-card-body">In rewards authorized</div>
+          </div>
+          <div class="success-card">
+            <div class="success-card-body">More than</div>
+            <div class="success-card-header">14,500 cases</div>
+            <div class="success-card-body">solved and cleared</div>
+            <div class="success-card-icon">
+              <img src="assets/icons/magnifying_glass.png" alt="Search" />
+            </div>
+          </div>
+          <div class="success-card is-reversed">
+            <div class="success-card-icon">
+              <img src="assets/icons/break_in.png" alt="Break In" />
+            </div>
+            <div class="success-card-body">Over</div>
+            <div class="success-card-header">1,275</div>
+            <div class="success-card-body">break and entry cases solved</div>
+          </div>
+          <div class="success-card">
+            <div class="success-card-body">Over</div>
+            <div class="success-card-header">$49,200,000</div>
+            <div class="success-card-body">worth of property recovered</div>
+            <div class="success-card-icon">
+              <img src="assets/icons/property.png" alt="Property" />
+            </div>
+          </div>
+          <div class="success-card">
+            <div class="success-card-header">46</div>
+            <div class="success-card-body">homicide arrests</div>
+          </div>
+        </div>
+
+        <h3>4 Column Layout</h3>
+        <div class="grid-label">grid-template-columns: repeat(4, 1fr)</div>
+        <div class="code-example">.grid-4-col { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }</div>
+        <div class="grid-4-col">
+          <div class="success-card">
+            <div class="success-card-header">$150M+</div>
+            <div class="success-card-body">In value of solved crime</div>
+          </div>
+          <div class="success-card">
+            <div class="success-card-header">$1.3M+</div>
+            <div class="success-card-body">In rewards authorized</div>
+          </div>
+          <div class="success-card">
+            <div class="success-card-header">14,500+</div>
+            <div class="success-card-body">Cases solved</div>
+          </div>
+          <div class="success-card">
+            <div class="success-card-header">1,275</div>
+            <div class="success-card-body">Break-ins solved</div>
+          </div>
+          <div class="success-card">
+            <div class="success-card-header">$49M+</div>
+            <div class="success-card-body">Property recovered</div>
+          </div>
+          <div class="success-card">
+            <div class="success-card-header">46</div>
+            <div class="success-card-body">Homicide arrests</div>
+          </div>
+          <div class="success-card">
+            <div class="success-card-header">1,510</div>
+            <div class="success-card-body">Thefts cleared</div>
+          </div>
+          <div class="success-card">
+            <div class="success-card-header">5,121</div>
+            <div class="success-card-body">Stolen autos recovered</div>
+          </div>
+        </div>
+
+        <h3>5 Column Layout</h3>
+        <div class="grid-label">grid-template-columns: repeat(5, 1fr)</div>
+        <div class="code-example">.grid-5-col { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; }</div>
+        <div class="grid-5-col">
+          <div class="success-card">
+            <div class="success-card-header">$150M+</div>
+            <div class="success-card-body">Solved crime value</div>
+          </div>
+          <div class="success-card">
+            <div class="success-card-header">$1.3M+</div>
+            <div class="success-card-body">Rewards authorized</div>
+          </div>
+          <div class="success-card">
+            <div class="success-card-header">14.5K+</div>
+            <div class="success-card-body">Cases solved</div>
+          </div>
+          <div class="success-card">
+            <div class="success-card-header">1,275</div>
+            <div class="success-card-body">Break-ins solved</div>
+          </div>
+          <div class="success-card">
+            <div class="success-card-header">$49M+</div>
+            <div class="success-card-body">Property recovered</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Responsive Grid Layouts -->
+      <div class="demo-section">
+        <h2>Responsive Grid Layouts</h2>
+        
+        <h3>Auto-Fit Layout (Recommended)</h3>
+        <div class="grid-label">grid-template-columns: repeat(auto-fit, minmax(280px, 1fr))</div>
+        <div class="code-example">.grid-auto-fit { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }</div>
+        <div class="grid-auto-fit">
+          <div class="success-card">
+            <div class="success-card-header">$150,000,000+</div>
+            <div class="success-card-body">In value of solved crime</div>
+          </div>
+          <div class="success-card">
+            <div class="success-card-header">$1,304,000+</div>
+            <div class="success-card-body">In rewards authorized</div>
+          </div>
+          <div class="success-card">
+            <div class="success-card-body">More than</div>
+            <div class="success-card-header">14,500 cases</div>
+            <div class="success-card-body">solved and cleared</div>
+            <div class="success-card-icon">
+              <img src="assets/icons/magnifying_glass.png" alt="Search" />
+            </div>
+          </div>
+          <div class="success-card is-reversed">
+            <div class="success-card-icon">
+              <img src="assets/icons/break_in.png" alt="Break In" />
+            </div>
+            <div class="success-card-body">Over</div>
+            <div class="success-card-header">1,275 break and entry</div>
+            <div class="success-card-body">cases solved</div>
+          </div>
+          <div class="success-card">
+            <div class="success-card-body">Over</div>
+            <div class="success-card-header">$49,200,000</div>
+            <div class="success-card-body">worth of property recovered</div>
+            <div class="success-card-icon">
+              <img src="assets/icons/property.png" alt="Property" />
+            </div>
+          </div>
+          <div class="success-card">
+            <div class="success-card-body">Over</div>
+            <div class="success-card-header">30</div>
+            <div class="success-card-body">attempt homicides solved</div>
+          </div>
+        </div>
+
+        <h3>Auto-Fill Layout</h3>
+        <div class="grid-label">grid-template-columns: repeat(auto-fill, minmax(250px, 1fr))</div>
+        <div class="code-example">.grid-auto-fill { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; }</div>
+        <div class="grid-auto-fill">
+          <div class="success-card">
+            <div class="success-card-header">1,510</div>
+            <div class="success-card-body">thefts cleared</div>
+          </div>
+          <div class="success-card">
+            <div class="success-card-body">More than</div>
+            <div class="success-card-header">5,121 stolen autos</div>
+            <div class="success-card-body">recovered</div>
+          </div>
+          <div class="success-card">
+            <div class="success-card-body">Over</div>
+            <div class="success-card-header">$3,200,000</div>
+            <div class="success-card-body">worth of frauds solved</div>
+          </div>
+          <div class="success-card">
+            <div class="success-card-header">46</div>
+            <div class="success-card-body">homicide arrests</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Advanced Grid Layouts -->
+      <div class="demo-section">
+        <h2>Advanced Grid Layouts</h2>
+        
+        <h3>Asymmetric Layout</h3>
+        <div class="grid-label">grid-template-columns: 2fr 1fr 1fr</div>
+        <div class="code-example">.grid-asymmetric { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 20px; }</div>
+        <div class="grid-asymmetric">
+          <div class="success-card">
+            <div class="success-card-body">More than</div>
+            <div class="success-card-header">14,500 cases</div>
+            <div class="success-card-body">solved and cleared with the help of community tips</div>
+            <div class="success-card-icon">
+              <img src="assets/icons/magnifying_glass.png" alt="Search" />
+            </div>
+          </div>
+          <div class="success-card">
+            <div class="success-card-header">$1.3M+</div>
+            <div class="success-card-body">In rewards</div>
+          </div>
+          <div class="success-card">
+            <div class="success-card-header">46</div>
+            <div class="success-card-body">Homicides</div>
+          </div>
+        </div>
+
+        <h3>Mixed Span Layout</h3>
+        <div class="grid-label">6-column grid with span variations</div>
+        <div class="code-example">.grid-mixed { display: grid; grid-template-columns: repeat(6, 1fr); gap: 20px; }
+.span-2 { grid-column: span 2; }
+.span-3 { grid-column: span 3; }</div>
+        <div class="grid-mixed">
+          <div class="success-card span-3">
+            <div class="success-card-header">$150,000,000+</div>
+            <div class="success-card-body">In value of solved crime throughout our community partnership</div>
+          </div>
+          <div class="success-card span-2">
+            <div class="success-card-header">14,500+</div>
+            <div class="success-card-body">Cases solved and cleared</div>
+          </div>
+          <div class="success-card">
+            <div class="success-card-header">46</div>
+            <div class="success-card-body">Homicides</div>
+          </div>
+          <div class="success-card span-2">
+            <div class="success-card-header">$1,304,000+</div>
+            <div class="success-card-body">In rewards authorized</div>
+          </div>
+          <div class="success-card span-2">
+            <div class="success-card-header">1,275</div>
+            <div class="success-card-body">Break and entry cases solved</div>
+          </div>
+          <div class="success-card span-2">
+            <div class="success-card-header">$49,200,000</div>
+            <div class="success-card-body">Property recovered</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card Variations -->
+      <div class="demo-section">
+        <h2>Card Layout Variations</h2>
+        
+        <h3>Standard Cards</h3>
+        <div class="grid-3-col">
+          <div class="success-card">
+            <div class="success-card-header">$150,000,000+</div>
+            <div class="success-card-body">In value of solved crime</div>
+          </div>
+          <div class="success-card">
+            <div class="success-card-body">More than</div>
+            <div class="success-card-header">14,500 cases</div>
+            <div class="success-card-body">solved and cleared</div>
+          </div>
+          <div class="success-card">
+            <div class="success-card-body">Over</div>
+            <div class="success-card-header">30</div>
+            <div class="success-card-body">attempt homicides solved</div>
+          </div>
+        </div>
+
+        <h3>Cards with Icons (Bottom)</h3>
+        <div class="grid-3-col">
+          <div class="success-card">
+            <div class="success-card-header">14,500+</div>
+            <div class="success-card-body">Cases solved</div>
+            <div class="success-card-icon">
+              <img src="assets/icons/magnifying_glass.png" alt="Search" />
+            </div>
+          </div>
+          <div class="success-card">
+            <div class="success-card-header">1,275</div>
+            <div class="success-card-body">Break-ins solved</div>
+            <div class="success-card-icon">
+              <img src="assets/icons/break_in.png" alt="Break In" />
+            </div>
+          </div>
+          <div class="success-card">
+            <div class="success-card-header">$49.2M</div>
+            <div class="success-card-body">Property recovered</div>
+            <div class="success-card-icon">
+              <img src="assets/icons/property.png" alt="Property" />
+            </div>
+          </div>
+        </div>
+
+        <h3>Cards with Icons (Top - Reversed)</h3>
+        <div class="grid-3-col">
+          <div class="success-card is-reversed">
+            <div class="success-card-icon">
+              <img src="assets/icons/magnifying_glass.png" alt="Search" />
+            </div>
+            <div class="success-card-header">14,500+</div>
+            <div class="success-card-body">Cases solved</div>
+          </div>
+          <div class="success-card is-reversed">
+            <div class="success-card-icon">
+              <img src="assets/icons/break_in.png" alt="Break In" />
+            </div>
+            <div class="success-card-header">1,275</div>
+            <div class="success-card-body">Break-ins solved</div>
+          </div>
+          <div class="success-card is-reversed">
+            <div class="success-card-icon">
+              <img src="assets/icons/property.png" alt="Property" />
+            </div>
+            <div class="success-card-header">$49.2M</div>
+            <div class="success-card-body">Property recovered</div>
+          </div>
+        </div>
+
+        <h3>Sandwich Layout (Text-Number-Text)</h3>
+        <div class="grid-3-col">
+          <div class="success-card">
+            <div class="success-card-body">Over</div>
+            <div class="success-card-header">$150,000,000</div>
+            <div class="success-card-body">in total value</div>
+          </div>
+          <div class="success-card">
+            <div class="success-card-body">More than</div>
+            <div class="success-card-header">14,500</div>
+            <div class="success-card-body">cases resolved</div>
+          </div>
+          <div class="success-card">
+            <div class="success-card-body">Over</div>
+            <div class="success-card-header">1,275</div>
+            <div class="success-card-body">break-ins solved</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Copy Examples -->
+      <div class="demo-section">
+        <h2>Quick Copy HTML Examples</h2>
+        
+        <h3>Basic 3-Column Grid</h3>
+        <div class="code-example">&lt;div class="success-grid-3-col"&gt;
+  &lt;div class="success-card"&gt;
+    &lt;div class="success-card-header"&gt;$150,000,000+&lt;/div&gt;
+    &lt;div class="success-card-body"&gt;In value of solved crime&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="success-card"&gt;
+    &lt;div class="success-card-header"&gt;14,500+&lt;/div&gt;
+    &lt;div class="success-card-body"&gt;Cases solved&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="success-card"&gt;
+    &lt;div class="success-card-header"&gt;1,275&lt;/div&gt;
+    &lt;div class="success-card-body"&gt;Break-ins solved&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</div>
+
+        <h3>Responsive Auto-Fit Grid</h3>
+        <div class="code-example">&lt;div class="success-grid-auto-fit"&gt;
+  &lt;div class="success-card"&gt;
+    &lt;div class="success-card-body"&gt;More than&lt;/div&gt;
+    &lt;div class="success-card-header"&gt;14,500 cases&lt;/div&gt;
+    &lt;div class="success-card-body"&gt;solved and cleared&lt;/div&gt;
+    &lt;div class="success-card-icon"&gt;
+      &lt;img src="assets/icons/magnifying_glass.png" alt="Search" /&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;!-- Add more cards here --&gt;
+&lt;/div&gt;</div>
+
+        <h3>Card with Icon (Reversed)</h3>
+        <div class="code-example">&lt;div class="success-card is-reversed"&gt;
+  &lt;div class="success-card-icon"&gt;
+    &lt;img src="assets/icons/break_in.png" alt="Break In" /&gt;
+  &lt;/div&gt;
+  &lt;div class="success-card-body"&gt;Over&lt;/div&gt;
+  &lt;div class="success-card-header"&gt;1,275 break and entry&lt;/div&gt;
+  &lt;div class="success-card-body"&gt;cases solved&lt;/div&gt;
+&lt;/div&gt;</div>
+      </div>
+
+      <!-- CSS Classes Reference -->
+      <div class="demo-section">
+        <h2>CSS Classes Reference</h2>
+        
+        <h3>Grid Container Classes</h3>
+        <div class="code-example">/* Grid Layouts */
+.grid-1-col    → Single column
+.grid-2-col    → Two columns
+.grid-3-col    → Three columns  
+.grid-4-col    → Four columns
+.grid-5-col    → Five columns
+.grid-auto-fit → Responsive auto-fit (recommended)
+.grid-auto-fill → Responsive auto-fill
+
+/* Advanced Grids */
+.grid-asymmetric → 2fr 1fr 1fr layout
+.grid-mixed     → 6-column with span classes</div>
+
+        <h3>Card Classes</h3>
+        <div class="code-example">/* Card Structure */
+.success-card        → Main card container
+.success-card-header → Large number/text (25px, bold)
+.success-card-body   → Description text (18px, regular)
+.success-card-icon   → Icon container (84x76px)
+
+/* Card Modifiers */
+.is-reversed → Reverses card content order
+.is-mobile   → Mobile-optimized sizing
+
+/* Grid Span Classes (for .grid-mixed) */
+.span-2 → Takes up 2 grid columns
+.span-3 → Takes up 3 grid columns</div>
+      </div>
+    </div>
+  </body>
+</html>
