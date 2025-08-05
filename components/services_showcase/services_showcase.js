@@ -481,16 +481,7 @@ function servicesShowcase() {
             allIframes.forEach((iframe, index) => {
                 console.log(`📺 Found YouTube iframe ${index}`);
                 
-                // Add click listener to iframe container to detect when user interacts
-                iframe.addEventListener('mouseenter', () => {
-                    console.log(`📹 User hovering over YouTube iframe ${index} - PAUSING TIMER`);
-                    this.pauseTimer('youtube-interaction');
-                });
-                
-                iframe.addEventListener('mouseleave', () => {
-                    console.log(`📹 User left YouTube iframe ${index} - RESUMING TIMER`);
-                    this.resumeTimer('youtube-interaction');
-                });
+                // Note: Hover pause/resume functionality removed per user request
             });
         },
 

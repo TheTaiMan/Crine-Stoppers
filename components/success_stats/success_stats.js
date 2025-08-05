@@ -256,21 +256,8 @@ function successStats() {
         formatNumber(num) {
             if (num === 0) return '0';
             
-            // Handle large numbers with commas
-            if (num >= 1000000) {
-                // For millions, show in M format if over 10M, otherwise show with commas
-                if (num >= 10000000) {
-                    return (num / 1000000).toFixed(0) + 'M';
-                } else {
-                    return num.toLocaleString();
-                }
-            } else if (num >= 1000) {
-                // Add commas for thousands
-                return num.toLocaleString();
-            } else {
-                // Small numbers stay as is
-                return num.toString();
-            }
+            // Always show full number with commas for readability
+            return num.toLocaleString();
         },
         
         // Cleanup when component is destroyed

@@ -3,7 +3,7 @@
 .sidebar {
   width: 220px;
   min-width: 280px;
-  height: 100vh;
+  height: 100svh; /* Small viewport height - ignores dynamic browser UI */
   background-color: var(--color-dark);
   padding: 10px;
   position: fixed;
@@ -19,7 +19,7 @@
 }
 
 .sidebar-content {
-  height: calc(100vh - 20px);
+  height: calc(100svh - 20px); /* Matches sidebar height minus padding */
   overflow-y: auto;
   display: flex;
   flex-direction: column;
@@ -819,6 +819,17 @@
   /* Fallback for browsers without dvh support */
   .mobile-navbar.expanded {
     height: 100vh !important;
+  }
+}
+
+/* Fallback for browsers without svh support */
+@supports not (height: 100svh) {
+  .sidebar {
+    height: 100vh;
+  }
+  
+  .sidebar-content {
+    height: calc(100vh - 20px);
   }
 }
 

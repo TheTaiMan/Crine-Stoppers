@@ -4,19 +4,19 @@
         
 
         <!-- Card 1: $150,000,000+ - Position: Row 1, Col 1-3 -->
-        <div class="success-card" style="grid-row: 1 / 4; grid-column: 1 / 4;">
+        <div class="success-card card1">
             <div class="success-card-header" x-text="'$' + formatNumber(counters.value1) + '+'">$150,000,000+</div>
             <div class="success-card-body">In value of solved crime</div>
         </div>
 
         <!-- Card 2: $1,304,000+ - Position: Row 1, Col 4-6 -->
-        <div class="success-card" style="grid-row: 4 / 6; grid-column: 1 / 4;">
+        <div class="success-card card2">
             <div class="success-card-header" x-text="'$' + formatNumber(counters.value5) + '+'">$1,304,000+</div>
             <div class="success-card-body">In rewards authorized</div>
         </div>
 
         <!-- Card 3: 14,500 cases WITH MAGNIFYING GLASS ICON - Position: Row 1-2, Col 7-10 -->
-        <div class="success-card" style="grid-row: 1 / 6; grid-column: 4 / 7;">
+        <div class="success-card card3">
             <div class="success-card-body">More than</div>
             <div class="success-card-header" x-text="formatNumber(counters.value2) + ' cases'">14,500 cases</div>
             <div class="success-card-body">solved and cleared</div>
@@ -26,7 +26,7 @@
         </div>
 
         <!-- Card 4: 1,275 break and entry WITH BREAK-IN ICON - Position: Row 1-2, Col 11-14 -->
-        <div class="success-card" style="grid-row: 1 / 6; grid-column: 7 / 11;">
+        <div class="success-card card4">
             <div class="success-card-icon">
                 <img src="assets/icons/break_in.png" alt="Break In" />
             </div>
@@ -36,79 +36,82 @@
         </div>
 
         <!-- Card 5: $49,200,000 property WITH PROPERTY ICON - Position: Row 2, Col 1-4 -->
-        <div class="success-card" style="grid-row: 1 / 6; grid-column: 11 / 15;">
+        <div class="success-card card5">
             <div class="success-card-body">Over</div>
             <div class="success-card-header" x-text="'$' + formatNumber(counters.value4)">$49,200,000</div>
-            <div class="success-card-body">worth of property recovered</div>
+            <div class="success-card-body">worth of property<br>recovered</div>
             <div class="success-card-icon">
                 <img src="assets/icons/property.png" alt="Property Recovery" />
             </div>
         </div>
 
-        <!-- Card 6: 30 attempt homicides - Position: Row 2, Col 5-6 -->
-        <div class="success-card" style="grid-row: 6 / 9; grid-column: 1 / 3;">
-            <div class="success-card-body">Over</div>
-            <div class="success-card-header" x-text="formatNumber(counters.value6)">30</div>
-            <div class="success-card-body">attempt homicides solved</div>
+        <!-- Card 6: 30 attempt homicides -->
+        <div class="success-card card6">
+            <div class="card6-first-line">
+                <span class="success-card-body">Over</span>
+                <span class="success-card-header" x-text="formatNumber(counters.value6)">30</span>
+            </div>
+            <div class="success-card-body">attempt</div>
+            <div class="success-card-body">homicides</div>
+            <div class="success-card-body">solved</div>
         </div>
         
-        <!-- Card 7: 1,510 thefts - Position: Row 3, Col 1-2 -->
-        <div class="success-card" style="grid-row: 6 / 9; grid-column: 3 / 5;">
+        <!-- Card 7: 1,510 thefts -->
+        <div class="success-card card7">
             <div class="success-card-body">Over</div>
             <div class="success-card-header" x-text="formatNumber(counters.value7)">1,510</div>
             <div class="success-card-body">thefts cleared</div>
         </div>
 
-        <!-- Card 8: 5,121 stolen autos - Position: Row 3, Col 3-5 -->
-        <div class="success-card" style="grid-row: 6 / 9; grid-column: 5 / 9;">
+        <!-- Card 10: 46 homicide arrests -->
+        <div class="success-card card8">
+            <div class="success-card-header" x-text="formatNumber(counters.value10)">46</div>
+            <div class="success-card-body">homicide arrests</div>
+        </div>
+
+        <!-- Card 8: 5,121 stolen autos -->
+        <div class="success-card card9">
             <div class="success-card-body">More than</div>
             <div class="success-card-header" x-text="formatNumber(counters.value8) + ' stolen autos'">5,121 stolen autos</div>
             <div class="success-card-body">recovered</div>
         </div>
 
         <!-- Card 9: $3,200,000 frauds - Position: Row 3, Col 6-9 -->
-        <div class="success-card" style="grid-row: 6 / 9; grid-column: 9 / 12;">
+        <div class="success-card card10">
             <div class="success-card-body">Over</div>
             <div class="success-card-header" x-text="'$' + formatNumber(counters.value9)">$3,200,000</div>
             <div class="success-card-body">worth of frauds solved</div>
         </div>
 
-        <!-- Card 10: 46 homicide arrests - Position: Row 3, Col 10-11 -->
-        <div class="success-card" style="grid-row: 6 / 9; grid-column: 12 / 15;">
-            <div class="success-card-header" x-text="formatNumber(counters.value10)">46</div>
-            <div class="success-card-body">homicide arrests</div>
-        </div>
-
         <!-- Card 11: $4,300,000 arsons - Position: Row 3, Col 12-14 -->
-        <div class="success-card" style="grid-row: 9 / 13; grid-column: 1 / 4;">
+        <div class="success-card card11">
             <div class="success-card-body">Over</div>
             <div class="success-card-header" x-text="'$' + formatNumber(counters.value11)">$4,300,000</div>
             <div class="success-card-body">worth of arsons solved</div>
         </div>
 
         <!-- Card 12: 1,924 robbery arrests - Position: Row 4, Col 1-3 -->
-        <div class="success-card" style="grid-row: 9 / 13; grid-column: 4 / 7;">
+        <div class="success-card card12">
             <div class="success-card-body">Over</div>
-            <div class="success-card-header" x-text="formatNumber(counters.value12) + ' robbery'">1,924 robbery</div>
-            <div class="success-card-body">arrests</div>
+            <div class="success-card-header" x-text="formatNumber(counters.value12) + ' robbery arrests'">1,924 robbery arrests</div>
         </div>
 
         <!-- Card 13: 2,600 wanted persons - Position: Row 4, Col 4-6 -->
-        <div class="success-card" style="grid-row: 9 / 13; grid-column: 7 / 10;">
+        <div class="success-card card13">
             <div class="success-card-body">Over</div>
             <div class="success-card-header" x-text="formatNumber(counters.value13)">2,600</div>
             <div class="success-card-body">Wanted persons arrested</div>
         </div>
 
         <!-- Card 14: $90,200,000 drugs - Position: Row 4, Col 7-11 -->
-        <div class="success-card" style="grid-row: 9 / 13; grid-column: 10 / 13;">
+        <div class="success-card card14">
             <div class="success-card-body">Over</div>
             <div class="success-card-header" x-text="'$' + formatNumber(counters.value14)">$90,200,000</div>
             <div class="success-card-body">in drugs seized</div>
         </div>
 
         <!-- Card 15: 7,070 persons charged - Position: Row 4, Col 12-14 -->
-        <div class="success-card" style="grid-row: 9 / 13; grid-column: 13 / 15;">
+        <div class="success-card card15">
             <div class="success-card-body">Over</div>
             <div class="success-card-header" x-text="formatNumber(counters.value15)">7,070</div>
             <div class="success-card-body">persons charged</div>
@@ -157,14 +160,6 @@
     --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
-/* ========== 12x14 CSS GRID SYSTEM ========== */
-.success-stats-grid {
-    display: grid;
-    grid-template-columns: repeat(14, 1fr);
-    grid-template-rows: repeat(12, auto);
-    gap: 20px;
-    width: 100%;
-}
 
 /* Success Card Component from style guide */
 .success-card {
