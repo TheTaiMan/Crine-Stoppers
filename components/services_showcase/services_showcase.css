@@ -52,7 +52,7 @@
     border-radius: 42px;
     background-color: var(--color-dark-alt);
     padding: 3px 10px;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .service-tab.active .tab-button {
@@ -287,7 +287,8 @@
 @media (min-width: 769px) {
     .service-tab:hover .tab-button {
         background-color: var(--color-dark);
-        transition: background-color 0.2s ease;
+        transform: translateY(-1px);
+        transition: background-color 0.2s ease, transform 0.2s ease;
     }
     
     .services-content:hover {
