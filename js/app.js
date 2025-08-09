@@ -10,7 +10,7 @@ function app() {
         pageCache: {},
         isBannerInView: true,
         showSidebarTipButton: false, // Initialize as false since banner starts in view (desktop sidebar)
-        showMobileTipButton: true, // Mobile tip button always visible initially
+        showMobileTipButton: window.innerWidth <= 768, // Set initial state based on screen size
         
         // Update tip button visibility based on banner state
         updateTipButtonVisibility() {
@@ -128,6 +128,12 @@ function app() {
             
             // Initialize tip button visibility
             this.updateTipButtonVisibility();
+            
+            // Add window resize listener for immediate tip button updates
+            window.addEventListener('resize', () => {
+                // Immediate update during resize to prevent button disappearing
+                this.updateTipButtonVisibility();
+            });
         },
         
         // Pre-load common pages for instant navigation
