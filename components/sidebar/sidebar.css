@@ -71,7 +71,7 @@
   padding: 5px 5px;
   flex: 1;
   border-radius: var(--radius-md);
-  transition: background-color 0.2s ease;
+  transition: all 0.2s ease;
   text-decoration: none;
   color: inherit;
 }
@@ -184,7 +184,7 @@
   width: 3px;
   background-color: var(--color-dark-alt);
   border-radius: 88px;
-  transition: background-color 0.2s ease;
+  transition: all 0.2s ease;
   flex-shrink: 0;
   align-self: stretch;
 }
@@ -243,9 +243,8 @@
 }
 
 .submit-tip-button-desktop:hover {
-  background-color: var(--color-primary);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
+  background-color: var(--color-danger-dark);
+  transform: translateY(-1px);
 }
 
 .submit-tip-button-text {
@@ -285,9 +284,8 @@
 }
 
 .donate-button-desktop:hover {
-  background-color: var(--color-secondary);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
+  background-color: var(--color-primary-light);
+  transform: translateY(-1px);
 }
 
 .donate-button-text {
@@ -357,7 +355,7 @@
   justify-content: center;
   padding: 10px;
   box-sizing: border-box;
-  transition: background-color 0.2s ease;
+  transition: all 0.2s ease;
 }
 
 .mobile-menu-toggle:hover {
@@ -544,7 +542,7 @@
   gap: 5px;
   padding: 0px 0px 0px 3px;
   width: 100%;
-  transition: background-color 0.2s ease;
+  transition: all 0.2s ease;
   text-decoration: none;
   color: inherit;
 }
@@ -625,7 +623,7 @@
   width: 3px;
   background-color: var(--color-dark-alt);
   border-radius: 88px;
-  transition: background-color 0.2s ease;
+  transition: all 0.2s ease;
   flex-shrink: 0;
   align-self: stretch;
 }
@@ -693,11 +691,12 @@
   max-height: 45px; /* Smaller maximum */
   border: none;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: all 0.2s ease;
 }
 
 .mobile-submit-tip-button-bg:hover {
-  background-color: var(--color-primary);
+  background-color: var(--color-danger-dark);
+  transform: translateY(-1px);
 }
 
 .mobile-submit-tip-button-text {
@@ -736,11 +735,12 @@
   max-height: 50px;
   border: none;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: all 0.2s ease;
 }
 
 .mobile-tip-button-bg:hover {
-  background-color: var(--color-primary);
+  background-color: var(--color-danger-dark);
+  transform: translateY(-1px);
 }
 
 .mobile-tip-button-text {
@@ -779,11 +779,12 @@
   max-height: 45px; /* Smaller maximum */
   border: none;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: all 0.2s ease;
 }
 
 .mobile-donate-button-bg:hover {
-  background-color: var(--color-secondary);
+  background-color: var(--color-primary-light);
+  transform: translateY(-1px);
 }
 
 .mobile-donate-button-text {

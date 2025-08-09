@@ -21,7 +21,7 @@
 }
 
 .btn-learn-more:hover {
-    opacity: 0.9;
+    background: var(--color-accent-dark, #5a7186);
     transform: translateY(-1px);
 }
 

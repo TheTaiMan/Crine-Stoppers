@@ -11,6 +11,11 @@
 
   /* Utility Colors */
   --color-hover-light: rgba(255, 255, 255, 0.13);
+  
+  /* Hover shade variations */
+  --color-primary-light: #a8d158; /* Lighter shade of Fresh Lime for dark text buttons */
+  --color-danger-dark: #9a1825; /* Darker shade of Crimson Red for light text buttons */
+  --color-accent-dark: #5a7186; /* Darker shade of Storm Blue for light text buttons */
 
   /* Typography */
   --font-primary: 'Montserrat', sans-serif;
