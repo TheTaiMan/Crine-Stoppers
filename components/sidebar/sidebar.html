@@ -4,19 +4,21 @@
     </div>
     
     <nav class="sidebar-nav">
-        <div class="nav-group" x-data="{ hoveredItemId: null, clickedItemId: null, isTouchDevice: false }">
+        <div class="nav-group" x-data="{ hoveredItemId: null, clickedItemId: null, isTouchDevice: false, touchInProgress: false }">
             <template x-for="page in navigation" :key="page.id">
                 <div 
                     class="nav-item-wrapper"
-                    @mouseenter="!isTouchDevice && (hoveredItemId = page.id)"
-                    @mouseleave="!isTouchDevice && (hoveredItemId = null)"
-                    @touchstart="isTouchDevice = true"
+                    @mouseenter="!touchInProgress && !isTouchDevice && (hoveredItemId = page.id)"
+                    @mouseleave="!touchInProgress && !isTouchDevice && (hoveredItemId = null)"
+                    @touchstart="isTouchDevice = true; touchInProgress = true"
+                    @touchend="setTimeout(() => touchInProgress = false, 300)"
                 >
                     <!-- Main Navigation Item with Arrow -->
                     <div class="nav-item-container">
                         <a 
                             :href="page.path"
-                            @click.prevent="isTouchDevice && page.sections && page.sections.length > 0 && currentPage !== page.id ? (clickedItemId = clickedItemId === page.id ? null : page.id) : navigateTo(page.path)"
+                            @click.prevent="navigateTo(page.path)"
+                            @touchstart.stop="if (isTouchDevice) { touchInProgress = true }"
                             class="nav-item"
                             :class="{ 'is-selected': currentPage === page.id }"
                         >
@@ -36,7 +38,8 @@
                             x-show="page.sections && page.sections.length > 0"
                             class="nav-arrow-indicator"
                             :class="{ 'expanded': hoveredItemId === page.id || currentPage === page.id || clickedItemId === page.id }"
-                            @click="isTouchDevice ? (clickedItemId = clickedItemId === page.id ? null : page.id) : null"
+                            @click.stop="isTouchDevice ? (clickedItemId = clickedItemId === page.id ? null : page.id) : null"
+                            @touchstart.stop="if (isTouchDevice) { touchInProgress = true }"
                         >
                             <svg class="nav-arrow" viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
