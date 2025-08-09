@@ -48,8 +48,16 @@
                             x-show="page.sections && page.sections.length > 0"
                             class="nav-arrow-indicator"
                             :class="{ 'expanded': hoveredItemId === page.id || currentPage === page.id || clickedItemId === page.id }"
-                            @click.stop="if (isTouchDevice) { clickedItemId = clickedItemId === page.id ? null : page.id; blockHover(); }"
-                            @touchstart.stop="blockHover()"
+                            @click.stop="if (isTouchDevice) { 
+                                clickedItemId = clickedItemId === page.id ? null : page.id; 
+                                touchBlocked = true; 
+                                hoveredItemId = null; 
+                                setTimeout(() => touchBlocked = false, 500); 
+                            }"
+                            @touchstart.stop="if (isTouchDevice) { 
+                                touchBlocked = true; 
+                                hoveredItemId = null; 
+                            }"
                         >
                             <svg class="nav-arrow" viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
