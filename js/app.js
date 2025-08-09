@@ -9,31 +9,41 @@ function app() {
         activeSection: '',
         pageCache: {},
         isBannerInView: true,
-        showSidebarTipButton: false, // Initialize as false since banner starts in view
+        showSidebarTipButton: false, // Initialize as false since banner starts in view (desktop sidebar)
+        showMobileTipButton: true, // Mobile tip button always visible initially
         
         // Update tip button visibility based on banner state
         updateTipButtonVisibility() {
             console.log('updateTipButtonVisibility called - currentPage:', this.currentPage, 'isBannerInView:', this.isBannerInView, 'window width:', window.innerWidth);
             
-            // Always show on mobile (screen width <= 768px)
-            if (window.innerWidth <= 768) {
-                console.log('Mobile screen detected, always showing button');
-                this.showSidebarTipButton = true;
-                return;
+            const isMobile = window.innerWidth <= 768;
+            
+            // Mobile tip button logic - always visible on mobile
+            if (isMobile) {
+                console.log('Mobile screen detected, always showing mobile button');
+                this.showMobileTipButton = true;
+            } else {
+                // On desktop, mobile tip button is never shown (mobile nav not visible)
+                this.showMobileTipButton = false;
             }
             
-            // Always show on non-home pages (desktop only)
-            if (this.currentPage !== 'home') {
-                console.log('Not home page, showing button');
-                this.showSidebarTipButton = true;
-                return;
+            // Desktop sidebar tip button logic
+            if (isMobile) {
+                // On mobile screens, hide desktop sidebar button (sidebar not visible)
+                this.showSidebarTipButton = false;
+            } else {
+                // Desktop logic: Always show on non-home pages
+                if (this.currentPage !== 'home') {
+                    console.log('Desktop - Not home page, showing sidebar button');
+                    this.showSidebarTipButton = true;
+                } else {
+                    // On desktop home page, hide sidebar button when banner is in view
+                    // Show sidebar button when banner is out of view (scrolled past)
+                    const shouldShow = !this.isBannerInView;
+                    console.log('Desktop home page - shouldShow:', shouldShow);
+                    this.showSidebarTipButton = shouldShow;
+                }
             }
-            
-            // On home page (desktop only), hide sidebar button when banner is in view
-            // Show sidebar button when banner is out of view (scrolled past)
-            const shouldShow = !this.isBannerInView;
-            console.log('Home page - shouldShow:', shouldShow);
-            this.showSidebarTipButton = shouldShow;
         },
         
         // Navigation configuration
