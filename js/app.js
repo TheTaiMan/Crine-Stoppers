@@ -13,16 +13,23 @@ function app() {
         
         // Update tip button visibility based on banner state
         updateTipButtonVisibility() {
-            console.log('updateTipButtonVisibility called - currentPage:', this.currentPage, 'isBannerInView:', this.isBannerInView);
+            console.log('updateTipButtonVisibility called - currentPage:', this.currentPage, 'isBannerInView:', this.isBannerInView, 'window width:', window.innerWidth);
             
-            // Always show on non-home pages
+            // Always show on mobile (screen width <= 768px)
+            if (window.innerWidth <= 768) {
+                console.log('Mobile screen detected, always showing button');
+                this.showSidebarTipButton = true;
+                return;
+            }
+            
+            // Always show on non-home pages (desktop only)
             if (this.currentPage !== 'home') {
                 console.log('Not home page, showing button');
                 this.showSidebarTipButton = true;
                 return;
             }
             
-            // On home page, hide sidebar button when banner is in view
+            // On home page (desktop only), hide sidebar button when banner is in view
             // Show sidebar button when banner is out of view (scrolled past)
             const shouldShow = !this.isBannerInView;
             console.log('Home page - shouldShow:', shouldShow);

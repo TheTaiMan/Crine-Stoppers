@@ -3,12 +3,14 @@
 .sidebar {
   width: 220px;
   min-width: 280px;
-  height: 100svh; /* Small viewport height - ignores dynamic browser UI */
+  height: 100dvh; /* Dynamic viewport height - adapts to browser UI */
+  min-height: 100dvh; /* Ensure it always fills the full viewport */
   background-color: var(--color-dark);
   padding: 10px;
   position: fixed;
   top: 0;
   left: 0;
+  bottom: 0; /* Explicitly stick to bottom */
   z-index: 40;
   transition: transform 0.3s ease-in-out;
   overflow: hidden;
@@ -19,7 +21,7 @@
 }
 
 .sidebar-content {
-  height: calc(100svh - 20px); /* Matches sidebar height minus padding */
+  height: calc(100dvh - 20px); /* Matches sidebar height minus padding */
   overflow-y: auto;
   display: flex;
   flex-direction: column;
@@ -836,10 +838,11 @@
   }
 }
 
-/* Fallback for browsers without svh support */
-@supports not (height: 100svh) {
+/* Fallback for browsers without dvh support */
+@supports not (height: 100dvh) {
   .sidebar {
     height: 100vh;
+    min-height: 100vh;
   }
   
   .sidebar-content {

@@ -5,6 +5,7 @@ function sidebar() {
         isMobile: false,
         mobileNavOpen: false,
         sidebarContent: '',
+        scrollPosition: 0, // Store scroll position when mobile nav opens
         
         initSidebar() {
             this.loadSidebarContent();
@@ -46,6 +47,12 @@ function sidebar() {
                     }
                 }, 100);
             }
+            
+            // Update tip button visibility when screen size changes
+            const appElement = document.querySelector('[x-data*="app()"]');
+            if (appElement && appElement.__x && appElement.__x.$data && appElement.__x.$data.updateTipButtonVisibility) {
+                appElement.__x.$data.updateTipButtonVisibility();
+            }
         },
         
         toggle() {
@@ -64,22 +71,36 @@ function sidebar() {
             this.mobileNavOpen = !this.mobileNavOpen;
             // Ensure body scroll state matches mobile nav state
             if (this.mobileNavOpen) {
+                // Store current scroll position before opening mobile nav
+                this.scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
                 document.body.classList.add('mobile-nav-open');
+                // Apply the stored scroll position to prevent jump
+                document.body.style.top = `-${this.scrollPosition}px`;
             } else {
                 document.body.classList.remove('mobile-nav-open');
+                // Restore scroll position
+                document.body.style.top = '';
+                window.scrollTo(0, this.scrollPosition);
             }
         },
         
         openMobileNav() {
             this.mobileNavOpen = true;
+            // Store current scroll position before opening mobile nav
+            this.scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
             // Ensure body scroll is disabled
             document.body.classList.add('mobile-nav-open');
+            // Apply the stored scroll position to prevent jump
+            document.body.style.top = `-${this.scrollPosition}px`;
         },
         
         closeMobileNav() {
             this.mobileNavOpen = false;
             // Ensure body scroll is restored
             document.body.classList.remove('mobile-nav-open');
+            // Restore scroll position
+            document.body.style.top = '';
+            window.scrollTo(0, this.scrollPosition);
             
             // Re-check banner visibility when closing mobile nav (switching to desktop view)
             setTimeout(() => {
