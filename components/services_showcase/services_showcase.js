@@ -136,13 +136,17 @@ function servicesShowcase() {
             window.addEventListener('hashchange', () => {
                 console.log('📄 Hash changed - checking if still on home page');
                 setTimeout(() => {
-                    if (!this.isHomePage()) {
+                    const newPageStatus = this.isHomePage();
+                    console.log('📍 Hash change: isHomePage =', newPageStatus, 'isActive =', this.isActive);
+                    
+                    if (!newPageStatus && this.isActive) {
                         console.log('❌ No longer on home page - destroying services showcase');
                         this.destroy();
-                    } else if (!this.isActive) {
+                    } else if (newPageStatus && !this.isActive) {
                         console.log('✅ Back on home page - reinitializing services showcase');
                         this.init();
                     }
+                    // If still on home page and active, continue normally - don't restart
                 }, 100); // Small delay to let app update
             });
 
@@ -150,13 +154,17 @@ function servicesShowcase() {
             window.addEventListener('popstate', () => {
                 console.log('📄 Popstate event - checking if still on home page');
                 setTimeout(() => {
-                    if (!this.isHomePage()) {
+                    const newPageStatus = this.isHomePage();
+                    console.log('📍 Popstate: isHomePage =', newPageStatus, 'isActive =', this.isActive);
+                    
+                    if (!newPageStatus && this.isActive) {
                         console.log('❌ No longer on home page - destroying services showcase');
                         this.destroy();
-                    } else if (!this.isActive) {
+                    } else if (newPageStatus && !this.isActive) {
                         console.log('✅ Back on home page - reinitializing services showcase');
                         this.init();
                     }
+                    // If still on home page and active, continue normally - don't restart
                 }, 100); // Small delay to let app update
             });
 

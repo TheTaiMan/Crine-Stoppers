@@ -398,8 +398,9 @@ function app() {
                     block: 'start'
                 });
                 
-                // Update URL hash
-                window.history.replaceState(null, '', `${window.location.pathname}${window.location.hash}#${sectionId}`);
+                // Update URL hash properly - don't append to existing hash
+                const currentPageHash = this.getHashFromPageId(this.currentPage);
+                window.history.replaceState(null, '', `${window.location.pathname}${currentPageHash}`);
                 
                 // Update active section
                 this.activeSection = sectionId;
