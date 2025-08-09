@@ -607,11 +607,22 @@ function app() {
 
 // Make navigateTo available globally
 window.navigateTo = function(hash) {
+    console.log('Global navigateTo called with hash:', hash);
     const appElement = document.querySelector('[x-data*="app()"]');
+    console.log('App element found:', !!appElement);
     if (appElement && appElement.__x && appElement.__x.$data) {
+        console.log('App data found, calling navigateTo');
         return appElement.__x.$data.navigateTo(hash);
     } else {
         console.error('App instance not found for navigation');
+        // Fallback: try to find the app element differently
+        const bodyElement = document.querySelector('body[x-data]');
+        if (bodyElement && bodyElement.__x && bodyElement.__x.$data && bodyElement.__x.$data.navigateTo) {
+            console.log('Using body element fallback');
+            return bodyElement.__x.$data.navigateTo(hash);
+        } else {
+            console.error('No app instance found anywhere');
+        }
     }
 };
 
