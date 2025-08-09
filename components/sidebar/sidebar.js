@@ -134,8 +134,10 @@ function sidebar() {
         
         openDonation() {
             this.closeMobileNav();
-            // Add donation URL when available
-            console.log('Donation button clicked');
+            // Navigate to donate page
+            if (window.navigateTo) {
+                window.navigateTo('#donate');
+            }
         },
         
         async loadSidebarContent() {

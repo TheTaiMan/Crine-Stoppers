@@ -170,12 +170,18 @@ function app() {
         getPageIdFromHash(hash) {
             if (!hash || hash === '#' || hash === '#home') return 'home';
             
+            // Special case for donate page (not in navigation but still a valid page)
+            if (hash === '#donate') return 'donate';
+            
             const page = this.navigation.find(nav => nav.path === hash);
             return page ? page.id : null;
         },
         
         // Convert page ID to hash
         getHashFromPageId(pageId) {
+            // Special case for donate page
+            if (pageId === 'donate') return '#donate';
+            
             const page = this.navigation.find(nav => nav.id === pageId);
             return page ? page.path : '#home';
         },
@@ -598,6 +604,16 @@ function app() {
         }
     };
 }
+
+// Make navigateTo available globally
+window.navigateTo = function(hash) {
+    const appElement = document.querySelector('[x-data*="app()"]');
+    if (appElement && appElement.__x && appElement.__x.$data) {
+        return appElement.__x.$data.navigateTo(hash);
+    } else {
+        console.error('App instance not found for navigation');
+    }
+};
 
 // Make navigateToSection available globally for mobile navigation
 window.navigateToSection = function(pageId, sectionId) {
