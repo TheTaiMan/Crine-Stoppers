@@ -87,6 +87,8 @@
   color: var(--color-secondary);
   flex-shrink: 0;
   transition: all 0.2s ease;
+  cursor: pointer;
+  touch-action: manipulation;
 }
 
 .nav-arrow {
@@ -99,8 +101,11 @@
   transform: rotate(180deg);
 }
 
-.nav-item:hover {
-  background-color: var(--color-hover-light);
+/* Only apply hover effects on non-touch devices */
+@media (hover: hover) and (pointer: fine) {
+  .nav-item:hover {
+    background-color: var(--color-hover-light);
+  }
 }
 
 .nav-icon-container {
@@ -170,12 +175,15 @@
   flex-shrink: 0;
 }
 
-.sub-nav-item:hover {
-  background-color: var(--color-hover-light);
-}
+/* Only apply hover effects on non-touch devices */
+@media (hover: hover) and (pointer: fine) {
+  .sub-nav-item:hover {
+    background-color: var(--color-hover-light);
+  }
 
-.sub-nav-item:hover .sub-nav-indicator {
-  background-color: var(--color-primary);
+  .sub-nav-item:hover .sub-nav-indicator {
+    background-color: var(--color-primary);
+  }
 }
 
 /* .sub-nav-item:hover .sub-nav-text {
@@ -244,9 +252,12 @@
   padding: var(--space-4) var(--space-5);
 }
 
-.submit-tip-button-desktop:hover {
-  background-color: var(--color-danger-dark);
-  transform: translateY(-1px);
+/* Only apply hover effects on non-touch devices */
+@media (hover: hover) and (pointer: fine) {
+  .submit-tip-button-desktop:hover {
+    background-color: var(--color-danger-dark);
+    transform: translateY(-1px);
+  }
 }
 
 .submit-tip-button-text {
@@ -285,9 +296,12 @@
   padding: var(--space-4) var(--space-5);
 }
 
-.donate-button-desktop:hover {
-  background-color: var(--color-primary-light);
-  transform: translateY(-1px);
+/* Only apply hover effects on non-touch devices */
+@media (hover: hover) and (pointer: fine) {
+  .donate-button-desktop:hover {
+    background-color: var(--color-primary-light);
+    transform: translateY(-1px);
+  }
 }
 
 .donate-button-text {
@@ -360,8 +374,11 @@
   transition: all 0.2s ease;
 }
 
-.mobile-menu-toggle:hover {
-  background-color: var(--color-primary);
+/* Only apply hover effects on non-touch devices */
+@media (hover: hover) and (pointer: fine) {
+  .mobile-menu-toggle:hover {
+    background-color: var(--color-primary);
+  }
 }
 
 .mobile-navbar-bottom-header {
@@ -524,8 +541,11 @@
   padding: 0;
 }
 
-.mobile-nav-arrow-btn:hover {
-  color: var(--color-primary);
+/* Only apply hover effects on non-touch devices */
+@media (hover: hover) and (pointer: fine) {
+  .mobile-nav-arrow-btn:hover {
+    color: var(--color-primary);
+  }
 }
 
 .mobile-nav-arrow {
@@ -549,8 +569,11 @@
   color: inherit;
 }
 
-.mobile-nav-item:hover {
-  background-color: var(--color-hover-light);
+/* Only apply hover effects on non-touch devices */
+@media (hover: hover) and (pointer: fine) {
+  .mobile-nav-item:hover {
+    background-color: var(--color-hover-light);
+  }
 }
 
 .mobile-nav-icon-container {
@@ -617,8 +640,11 @@
   transform: translateY(0);
 }
 
-.mobile-sub-nav-item:hover {
-  background-color: var(--color-hover-light);
+/* Only apply hover effects on non-touch devices */
+@media (hover: hover) and (pointer: fine) {
+  .mobile-sub-nav-item:hover {
+    background-color: var(--color-hover-light);
+  }
 }
 
 .mobile-sub-nav-indicator {
@@ -696,9 +722,12 @@
   transition: all 0.2s ease;
 }
 
-.mobile-submit-tip-button-bg:hover {
-  background-color: var(--color-danger-dark);
-  transform: translateY(-1px);
+/* Only apply hover effects on non-touch devices */
+@media (hover: hover) and (pointer: fine) {
+  .mobile-submit-tip-button-bg:hover {
+    background-color: var(--color-danger-dark);
+    transform: translateY(-1px);
+  }
 }
 
 .mobile-submit-tip-button-text {
@@ -740,9 +769,12 @@
   transition: all 0.2s ease;
 }
 
-.mobile-tip-button-bg:hover {
-  background-color: var(--color-danger-dark);
-  transform: translateY(-1px);
+/* Only apply hover effects on non-touch devices */
+@media (hover: hover) and (pointer: fine) {
+  .mobile-tip-button-bg:hover {
+    background-color: var(--color-danger-dark);
+    transform: translateY(-1px);
+  }
 }
 
 .mobile-tip-button-text {
@@ -784,9 +816,12 @@
   transition: all 0.2s ease;
 }
 
-.mobile-donate-button-bg:hover {
-  background-color: var(--color-primary-light);
-  transform: translateY(-1px);
+/* Only apply hover effects on non-touch devices */
+@media (hover: hover) and (pointer: fine) {
+  .mobile-donate-button-bg:hover {
+    background-color: var(--color-primary-light);
+    transform: translateY(-1px);
+  }
 }
 
 .mobile-donate-button-text {

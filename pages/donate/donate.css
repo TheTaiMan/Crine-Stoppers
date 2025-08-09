@@ -91,7 +91,7 @@
 
 .donate-notice-title {
   font-family: var(--font-primary);
-  font-size: 25px;
+  font-size: var(--text-2xl);
   font-weight: var(--font-weight-bold);
   color: var(--color-light);
   text-align: center;
@@ -114,7 +114,7 @@
 
 .donate-paypal-title {
   font-family: var(--font-primary);
-  font-size: 25px;
+  font-size: var(--text-2xl);
   font-weight: var(--font-weight-bold);
   color: var(--color-light);
   margin: 0;
@@ -153,11 +153,11 @@
 
 .donate-paypal-text {
   font-family: var(--font-secondary);
-  font-size: 18px;
+  font-size: var(--text-lg);
   font-weight: var(--font-weight-medium);
   color: var(--color-light);
   line-height: 1.53;
-  letter-spacing: -0.36px;
+  letter-spacing: -0.02em;
   margin: 0;
 }
 
@@ -191,7 +191,7 @@
 
 .donate-form-title {
   font-family: var(--font-primary);
-  font-size: 25px;
+  font-size: var(--text-2xl);
   font-weight: var(--font-weight-bold);
   color: var(--color-dark);
   margin: 0;
@@ -258,54 +258,6 @@
     width: 100%;
   }
 
-  .donate-notice-title {
-    font-size: 24px;
-  }
-
-  .donate-paypal-title {
-    font-size: 24px;
-  }
-
-  /* .donate-paypal-content {
-        flex-direction: column;
-        gap: var(--space-4);
-        align-items: center;
-        text-align: center;
-    }
- */
-  /*   .donate-paypal-text-section {
-        height: auto;
-        align-items: center;
-        text-align: center;
-    }
- */
-  /* .donate-paypal-button {
-        align-self: center;
-    } */
-
-  .donate-form-title {
-    font-size: 24px;
-  }
-
-  .donate-form-features {
-    flex-direction: column;
-    align-items: center;
-    gap: var(--space-4);
-  }
-}
-
-@media (max-width: 1240px) {
-  .donate-content-block {
-    flex-direction: column;
-    gap: var(--space-5);
-  }
-
-  .donate-info-section {
-    padding-left: 0;
-    align-items: center;
-    width: 100%;
-  }
-
   .donate-form-features {
     flex-direction: column;
     align-items: center;
@@ -317,15 +269,11 @@
   .section-title {
     font-size: var(--text-2xl);
   }
-  .donate-form-title {
-    font-size: 24px;
-  }
-  .donate-notice-title {
-    font-size: 20px;
-  }
-
+  
+  .donate-form-title,
+  .donate-notice-title,
   .donate-paypal-title {
-    font-size: 20px;
+    font-size: var(--text-xl);
   }
 }
 
@@ -335,7 +283,13 @@
   }
 
   .section-title {
-    font-size: 28px;
+    font-size: var(--text-xl);
+  }
+
+  .donate-notice-title,
+  .donate-paypal-title,
+  .donate-form-title {
+    font-size: var(--text-lg);
   }
 
   .donate-qr-code {
