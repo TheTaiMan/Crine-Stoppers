@@ -196,6 +196,7 @@
     color: var(--color-dark);
     margin: 0;
     line-height: 1.46;
+    text-transform: none;
 }
 
 .donate-form-container {
