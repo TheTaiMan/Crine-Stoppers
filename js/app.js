@@ -534,6 +534,10 @@ function app() {
                     (entries) => {
                         entries.forEach(entry => {
                             this.isBannerInView = entry.isIntersecting;
+                            console.log('Banner (fallback) visibility changed:', entry.isIntersecting);
+                            
+                            // Update tip button visibility
+                            this.updateTipButtonVisibility();
                         });
                     },
                     {
@@ -587,6 +591,9 @@ function app() {
                         this.isBannerInView = isIntersecting;
                     }
                 }
+                
+                // Update tip button visibility after manual check
+                this.updateTipButtonVisibility();
             }
         }
     };
