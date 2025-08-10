@@ -101,8 +101,8 @@
     </div>
     
     <!-- Donate Button (Desktop) -->
-    <div class="sidebar-donate-section">
-        <button class="donate-button-desktop" @click="navigateTo('#donate')" onclick="console.log('Donate button clicked'); window.navigateTo('#donate');">
+    <div class="sidebar-donate-section" x-show="currentPage !== 'donate'">
+        <button class="donate-button-desktop" @click="navigateTo('#donate')" onclick="window.navigateTo('#donate');">
             <span class="donate-button-text">DONATE</span>
         </button>
     </div>

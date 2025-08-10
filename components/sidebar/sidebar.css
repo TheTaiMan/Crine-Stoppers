@@ -272,7 +272,7 @@
 
 /* Desktop Donate Button */
 .sidebar-donate-section {
-  padding: var(--space-2) var(--space-3) var(--space-5);
+  padding: var(--space-3) var(--space-3) var(--space-2);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -702,6 +702,11 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+/* When donate button is hidden, submit tip button expands to fill space */
+.mobile-nav-buttons.donate-hidden .mobile-submit-tip-button {
+  flex: 1;
 }
 
 .mobile-submit-tip-button-bg {

@@ -179,15 +179,15 @@
             </nav>
             
             <!-- Mobile Action Buttons -->
-            <div class="mobile-nav-buttons">
+            <div class="mobile-nav-buttons" :class="{ 'donate-hidden': currentPage === 'donate' }">
                 <div class="mobile-submit-tip-button" x-show="showMobileTipButton">
                     <button class="mobile-submit-tip-button-bg" onclick="navigateTo('/submit-tip')">
                         <span class="mobile-submit-tip-button-text">SUBMIT A TIP</span>
                     </button>
                 </div>
                 
-                <div class="mobile-donate-button">
-                    <button class="mobile-donate-button-bg" @click="navigateTo('#donate')" onclick="console.log('Mobile donate button clicked'); window.navigateTo('#donate');">
+                <div class="mobile-donate-button" x-show="currentPage !== 'donate'">
+                    <button class="mobile-donate-button-bg" @click.prevent="navigateTo('#donate'); closeMobileNav();">
                         <span class="mobile-donate-button-text">DONATE</span>
                     </button>
                 </div>

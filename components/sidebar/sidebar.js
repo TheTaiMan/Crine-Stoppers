@@ -133,7 +133,10 @@ function sidebar() {
         },
         
         openDonation() {
-            this.closeMobileNav();
+            // Only close mobile nav if we're in mobile mode and nav is open
+            if (this.isMobile && this.mobileNavOpen) {
+                this.closeMobileNav();
+            }
             // Navigate to donate page
             if (window.navigateTo) {
                 window.navigateTo('#donate');
