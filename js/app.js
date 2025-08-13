@@ -260,9 +260,17 @@ function app() {
                             this.loadServicesShowcaseComponent();
                             this.loadSuccessStatsComponent();
                             // Set up banner visibility observer after banner loads
+                            // Use multiple strategies to ensure banner observer is set up
                             setTimeout(() => {
                                 this.setupBannerVisibilityObserver();
-                            }, 200);
+                            }, 300);
+                            
+                            // Backup attempt in case the first one fails
+                            setTimeout(() => {
+                                if (!this.bannerObserver && this.currentPage === 'home') {
+                                    this.setupBannerVisibilityObserver();
+                                }
+                            }, 1000);
                         }
                     });
                     return;
@@ -293,9 +301,17 @@ function app() {
                         this.loadServicesShowcaseComponent();
                         this.loadSuccessStatsComponent();
                         // Set up banner visibility observer after banner loads
+                        // Use multiple strategies to ensure banner observer is set up
                         setTimeout(() => {
                             this.setupBannerVisibilityObserver();
-                        }, 200);
+                        }, 300);
+                        
+                        // Backup attempt in case the first one fails
+                        setTimeout(() => {
+                            if (!this.bannerObserver && this.currentPage === 'home') {
+                                this.setupBannerVisibilityObserver();
+                            }
+                        }, 1000);
                     }
                 });
                 
