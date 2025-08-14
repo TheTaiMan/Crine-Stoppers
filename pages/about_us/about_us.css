@@ -1010,3 +1010,18 @@
     max-width: calc(100vw - 40px);
   }
 }
+
+/* FAQ Image Styles */
+.about-faq-image {
+  margin-top: 20px;
+  overflow: hidden;
+  border-radius: 16px;
+}
+
+.about-volunteer-image {
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  object-fit: cover;
+  display: block;
+}
