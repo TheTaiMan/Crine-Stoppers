@@ -282,9 +282,9 @@
     height: 200px;
   }
 
-  .section-title {
+  /* .section-title {
     font-size: var(--text-xl);
-  }
+  } */
 
   .donate-notice-title,
   .donate-paypal-title,

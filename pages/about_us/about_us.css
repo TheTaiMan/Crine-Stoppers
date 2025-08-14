@@ -1,16 +1,47 @@
 /* About Us Page Styles */
+
+/* ===== BASE LAYOUT ===== */
 .page-about-us {
   width: 100%;
   min-height: 100vh;
 }
 
-/* Banner Section */
+/* Page-specific overrides */
+.page-about-us .section-title {
+  text-transform: none;
+}
+
+.page-about-us .paragraph-text {
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.page-about-us .paragraph-block {
+  max-width: 600px;
+}
+
+/* Section Title */
+.section-header {
+  margin-bottom: 10px;
+}
+
+.section-title {
+  font-family: var(--font-primary);
+  font-size: var(--text-3xl);
+  font-weight: var(--font-weight-black);
+  color: var(--color-dark);
+  letter-spacing: 0;
+  line-height: 1.46;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+/* ===== BANNER SECTION ===== */
 .about-banner-section {
   width: 100%;
   height: 235px;
   position: relative;
   overflow: hidden;
-  margin-bottom: var(--space-6);
 }
 
 .about-banner {
@@ -34,7 +65,7 @@
   object-position: center;
 }
 
-/* Introduction Section */
+/* ===== INTRODUCTION SECTION ===== */
 .about-intro-content {
   display: flex;
   align-items: flex-start;
@@ -80,28 +111,11 @@
   object-fit: cover;
 }
 
-/* Override section title text transform for mixed case */
-.page-about-us .section-title {
-  text-transform: none;
-}
-
-/* Set paragraph text to 18px on About Us page */
-.page-about-us .paragraph-text {
-  font-size: 18px;
-  line-height: 1.6;
-}
-
-/* Make paragraph blocks wider on About Us page */
-.page-about-us .paragraph-block {
-  max-width: 600px;
-}
-
-/* Make intro paragraph block match the width of the handcuff image */
 .about-intro-content .paragraph-block {
   max-width: 600px;
 }
 
-/* Anonymity Section */
+/* ===== ANONYMITY SECTION ===== */
 .about-anonymity-section {
   display: flex;
   width: 100%;
@@ -131,7 +145,6 @@
   min-height: 500px;
 }
 
-/* Flip the second court image horizontally */
 .about-anonymity-image:last-child .about-court-image {
   transform: scaleX(-1);
 }
@@ -151,15 +164,16 @@
 }
 
 .about-read-more .btn-learn-more {
-  width: 420px;
-  min-width: 420px;
+  width: fit-content;
+  min-width: 280px;
+  max-width: none;
 }
 
 .about-read-more .btn-learn-more .btn-text {
   white-space: nowrap;
 }
 
-/* How It Works Section */
+/* ===== HOW IT WORKS SECTION ===== */
 .about-how-works-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -169,7 +183,6 @@
   margin-bottom: var(--space-8);
 }
 
-/* Position specific cards */
 .about-how-works-grid .about-work-card:nth-child(1) {
   grid-column: 1;
   grid-row: 1;
@@ -190,15 +203,8 @@
   grid-row: 2;
 }
 
-/* Reports and Summary flex container */
-.reports-summary-container {
-  display: flex;
-  gap: 35px;
-  align-items: flex-start;
-  flex-direction: column;
-}
-
-/* Awards and Community Alerts flex container */
+/* Container styles */
+.reports-summary-container,
 .awards-community-container {
   display: flex;
   gap: 35px;
@@ -206,6 +212,7 @@
   flex-direction: column;
 }
 
+/* Work card styles */
 .about-work-card {
   position: relative;
   display: flex;
@@ -215,54 +222,6 @@
   gap: 8px;
   overflow: visible;
   height: auto;
-}
-
-.about-card-dark .about-card-content {
-  background-color: var(--color-dark);
-}
-
-.about-card-navy .about-card-content {
-  background-color: var(--color-dark);
-}
-
-.about-card-icon {
-  position: absolute;
-  width: 94px;
-  height: 84px;
-  top: -25px;
-  right: -30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: visible;
-  z-index: 2;
-}
-
-.about-icon {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-/* Make Money Bag icon bigger */
-.about-icon[src*='Money Bag.svg'] {
-  width: 120%;
-  height: 120%;
-}
-
-.about-dollar-sign {
-  position: absolute;
-  height: 58px;
-  top: 74%;
-  left: 50%;
-  transform: translate(-50%, -50%) rotate(15deg);
-  font-family: var(--font-secondary);
-  font-weight: var(--font-weight-bold);
-  color: var(--color-accent);
-  font-size: var(--text-3xl);
-  letter-spacing: 0;
-  line-height: 1.46;
-  white-space: nowrap;
 }
 
 .about-card-content {
@@ -278,6 +237,11 @@
   border-radius: var(--radius-lg);
   box-sizing: border-box;
   overflow-wrap: break-word;
+}
+
+.about-card-dark .about-card-content,
+.about-card-navy .about-card-content {
+  background-color: var(--color-dark);
 }
 
 .about-card-header {
@@ -303,12 +267,50 @@
   margin: 0;
 }
 
-/* Blue line variant for dark cards */
+.about-card-icon {
+  position: absolute;
+  width: 94px;
+  height: 84px;
+  top: -25px;
+  right: -30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+  z-index: 2;
+}
+
+.about-icon {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.about-icon[src*='Money Bag.svg'] {
+  width: 120%;
+  height: 120%;
+}
+
+.about-dollar-sign {
+  position: absolute;
+  height: 58px;
+  top: 74%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(15deg);
+  font-family: var(--font-secondary);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-accent);
+  font-size: var(--text-3xl);
+  letter-spacing: 0;
+  line-height: 1.46;
+  white-space: nowrap;
+}
+
+/* Text color variants */
 .paragraph-block-line-blue {
   background-color: var(--color-accent);
 }
 
-/* White text variant */
 .paragraph-text-white {
   color: var(--color-light);
 }
@@ -317,7 +319,7 @@
   color: var(--color-dark);
 }
 
-/* Good Standing Banner */
+/* ===== GOOD STANDING BANNER ===== */
 .about-good-standing {
   grid-column: 1 / -1;
   flex-direction: column;
@@ -362,7 +364,7 @@
   line-height: 30.6px;
 }
 
-/* FAQ Section */
+/* ===== FAQ SECTION ===== */
 .about-faq-grid {
   display: flex;
   gap: 20px;
@@ -371,7 +373,6 @@
   margin-bottom: var(--space-8);
 }
 
-/* FAQ pair containers */
 .faq-pair-container {
   display: flex;
   gap: 20px;
@@ -414,7 +415,7 @@
 .about-faq-title {
   position: relative;
   flex: 1;
-  font-family: "Montserrat-Bold", Helvetica;
+  font-family: 'Montserrat-Bold', Helvetica;
   font-weight: 700;
   color: var(--color-dark);
   font-size: 25px;
@@ -439,7 +440,6 @@
   justify-content: center;
 }
 
-
 .about-faq-icon {
   width: 24px;
   height: 24px;
@@ -453,7 +453,7 @@
   margin-top: 10px;
 }
 
-/* Memory Section */
+/* ===== MEMORY SECTION ===== */
 .about-memory-section {
   display: flex;
   align-items: flex-start;
@@ -538,140 +538,25 @@
   white-space: nowrap;
 }
 
-/* Responsive Design */
-@media (max-width: 983px) {
-  .about-anonymity-image {
-    display: none;
-  }
-
-  .about-anonymity-content {
-    flex: 1;
-    width: 100%;
-    max-width: none;
-  }
+/* ===== LOGO VISIBILITY CONTROL ===== */
+.about-logo-mobile {
+  display: none;
 }
 
-/* @media (max-width: 1024px) {
-  .about-memory-section {
-    padding-right: var(--space-4);
-    gap: var(--space-6);
-  }
-  
-  .about-how-works-grid {
-    gap: var(--space-4);
-  }
-} */
-
-@media (max-width: 768px) {
-  .about-intro-content {
-    flex-direction: column;
-    gap: var(--space-4);
-    text-align: center;
-  }
-
-  .about-intro-header {
-    min-width: unset;
-    width: 100%;
-  }
-
-  .about-main-title {
-    font-size: var(--text-2xl);
-  }
-
-  .about-anonymity-section {
-    flex-direction: column;
-    gap: var(--space-4);
-  }
-
-  .about-anonymity-image {
-    width: 200px;
-    align-self: center;
-  }
-
-  .about-anonymity-content {
-    padding: 0;
-  }
-
-  .about-how-works-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .about-card-icon {
-    width: 60px;
-    height: 54px;
-    right: 15px;
-  }
-
-  .about-memory-section {
-    flex-direction: column;
-    padding: 0;
-    gap: 35px;
-    align-items: center;
-    text-align: center;
-  }
-  
-  .about-memory-content {
-    align-items: center;
-    text-align: center;
-    width: 100%;
-    max-width: 600px;
-  }
-
-  .about-brian-photo {
-    width: 200px;
-    height: 270px;
-  }
-  
-  .about-brian-section {
-    width: auto;
-    max-width: 280px;
-  }
-
-  .about-read-more .btn-learn-more {
-    width: 100%;
-    max-width: 300px;
-  }
+.about-logo-desktop {
+  display: block;
 }
 
-@media (max-width: 480px) {
-  .about-banner-section {
-    height: 180px;
-    margin-bottom: var(--space-4);
-  }
+/* ===== RESPONSIVE DESIGN ===== */
 
-  .about-main-title {
-    font-size: var(--text-xl);
-  }
-
-  .about-intro-image {
-    width: 180px;
-    height: 140px;
-  }
-
-  .about-card-title {
-    font-size: var(--text-lg);
-  }
-
-  .about-faq-title {
-    font-size: var(--text-lg);
-  }
-
-  .about-brian-photo {
-    width: 160px;
-    height: 216px;
-  }
-}
-
+/* Desktop Layout Adjustments */
 @media (max-width: 1380px) {
-  /* Match the Report Crime Example structure exactly */
   .about-intro-content {
     display: flex;
     gap: 10px;
-    align-items: center;
     position: relative;
   }
 
-  /* Left side div - like .div in example */
   .about-intro-header {
     height: 388px;
     position: relative;
@@ -680,7 +565,6 @@
     max-width: 600px;
   }
 
-  /* Header positioned absolutely at top - like .header in example */
   .about-main-title {
     position: absolute;
     top: 0;
@@ -688,11 +572,9 @@
     min-width: 390px;
     height: 190px;
     display: inline-flex;
-    align-items: center;
     gap: 10px;
   }
 
-  /* Paragraph positioned absolutely below header within the left container */
   .about-intro-content .paragraph-block {
     position: absolute;
     top: 200px;
@@ -703,7 +585,6 @@
     text-align: left;
   }
 
-  /* Right side - image wrapper like .mask-group-wrapper */
   .about-intro-image {
     flex: 1;
     height: 388px;
@@ -713,14 +594,28 @@
   }
 
   .about-handcuff-image {
-    width: 80%;
-    max-width: 340px;
+    width: 90%;
     object-fit: cover;
   }
 }
 
+@media (max-width: 1200px) {
+  .about-memory-section {
+    gap: 35px;
+    padding: 0 50px 0 0;
+  }
+
+  .about-faq-grid {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .faq-pair-container {
+    width: 100%;
+  }
+}
+
 @media (max-width: 1150px) {
-  /* Back to the working approach - vertical stacking */
   .about-intro-content {
     display: flex;
     flex-direction: column;
@@ -729,7 +624,6 @@
     position: relative;
   }
 
-  /* Header container with image positioned inside it */
   .about-intro-header {
     position: relative;
     height: 190px;
@@ -744,12 +638,11 @@
     flex-shrink: 0;
   }
 
-  /* Image positioned absolutely at the right of header container - can shrink */
   .about-intro-image {
     position: absolute;
     width: auto;
-    max-width: 247px;
-    height: 190px;
+    max-width: 367px;
+    height: 170px;
     top: 0;
     right: 0;
     display: flex;
@@ -759,12 +652,9 @@
   }
 
   .about-handcuff-image {
-    /*     width: clamp(150px, 20vw, 247px);
-    height: clamp(120px, 15vw, 190px); */
     object-fit: cover;
   }
 
-  /* Paragraph takes full width below */
   .about-intro-content .paragraph-block {
     position: static !important;
     top: auto !important;
@@ -776,132 +666,16 @@
   }
 }
 
-/* Memory section responsive layout */
-@media (max-width: 1200px) {
-  .about-memory-section {
-    gap: 35px;
-    padding: 0 50px 0 0;
-  }
-}
-
-/* Logo visibility control */
-.about-logo-mobile {
-  display: none;
-}
-
-.about-logo-desktop {
-  display: block;
-}
-
-@media (max-width: 1000px) {
-  .about-logo-desktop {
-    display: none;
-  }
-  
-  .about-logo-mobile {
-    display: block;
-    margin-top: 40px;
+@media (max-width: 1050px) and (min-width: 769px) {
+  .about-intro-header {
     width: 100%;
-    max-width: 100%;
-  }
-}
-
-@media (max-width: 980px) {
-  .about-memory-section {
-    gap: 25px;
-    padding: 0 20px 0 0;
-    align-items: flex-start;
-  }
-  
-  .about-memory-content {
-    justify-content: flex-start;
-  }
-  
-  .about-brian-section {
-    padding: 20px 20px 8px;
-  }
-  
-  .about-brian-photo {
-    width: 200px;
-    height: 270px;
-  }
-}
-
-@media (max-width: 840px) {
-  .about-memory-section {
-    flex-direction: column;
-    gap: 35px;
-    padding: 0;
-    align-items: center;
-    text-align: center;
-  }
-  
-  .about-memory-content {
-    align-items: center;
-    width: 100%;
-    max-width: 600px;
-  }
-  
-  .about-memory-content .paragraph-text {
-    text-align: left;
-  }
-  
-  .about-brian-section {
-    width: auto;
-    max-width: 280px;
-    align-self: center;
-  }
-}
-
-/* FAQ responsive layout */
-@media (max-width: 1200px) {
-  .about-faq-grid {
-    flex-direction: column;
-    gap: 20px;
-  }
-  
-  .faq-pair-container {
-    width: 100%;
-  }
-}
-
-/* Responsive card content */
-@media (max-width: 768px) {
-  .about-card-content {
-    padding: 8px 15px 0px;
-  }
-
-  .about-card-header {
-    height: auto;
-    min-height: 44px;
-  }
-
-  .about-card-header .about-card-title {
-    font-size: 24px;
-    line-height: 1.3;
-  }
-}
-
-@media (max-width: 480px) {
-  .about-card-content {
-    padding: 6px 10px 0px;
-  }
-
-  .about-card-header .about-card-title {
-    font-size: 20px;
-    line-height: 1.2;
-  }
-}
-
-@media (max-width: 940px) and (min-width: 769px) {
-  /* Hide image between 900px and 769px */
-  .about-intro-image {
-    display: none;
+    min-width: unset;
   }
 
   .about-how-works-grid {
     grid-template-columns: 1fr;
     gap: 35px;
+    width: 100%;
   }
 
   .reports-summary-container,
@@ -915,5 +689,324 @@
   .about-how-works-grid .about-work-card:nth-child(4) {
     grid-column: 1;
     grid-row: auto;
+    width: 100%;
+  }
+}
+
+@media (max-width: 1000px) {
+  .about-logo-desktop {
+    display: none;
+  }
+
+  .about-logo-mobile {
+    display: block;
+    margin-top: 40px;
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 940px) {
+  .about-anonymity-image {
+    display: none;
+  }
+
+  .about-anonymity-content {
+    width: 100%;
+  }
+
+  .about-memory-section {
+    width: 100%;
+  }
+
+  .about-anonymity-content {
+    flex: 1;
+    width: 100%;
+    max-width: none;
+  }
+}
+
+@media (max-width: 980px) {
+  .about-memory-section {
+    gap: 25px;
+    padding: 0 20px 0 0;
+    align-items: flex-start;
+  }
+
+  .about-memory-content {
+    justify-content: flex-start;
+  }
+
+  .about-brian-section {
+    padding: 20px 20px 8px;
+  }
+
+  .about-brian-photo {
+    width: 200px;
+    height: 270px;
+  }
+}
+
+@media (max-width: 950px) and (min-width: 769px) {
+  .about-intro-image {
+    display: none;
+  }
+}
+
+@media (max-width: 840px) {
+  .about-memory-section {
+    flex-direction: column;
+    gap: 35px;
+    padding: 0;
+    align-items: center;
+    text-align: center;
+  }
+
+  .about-memory-content {
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+  }
+
+  .about-memory-content .paragraph-text {
+    text-align: left;
+  }
+
+  .about-brian-section {
+    width: auto;
+    max-width: 280px;
+  }
+}
+
+@media (max-width: 768px) {
+  /* .section-title {
+    font-size: var(--text-2xl);
+  } */
+
+  .about-logo-desktop {
+    display: block;
+  }
+
+  .about-logo-mobile {
+    display: none;
+    /*     margin-top: 40px;
+    width: 100%;
+    max-width: 100%; */
+  }
+
+  .about-banner-section {
+    margin-bottom: 10px;
+  }
+
+  .about-intro-content {
+    flex-direction: column;
+    gap: 15px;
+    text-align: left;
+  }
+
+  .about-intro-header {
+    min-width: unset;
+    width: 100%;
+    margin-bottom: 0;
+    height: 100px;
+  }
+
+  .about-handcuff-image {
+    width: 60%;
+  }
+
+  .about-intro-image {
+    height: 100px;
+    margin-bottom: 10px;
+  }
+
+  .about-main-title {
+    font-size: 28px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 0;
+    height: auto;
+  }
+
+  .about-intro-content .paragraph-block {
+    margin-top: 0;
+  }
+
+  .page-about-us .paragraph-text {
+    font-size: 16px;
+  }
+
+  .about-anonymity-section {
+    flex-direction: row;
+    gap: 20px;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .about-anonymity-image {
+    display: block;
+    width: clamp(0px, 20vw, 150px);
+    flex-shrink: 1;
+    min-width: 0;
+  }
+
+  .about-anonymity-content {
+    padding: 0;
+    flex: none;
+    width: 100%;
+    max-width: 600px;
+  }
+
+  .about-how-works-grid {
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
+
+  .about-work-card {
+    width: 100%;
+  }
+
+  .reports-summary-container,
+  .awards-community-container {
+    width: 100%;
+  }
+
+  .about-card-content {
+    padding: 8px 15px 0px;
+    width: 100%;
+  }
+
+  .about-card-icon {
+    width: 60px;
+    height: 54px;
+    right: -5px;
+  }
+
+  .about-card-header {
+    height: auto;
+    min-height: 44px;
+    width: 100%;
+  }
+
+  .about-card-header .about-card-title {
+    font-size: 24px;
+    line-height: 1.3;
+  }
+
+  .about-memory-section {
+    flex-direction: row;
+    padding: 0;
+    gap: 35px;
+    align-items: start;
+    text-align: center;
+  }
+
+  .about-memory-content {
+    align-items: center;
+    text-align: center;
+    width: 100%;
+  }
+
+  .about-brian-photo {
+    width: 200px;
+    height: 270px;
+  }
+
+  .about-brian-section {
+    width: auto;
+    max-width: 280px;
+  }
+
+  .about-read-more .btn-learn-more {
+    width: fit-content;
+    min-width: 280px;
+    max-width: none;
+  }
+}
+
+@media (max-width: 570px) {
+  .about-logo-desktop {
+    display: none;
+  }
+
+  .about-logo-mobile {
+    display: block;
+  }
+
+  .about-memory-section {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-banner-section {
+    height: 180px;
+    margin-bottom: 0px;
+  }
+
+  .section-title {
+    font-size: var(--text-xl);
+  }
+
+  .about-intro-content {
+    gap: 12px;
+  }
+
+  .about-main-title {
+    font-size: 24px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 0;
+    height: auto;
+  }
+
+  .about-intro-image {
+    width: 200px;
+    height: 100px;
+    align-self: flex-start;
+    justify-content: right;
+  }
+
+  .about-intro-content .paragraph-block {
+    margin-top: 0;
+  }
+
+  .page-about-us .paragraph-text {
+    font-size: 16px;
+  }
+
+  .about-card-content {
+    padding: 6px 10px 0px;
+  }
+
+  .about-card-header .about-card-title {
+    font-size: 20px;
+    line-height: 1.2;
+  }
+
+  /*   .about-faq-title {
+    font-size: var(--text-lg);
+  } */
+
+  .about-brian-photo {
+    width: 160px;
+    height: 216px;
+  }
+}
+
+@media (max-width: 400px) {
+  .about-anonymity-image {
+    display: none;
+  }
+
+  .about-read-more .btn-learn-more {
+    width: fit-content;
+    min-width: 260px;
+    max-width: calc(100vw - 40px);
   }
 }
