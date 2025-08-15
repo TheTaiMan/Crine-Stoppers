@@ -1,0 +1,617 @@
+/* Submit Tip Page Styles */
+
+/* ===== BASE LAYOUT ===== */
+.page-submit-tip {
+  width: 100%;
+}
+
+/* Page-specific overrides */
+.page-submit-tip .section-title {
+  text-transform: none;
+}
+
+.page-submit-tip .paragraph-text {
+  font-size: 18px;
+  line-height: 1.53;
+  letter-spacing: -0.36px;
+}
+
+.page-submit-tip .paragraph-block {
+  max-width: none;
+}
+
+/* ===== BANNER SECTION ===== */
+.submit-tip-banner-section {
+  width: 100%;
+  height: 235px;
+  position: relative;
+  overflow: hidden;
+}
+
+.submit-tip-banner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.submit-tip-banner-image-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.submit-tip-banner-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* ===== MAIN CONTENT ===== */
+.submit-tip-content-block {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin: 0 auto;
+  width: 100%;
+  gap: 20px;
+}
+
+.submit-tip-left-side {
+  max-width: 471px;
+  min-width: 355px;
+  flex-shrink: 1;
+}
+
+.submit-tip-right-side {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.submit-tip-info-section {
+  max-width: 500px;
+  min-width: 436px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-top: 9px;
+}
+
+/* ===== SUBMIT TIP BUTTON ===== */
+
+.submit-tip-button-container {
+  margin-bottom: 20px;
+}
+
+.submit-tip-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 350px;
+  height: 70px;
+  /* padding: 0 12px 0 20px; */
+  padding-right: 12px;
+  background-color: var(--color-danger);
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.submit-tip-button:hover {
+  background-color: var(--color-danger-dark);
+  transform: translateY(-2px);
+}
+
+.page-submit-tip .submit-tip-button-text {
+  font-family: var(--font-primary);
+  font-weight: 700;
+  color: var(--color-light);
+  font-size: 24px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: 35px;
+  flex: 1;
+}
+
+
+.submit-tip-button-arrow {
+  width: 50px;
+  height: 50px;
+  background-color: var(--color-light);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.submit-tip-arrow-icon {
+  width: 38px;
+  height: 42px;
+  filter: invert(0);
+}
+
+/* ===== RIGHT SIDE - CALL SECTION ===== */
+.submit-tip-call-section {
+  background-color: var(--color-dark);
+  border-radius: 16px;
+  padding: 20px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+}
+
+.submit-tip-call-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 58px;
+}
+
+.submit-tip-call-title {
+  font-family: var(--font-primary);
+  font-weight: 800;
+  color: var(--color-light);
+  font-size: 40px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: 58.4px;
+  margin: 0;
+}
+
+.submit-tip-phone-options {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: nowrap;
+  gap: 20px;
+  text-align: left;
+  font-size: 10px;
+}
+
+.submit-tip-phone-card {
+  flex: 1;
+  border-radius: 16px;
+  background-color: var(--color-light);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  min-width: 188px;
+  max-width: 200px;
+  box-shadow: var(--shadow-md);
+  text-align: left;
+  font-size: 10px;
+  color: var(--color-light);
+  font-family: 'Montserrat', var(--font-primary);
+}
+
+.submit-tip-copy-button-wrapper {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 4px 4px 0px;
+}
+
+.submit-tip-copy-button {
+  width: auto;
+  border-radius: 14px;
+  background-color: var(--color-accent);
+  height: 25px;
+  overflow: visible;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 3px 8px 3px 3px;
+  box-sizing: border-box;
+  min-width: 60px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+  font-size: 10px;
+  color: var(--color-light);
+  font-family: 'Montserrat', var(--font-primary);
+}
+
+.submit-tip-copy-button:hover {
+  background-color: var(--color-accent-dark);
+  transform: translateY(-1px);
+}
+
+.submit-tip-copy-button.copied {
+  background-color: var(--color-primary);
+}
+
+.submit-tip-copy-icon {
+  width: 20px;
+  position: relative;
+  height: 20px;
+}
+
+.submit-tip-copy-text {
+  flex: 1;
+  position: relative;
+  letter-spacing: -0.02em;
+  line-height: 153%;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.submit-tip-card-content {
+  align-self: stretch;
+  background-color: var(--color-light);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0px 0px 10px;
+  gap: 10px;
+  text-align: center;
+  font-size: 15px;
+  color: var(--color-dark);
+}
+
+.submit-tip-card-header {
+  align-self: stretch;
+  position: relative;
+  letter-spacing: -0.02em;
+  line-height: 153%;
+  font-weight: var(--font-weight-bold);
+}
+
+.submit-tip-card-phone {
+  align-self: stretch;
+  position: relative;
+  font-size: 23px;
+  letter-spacing: -0.02em;
+  line-height: 153%;
+  font-weight: var(--font-weight-bold);
+}
+
+.submit-tip-card-description {
+  align-self: stretch;
+  position: relative;
+  font-size: 12px;
+  letter-spacing: -0.02em;
+  line-height: 153%;
+  font-weight: var(--font-weight-bold);
+}
+
+.submit-tip-call-description {
+  margin-top: 10px;
+  max-width: 415px;
+}
+
+.submit-tip-call-text {
+  font-family: var(--font-secondary);
+  font-weight: 500;
+  color: var(--color-light);
+  font-size: 18px;
+  letter-spacing: -0.36px;
+  line-height: 27.5px;
+  text-align: left;
+  margin: 0;
+}
+
+.submit-tip-never {
+  text-decoration: underline;
+  letter-spacing: -0.06px;
+}
+
+/* ===== REWARD SECTION ===== */
+.submit-tip-reward-section {
+  position: relative;
+  height: 123px;
+  width: 100%;
+}
+
+.submit-tip-reward-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 500px;
+  /* height: 100%; */
+  padding: 15px 15px 15px 20px;
+  background-color: var(--color-primary);
+  border-radius: 16px;
+  position: relative;
+}
+
+.submit-tip-reward-text {
+  flex: 1;
+  max-width: 460px;
+}
+
+.submit-tip-reward-description {
+  font-family: var(--font-secondary);
+  font-weight: 600;
+  color: var(--color-dark);
+  font-size: 20px;
+  letter-spacing: -0.4px;
+  line-height: 30.6px;
+  margin: 0;
+}
+
+.submit-tip-reward-icon {
+  position: absolute;
+  right: 15px;
+  bottom: 15px;
+  width: 89px;
+  height: 89px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.submit-tip-money-icon {
+  width: 89px;
+  height: 89px;
+  object-fit: contain;
+}
+
+@media (max-width: 1140px) {
+  .submit-tip-left-side {
+    max-width: 335px;
+    flex-shrink: 1;
+  }
+  .submit-tip-info-section {
+    min-width: 100%;
+  }
+  .submit-tip-phone-options {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 970px) {
+  .submit-tip-left-side {
+    max-width: 100%;
+    flex-shrink: 1;
+  }
+  .submit-tip-content-block {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .submit-tip-phone-options {
+    flex-direction: row;
+  }
+
+  .submit-tip-content-block .paragraph-block {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .submit-tip-info-section {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .submit-tip-reward-content {
+    width: 100%;
+  }
+
+  .submit-tip-reward-content {
+    max-width: 100%;
+  }
+
+  .submit-tip-reward-text {
+    max-width: 100%;
+  }
+
+  .submit-tip-info-section {
+    padding-top: 0px;
+  }
+
+}
+
+@media (max-width: 768px) {
+  .submit-tip-banner-section {
+    height: 235px;
+  }
+
+  .submit-tip-content-block {
+    gap: 30px;
+  }
+
+  .page-submit-tip .submit-tip-button-text {
+    font-size: 24px;
+    line-height: 35px;
+  }
+
+  .submit-tip-button {
+    max-width: 280px;
+  }
+
+
+  .submit-tip-button-arrow {
+    width: 50px;
+    height: 50px;
+  }
+
+  .submit-tip-arrow-icon {
+    width: 28px;
+    height: 30px;
+  }
+
+  .submit-tip-call-description {
+    max-width: 372px;
+  }
+
+  .submit-tip-call-section {
+    align-items: center;
+    padding: 15px 20px;
+  }
+
+  .submit-tip-call-title {
+    font-size: 32px;
+    line-height: 46px;
+  }
+
+  .submit-tip-phone-options {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: var(--space-3);
+    align-items: center;
+    justify-content: center;
+  }
+
+  .submit-tip-phone-card {
+    flex: 1;
+    max-width: 180px;
+    min-width: 140px;
+  }
+
+  .submit-tip-copy-button {
+    width: auto;
+    height: 22px;
+    min-width: 50px;
+    padding: 2px 6px 2px 2px;
+  }
+
+  .submit-tip-copy-icon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .submit-tip-card-content {
+    font-size: 12px;
+  }
+
+  .submit-tip-card-header {
+    font-size: 12px;
+  }
+
+  .submit-tip-card-phone {
+    font-size: 18px;
+  }
+
+  .submit-tip-card-description {
+    font-size: 10px;
+  }
+
+  .submit-tip-reward-content {
+    display: flex;
+    padding: 12px 12px 12px 15px;
+    height: auto;
+    min-height: 100px;
+  }
+
+  .submit-tip-reward-icon {
+    width: 70px;
+    height: 70px;
+  }
+
+  .submit-tip-money-icon {
+    width: 70px;
+    height: 70px;
+  }
+
+  .submit-tip-reward-section .submit-tip-reward-description {
+    font-size: 18px;
+    line-height: 27px;
+  }
+
+  .page-submit-tip .paragraph-text {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .submit-tip-call-text {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .submit-tip-content-block {
+    gap: 25px;
+  }
+
+  .submit-tip-button {
+    height: 60px;
+    padding: 0 8px 0 15px;
+  }
+
+  .page-submit-tip .submit-tip-button-text {
+    font-size: 20px;
+    line-height: 28px;
+  }
+
+  .submit-tip-button-arrow {
+    width: 40px;
+    height: 40px;
+  }
+
+  .submit-tip-arrow-icon {
+    width: 32px;
+  }
+}
+
+@media (max-width: 480px) {
+  .submit-tip-banner-section {
+    height: 200px;
+  }
+  /* 
+  .submit-tip-call-section {
+    padding: 12px 15px;
+  } */
+
+  /*   .submit-tip-call-title {
+    font-size: 28px;
+    line-height: 40px;
+  } */
+
+  /*   .submit-tip-phone-options {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  } */
+
+  /*   .submit-tip-phone-card {
+    min-width: auto;
+    max-width: none;
+  } */
+
+  /*   .submit-tip-call-text {
+    font-size: 16px;
+    line-height: 24px;
+  } */
+
+  .submit-tip-reward-content {
+    flex-direction: column;
+    text-align: left;
+    padding: 15px;
+    gap: 10px;
+  }
+
+  .submit-tip-reward-icon {
+    position: static;
+    width: 60px;
+    height: 60px;
+    margin: 0 auto;
+  }
+
+  .submit-tip-money-icon {
+    width: 60px;
+    height: 60px;
+  }
+
+  .submit-tip-reward-description {
+    font-size: 16px;
+    line-height: 24px;
+  }
+}

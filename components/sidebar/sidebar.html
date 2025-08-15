@@ -94,8 +94,8 @@
     </nav>
     
     <!-- Submit Tip Button (Desktop) -->
-    <div class="sidebar-submit-tip-section" x-show="showSidebarTipButton">
-        <button class="submit-tip-button-desktop" onclick="navigateTo('/submit-tip')">
+    <div class="sidebar-submit-tip-section" x-show="showSidebarTipButton && currentPage !== 'submit_tip'">
+        <button class="submit-tip-button-desktop" @click="navigateTo('#submit_tip')" onclick="window.navigateTo('#submit_tip');">
             <span class="submit-tip-button-text">SUBMIT A TIP</span>
         </button>
     </div>

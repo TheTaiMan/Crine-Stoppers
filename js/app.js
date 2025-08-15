@@ -173,6 +173,9 @@ function app() {
             // Special case for donate page (not in navigation but still a valid page)
             if (hash === '#donate') return 'donate';
             
+            // Special case for submit_tip page (not in navigation but still a valid page)
+            if (hash === '#submit_tip') return 'submit_tip';
+            
             const page = this.navigation.find(nav => nav.path === hash);
             return page ? page.id : null;
         },
@@ -181,6 +184,9 @@ function app() {
         getHashFromPageId(pageId) {
             // Special case for donate page
             if (pageId === 'donate') return '#donate';
+            
+            // Special case for submit_tip page
+            if (pageId === 'submit_tip') return '#submit_tip';
             
             const page = this.navigation.find(nav => nav.id === pageId);
             return page ? page.path : '#home';
@@ -272,6 +278,15 @@ function app() {
                                 }
                             }, 1000);
                         }
+                        
+                        // Initialize submit tip copy buttons if this is the submit_tip page
+                        if (pageId === 'submit_tip') {
+                            setTimeout(() => {
+                                if (window.initSubmitTipButtons) {
+                                    window.initSubmitTipButtons();
+                                }
+                            }, 100);
+                        }
                     });
                     return;
                 }
@@ -312,6 +327,15 @@ function app() {
                                 this.setupBannerVisibilityObserver();
                             }
                         }, 1000);
+                    }
+                    
+                    // Initialize submit tip copy buttons if this is the submit_tip page
+                    if (pageId === 'submit_tip') {
+                        setTimeout(() => {
+                            if (window.initSubmitTipButtons) {
+                                window.initSubmitTipButtons();
+                            }
+                        }, 100);
                     }
                 });
                 
