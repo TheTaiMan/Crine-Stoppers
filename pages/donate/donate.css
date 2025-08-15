@@ -40,7 +40,7 @@
 
 .section-title {
   font-family: var(--font-primary);
-  font-size: var(--text-3xl);
+  font-size: 40px;
   font-weight: var(--font-weight-black);
   color: var(--color-dark);
   letter-spacing: 0;
