@@ -100,7 +100,28 @@
             </div>
             
             <!-- Mobile Navigation -->
-            <nav class="mobile-sidebar-nav" x-data="{ openSubMenuId: null }">
+            <nav class="mobile-sidebar-nav" x-data="{ 
+                openSubMenuId: null,
+                previousSubMenuId: null,
+                toggleSubmenu(pageId) {
+                    if (this.openSubMenuId === pageId) {
+                        // Closing current submenu
+                        this.openSubMenuId = null;
+                        this.previousSubMenuId = null;
+                    } else {
+                        // Store previous submenu ID
+                        this.previousSubMenuId = this.openSubMenuId;
+                        // Opening new submenu - open immediately for smooth transition
+                        this.openSubMenuId = pageId;
+                        // Close previous submenu after delay to show the effect
+                        if (this.previousSubMenuId && this.previousSubMenuId !== pageId) {
+                            setTimeout(() => {
+                                this.previousSubMenuId = null;
+                            }, 50); // 50ms delay to see the transition
+                        }
+                    }
+                }
+            }">
                 <div class="mobile-nav-group">
                     <template x-for="page in navigation" :key="page.id">
                         <div class="mobile-nav-item-wrapper">
@@ -132,7 +153,7 @@
                                 <!-- Expand/Collapse Arrow Button (only show if page has sections) -->
                                 <button 
                                     x-show="page.sections && page.sections.length > 0"
-                                    @click="openSubMenuId = (openSubMenuId === page.id) ? null : page.id"
+                                    @click="toggleSubmenu(page.id)"
                                     class="mobile-nav-arrow-btn"
                                     :class="{ 'expanded': openSubMenuId === page.id }"
                                     :title="openSubMenuId === page.id ? 'Collapse ' + page.name : 'Expand ' + page.name"
@@ -145,7 +166,7 @@
                             
                             <!-- Mobile Sub-navigation -->
                             <div 
-                                x-show="openSubMenuId === page.id && page.sections && page.sections.length > 0"
+                                x-show="(openSubMenuId === page.id || previousSubMenuId === page.id) && page.sections && page.sections.length > 0"
                                 x-transition:enter="transition ease-out duration-150"
                                 x-transition:enter-start="opacity-0 transform -translate-y-2"
                                 x-transition:enter-end="opacity-100 transform translate-y-0"
@@ -182,7 +203,7 @@
             
             <!-- Mobile Action Buttons -->
             <div class="mobile-nav-buttons" :class="{ 'donate-hidden': currentPage === 'donate' }">
-                <div class="mobile-submit-tip-button" x-show="showMobileTipButton">
+                <div class="mobile-submit-tip-button" x-show="showMobileTipButton && currentPage !== 'submit_tip'">
                     <button class="mobile-submit-tip-button-bg" @click.prevent="navigateTo('#submit_tip'); closeMobileNav();" onclick="window.navigateTo('#submit_tip');">
                         <span class="mobile-submit-tip-button-text">SUBMIT A TIP</span>
                     </button>
