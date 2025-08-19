@@ -1,190 +1,199 @@
-/* Page-specific styles */
-.page-intro {
-    font-size: var(--text-lg);
-    color: var(--color-accent);
-    text-align: center;
-    max-width: 600px;
-    margin: 0 auto var(--space-6);
-}
-
-.prevention-categories {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: var(--space-5);
-    margin-top: var(--space-5);
-}
-
-.prevention-card {
-    
-    padding: var(--space-5);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-md);
-    border-top: 4px solid var(--color-primary);
-}
-
-.prevention-card h3 {
-    color: var(--color-dark);
-    margin-bottom: var(--space-4);
-}
-
-.prevention-card ul {
-    list-style: none;
-    padding: 0;
-}
-
-.prevention-card li {
-    padding: var(--space-2) 0;
-    border-bottom: 1px solid #eee;
+/* Resources Page Styles - Following example structure exactly */
+.page-resources .content {
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+    align-items: center;
+    gap: 10px;
     position: relative;
-    padding-left: var(--space-4);
+    margin: 0 auto;
 }
 
-.prevention-card li:before {
-    content: '✓';
-    position: absolute;
-    left: 0;
-    color: var(--color-primary);
-    font-weight: bold;
+.page-resources .content .header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+    align-self: stretch;
+    width: 100%;
+    flex: 0 0 auto;
 }
 
-.prevention-card li:last-child {
-    border-bottom: none;
+.page-resources .content .text-wrapper {
+    position: relative;
+    flex: 1;
+    margin-top: -1px;
+    font-family: 'Montserrat-Black', Helvetica;
+    font-weight: 900;
+    color: var(--color-dark);
+    font-size: 40px;
+    letter-spacing: 0;
+    line-height: 58.4px;
 }
 
-.safety-tips-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: var(--space-5);
-    margin-top: var(--space-5);
-}
-
-.tip-category {
-    
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    box-shadow: var(--shadow-md);
-}
-
-.tip-category h3 {
-    background: var(--color-primary);
-    color: var(--color-light);
-    padding: var(--space-4);
-    margin: 0;
-    text-align: center;
-}
-
-.tip-list {
-    padding: var(--space-4);
-}
-
-.tip-item {
-    padding: var(--space-3) 0;
-    border-bottom: 1px solid #eee;
-}
-
-.tip-item:last-child {
-    border-bottom: none;
-}
-
-.tip-item h4 {
-    color: var(--color-accent);
-    margin-bottom: var(--space-2);
-    font-size: var(--text-lg);
-}
-
-.tip-item p {
-    margin: 0;
-    font-size: var(--text-base);
-    line-height: 1.5;
-}
-
-.programs-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: var(--space-5);
-    margin-top: var(--space-5);
-}
-
-.program-card {
-    
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    box-shadow: var(--shadow-md);
-    transition: transform 0.2s ease;
-}
-
-.program-card:hover {
-    transform: translateY(-4px);
-}
-
-.program-header {
-    background: var(--color-dark);
-    padding: var(--space-4);
-}
-
-.program-header h3 {
-    color: var(--color-light);
-    margin: 0;
-    text-align: center;
-}
-
-.program-content {
-    padding: var(--space-4);
-}
-
-.program-content p {
-    margin-bottom: var(--space-4);
-    font-size: var(--text-base);
-    line-height: 1.6;
-}
-
-.program-features {
+.page-resources .content .frame {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--space-2);
+    gap: 20px;
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    justify-content: flex-start;
 }
 
-.feature-tag {
-    background: var(--color-secondary);
-    color: var(--color-dark);
-    padding: var(--space-1) var(--space-3);
-    border-radius: var(--radius-full);
-    font-size: var(--text-sm);
-    font-weight: var(--font-weight-medium);
+.page-resources .content .resources-card,
+.page-resources .content .resources-card-2,
+.page-resources .content .resources-card-3,
+.page-resources .content .resources-card-4 {
+    position: relative;
+    flex: 1 1 320px;
+    min-width: 320px;
+    max-width: none;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 0px 0px 15px;
+    background-color: var(--color-dark);
+    border-radius: 16px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.program-contact {
-    margin-top: var(--space-6);
-    text-align: center;
-    padding: var(--space-5);
-    
-    border-radius: var(--radius-lg);
+.page-resources .content .resources-card:hover,
+.page-resources .content .resources-card-2:hover,
+.page-resources .content .resources-card-3:hover,
+.page-resources .content .resources-card-4:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
 }
 
-.program-contact h3 {
-    color: var(--color-primary);
-    margin-bottom: var(--space-3);
+
+.page-resources .content .photo {
+    position: relative;
+    align-self: stretch;
+    width: 100%;
+    height: 195px;
+    object-fit: cover;
+    object-position: center;
 }
 
-.program-contact p {
-    margin-bottom: var(--space-4);
-    font-size: var(--text-lg);
+.page-resources .content .div {
+    padding: 0px 12px;
+    align-self: stretch;
+    width: 100%;
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
+    gap: 5px;
 }
 
-.contact-actions {
-    margin-top: var(--space-4);
+.page-resources .content .header-2 {
+    position: relative;
+    flex: 1;
+    margin-top: -1px;
+    font-family: 'Montserrat-Bold', Helvetica;
+    font-weight: 700;
+    color: var(--variable-collection-cool-white);
+    font-size: 30px;
+    letter-spacing: 0;
+    line-height: 43.8px;
 }
 
+.page-resources .content .paragraph-content {
+    display: flex;
+    max-width: 500px;
+    align-items: flex-start;
+    gap: 10px;
+    position: relative;
+    width: 100%;
+    flex: 0 0 auto;
+}
+
+.page-resources .content .paragraph-wrapper {
+    gap: 10px;
+    flex: 1;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
+}
+
+.page-resources .content .paragraph {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    position: relative;
+    align-self: stretch;
+    width: 100%;
+    flex: 0 0 auto;
+}
+
+.page-resources .content .lorem-ipsum-dolor {
+    position: relative;
+    flex: 1;
+    margin-top: -1px;
+    font-family: 'Hind', Helvetica;
+    font-weight: 400;
+    color: var(--color-light);
+    font-size: 18px;
+    letter-spacing: -0.2px;
+    line-height: 27px;
+}
+
+/* Ensure proper colors for resource cards */
+.page-resources .content .resources-card,
+.page-resources .content .resources-card-2,
+.page-resources .content .resources-card-3,
+.page-resources .content .resources-card-4 {
+    background-color: var(--color-dark);
+}
+
+.page-resources .content .header-2 {
+    color: var(--color-light);
+}
+
+.page-resources .content .lorem-ipsum-dolor {
+    color: var(--color-light);
+}
+
+/* Responsive Design */
 @media (max-width: 768px) {
-    .prevention-categories,
-    .safety-tips-grid,
-    .programs-grid {
-        grid-template-columns: 1fr;
+    .page-resources .content .resources-card,
+    .page-resources .content .resources-card-2,
+    .page-resources .content .resources-card-3,
+    .page-resources .content .resources-card-4 {
+        flex: 1 1 calc(50% - 10px);
+        max-width: none;
+        min-width: 280px;
+        min-height: 250px;
     }
     
-    .prevention-card,
-    .tip-category,
-    .program-card {
-        margin-bottom: var(--space-4);
+    .page-resources .content .frame {
+        justify-content: center;
+        gap: 16px;
+    }
+    
+    .page-resources .content .text-wrapper {
+        font-size: var(--text-2xl); /* 25px */
+    }
+    
+    .page-resources .content .header-2 {
+        font-size: var(--text-xl); /* 20px */
+        line-height: 1.2;
+    }
+    
+    .page-resources .content .lorem-ipsum-dolor {
+        font-size: 16px;
+        line-height: 1.4;
+    }
+    
+    .page-resources .content .photo {
+        height: 140px;
     }
 }
