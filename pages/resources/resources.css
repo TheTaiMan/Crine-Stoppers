@@ -23,12 +23,12 @@
     position: relative;
     flex: 1;
     margin-top: -1px;
-    font-family: 'Montserrat-Black', Helvetica;
+    font-family: var(--font-primary);
     font-weight: var(--font-weight-black);
     color: var(--color-dark);
-    font-size: 40px;
+    font-size: var(--text-4xl);
     letter-spacing: 0;
-    line-height: 58.4px;
+    line-height: 1.46;
 }
 
 .page-resources .content .frame {
@@ -188,7 +188,7 @@
     }
     
     .page-resources .content .text-wrapper {
-        font-size: var(--text-2xl); /* 25px */
+        font-size: var(--text-2xl);
     }
     
     .page-resources .content .header-2 {
