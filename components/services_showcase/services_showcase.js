@@ -62,6 +62,13 @@ function servicesShowcase() {
             
             console.log('✅ On home page - Services Showcase initializing with simple width control...');
             
+            // Reset component state for fresh initialization
+            this.currentIndex = 0;
+            this.isPaused = false;
+            this.pauseReasons.clear();
+            this.youtubeIsPlaying = false;
+            this.progressWidth = 100;
+            
             // Mark component as active
             this.isActive = true;
             
@@ -367,14 +374,37 @@ function servicesShowcase() {
         },
 
         setupYouTubePlayer() {
+            console.log('📺 setupYouTubePlayer called - checking if component is active:', this.isActive);
+            
+            // Don't set up players if component is not active
+            if (!this.isActive) {
+                console.log('❌ Component not active - skipping YouTube player setup');
+                return;
+            }
+            
             // Wait a bit for DOM to be ready
             setTimeout(() => {
-                this.createYouTubePlayerInstances();
+                if (this.isActive) { // Double-check before creating instances
+                    this.createYouTubePlayerInstances();
+                } else {
+                    console.log('❌ Component became inactive - canceling YouTube player setup');
+                }
             }, 500);
         },
 
         createYouTubePlayerInstances() {
             console.log('📺 Setting up YouTube player instances...');
+            
+            // Ensure youtubePlayers map is initialized fresh
+            if (!this.youtubePlayers) {
+                this.youtubePlayers = new Map();
+            } else {
+                // Clear any existing players that might still be around
+                this.youtubePlayers.clear();
+            }
+            
+            // Reset YouTube playing state
+            this.youtubeIsPlaying = false;
             
             // Find all YouTube iframes
             const youtubeIframes = this.$el.querySelectorAll('iframe[src*="youtube.com"]');
@@ -383,7 +413,7 @@ function servicesShowcase() {
             youtubeIframes.forEach((iframe, index) => {
                 // Give iframe an ID if it doesn't have one
                 if (!iframe.id) {
-                    iframe.id = `youtube-player-${index}`;
+                    iframe.id = `youtube-player-${Date.now()}-${index}`; // Use timestamp to ensure uniqueness
                 }
                 
                 console.log(`📺 Creating YT.Player for iframe ID: ${iframe.id}`);
@@ -391,12 +421,17 @@ function servicesShowcase() {
                 try {
                     const player = new YT.Player(iframe.id, {
                         events: {
-                            'onStateChange': (event) => this.onYouTubeStateChange(event, index)
+                            'onReady': (event) => {
+                                console.log(`📺 YouTube player ${iframe.id} is ready`);
+                            },
+                            'onStateChange': (event) => {
+                                console.log(`📺 YouTube player ${iframe.id} state change:`, event.data);
+                                this.onYouTubeStateChange(event, index);
+                            }
                         }
                     });
                     
                     // Store player reference
-                    if (!this.youtubePlayers) this.youtubePlayers = new Map();
                     this.youtubePlayers.set(iframe.id, player);
                     
                     console.log(`✅ YouTube player created successfully for ${iframe.id}`);
@@ -591,7 +626,18 @@ function servicesShowcase() {
                 this.lastVideoStates.clear();
             }
             
+            // Properly destroy YouTube players before clearing the map
             if (this.youtubePlayers) {
+                this.youtubePlayers.forEach((player, playerId) => {
+                    try {
+                        if (player && typeof player.destroy === 'function') {
+                            console.log(`📺 Destroying YouTube player: ${playerId}`);
+                            player.destroy();
+                        }
+                    } catch (error) {
+                        console.warn(`⚠️ Error destroying YouTube player ${playerId}:`, error);
+                    }
+                });
                 this.youtubePlayers.clear();
             }
         }
