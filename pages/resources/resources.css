@@ -24,7 +24,7 @@
     flex: 1;
     margin-top: -1px;
     font-family: 'Montserrat-Black', Helvetica;
-    font-weight: 900;
+    font-weight: var(--font-weight-black);
     color: var(--color-dark);
     font-size: 40px;
     letter-spacing: 0;
