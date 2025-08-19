@@ -77,10 +77,10 @@ function app() {
                 path: '#resources',
                 icon: 'resources_icon.svg',
                 sections: [
-                    { id: 'crime-prevention', title: 'Wanted' },
-                    { id: 'safety-tips', title: 'Countraband Tobacco' },
-                    { id: 'community-programs', title: 'Important Numbers' },
-                    { id: 'community-program1s', title: 'Links' }
+                    { id: 'resources-wanted', title: 'Wanted' },
+                    { id: 'resources-contraband-tobacco', title: 'Countraband Tobacco' },
+                    { id: 'resources-important-numbers', title: 'Important Numbers' },
+                    { id: 'resources-links', title: 'Links' }
                 ]
             },
             {

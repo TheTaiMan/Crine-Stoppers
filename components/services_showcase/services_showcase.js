@@ -305,6 +305,9 @@ function servicesShowcase() {
             if (index !== this.currentIndex) {
                 console.log(`🔄 Switching from service ${this.currentIndex} to ${index}`);
                 
+                // Pause any currently playing videos before switching
+                this.pauseAllCurrentVideos();
+                
                 // Clear video-related pause reasons
                 this.resumeTimer('video-playing');
                 this.resumeTimer('youtube-interaction');
@@ -328,6 +331,10 @@ function servicesShowcase() {
         nextService() {
             const nextIndex = (this.currentIndex + 1) % this.services.length;
             console.log(`⏭️ Auto-advancing to service: ${nextIndex}`);
+            
+            // Pause any currently playing videos before auto-advancing
+            this.pauseAllCurrentVideos();
+            
             this.selectService(nextIndex);
         },
 
@@ -481,6 +488,48 @@ function servicesShowcase() {
                     console.log('📹 YouTube video unstarted');
                     break;
             }
+        },
+
+        // =============== VIDEO PAUSE FUNCTIONALITY ===============
+        pauseAllCurrentVideos() {
+            console.log('🎬 Pausing all videos...');
+            
+            // Pause ALL HTML5 videos - search in multiple ways
+            const allVideos = document.querySelectorAll('.services-showcase video');
+            console.log(`Found ${allVideos.length} HTML5 videos in services showcase`);
+            
+            allVideos.forEach((video, index) => {
+                console.log(`Video ${index}: paused=${video.paused}, currentTime=${video.currentTime}`);
+                if (!video.paused) {
+                    video.pause();
+                    console.log(`⏸️ Paused HTML5 video ${index}`);
+                } else {
+                    console.log(`✅ HTML5 video ${index} already paused`);
+                }
+            });
+            
+            // Also try searching within this component specifically
+            const componentVideos = this.$el.querySelectorAll('video');
+            console.log(`Found ${componentVideos.length} videos within component`);
+            
+            componentVideos.forEach((video, index) => {
+                if (!video.paused) {
+                    video.pause();
+                    console.log(`⏸️ Paused component video ${index}`);
+                }
+            });
+            
+            // Pause ALL YouTube videos
+            this.youtubePlayers.forEach((player, playerId) => {
+                try {
+                    if (player && typeof player.pauseVideo === 'function') {
+                        player.pauseVideo();
+                        console.log('⏸️ Paused YouTube video:', playerId);
+                    }
+                } catch (error) {
+                    console.warn('⚠️ Could not pause YouTube video:', error);
+                }
+            });
         },
 
         // =============== DIRECT VIDEO EVENT LISTENERS ===============
