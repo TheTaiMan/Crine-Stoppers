@@ -77,10 +77,10 @@ function app() {
                 path: '#resources',
                 icon: 'resources_icon.svg',
                 sections: [
-                    { id: 'resources-wanted', title: 'Wanted' },
-                    { id: 'resources-contraband-tobacco', title: 'Countraband Tobacco' },
-                    { id: 'resources-important-numbers', title: 'Important Numbers' },
-                    { id: 'resources-links', title: 'Links' }
+                    { id: 'wanted', title: 'Wanted', path: '#wanted' },
+                    { id: 'contraband-tobacco', title: 'Contraband Tobacco', path: '#contraband-tobacco' },
+                    { id: 'important-numbers', title: 'Important Numbers', path: '#important-numbers' },
+                    { id: 'links', title: 'Links', path: '#links' }
                 ]
             },
             {
@@ -176,6 +176,12 @@ function app() {
             // Special case for submit_tip page (not in navigation but still a valid page)
             if (hash === '#submit_tip') return 'submit_tip';
             
+            // Special cases for resource subpages
+            if (hash === '#wanted') return 'wanted';
+            if (hash === '#contraband-tobacco') return 'contraband-tobacco';
+            if (hash === '#important-numbers') return 'important-numbers';
+            if (hash === '#links') return 'links';
+            
             const page = this.navigation.find(nav => nav.path === hash);
             return page ? page.id : null;
         },
@@ -187,6 +193,12 @@ function app() {
             
             // Special case for submit_tip page
             if (pageId === 'submit_tip') return '#submit_tip';
+            
+            // Special cases for resource subpages
+            if (pageId === 'wanted') return '#wanted';
+            if (pageId === 'contraband-tobacco') return '#contraband-tobacco';
+            if (pageId === 'important-numbers') return '#important-numbers';
+            if (pageId === 'links') return '#links';
             
             const page = this.navigation.find(nav => nav.id === pageId);
             return page ? page.path : '#home';
@@ -542,6 +554,11 @@ function app() {
             return this.navigation.find(nav => nav.id === this.currentPage);
         },
         
+        // Check if current page is a resource subpage
+        isResourceSubpage() {
+            return ['wanted', 'contraband-tobacco', 'important-numbers', 'links'].includes(this.currentPage);
+        },
+        
         // Check if sidebar tip button should be visible
         shouldShowSidebarTipButton() {
             // Always show on non-home pages
@@ -694,5 +711,16 @@ window.shouldShowSidebarTipButton = function() {
     } else {
         console.error('App instance not found for shouldShowSidebarTipButton check');
         return true; // Default to showing the button if function is not accessible
+    }
+};
+
+// Make isResourceSubpage available globally
+window.isResourceSubpage = function() {
+    const appElement = document.querySelector('body[x-data]');
+    if (appElement && appElement.__x && appElement.__x.$data) {
+        return appElement.__x.$data.isResourceSubpage();
+    } else {
+        console.error('App instance not found for isResourceSubpage check');
+        return false; // Default to false if function is not accessible
     }
 };

@@ -103,10 +103,11 @@
 .page-resources .content .header-2 {
     position: relative;
     flex: 1;
+    margin: 0;
     margin-top: -1px;
     font-family: 'Montserrat-Bold', Helvetica;
     font-weight: 700;
-    color: var(--variable-collection-cool-white);
+    color: var(--color-light);
     font-size: 30px;
     letter-spacing: 0;
     line-height: 43.8px;
@@ -192,7 +193,7 @@
     }
     
     .page-resources .content .header-2 {
-        font-size: var(--text-xl); /* 20px */
+        font-size: 20px;
         line-height: 1.2;
     }
     
@@ -205,3 +206,4 @@
         height: 140px;
     }
 }
+

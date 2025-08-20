@@ -47,7 +47,7 @@
                         <div 
                             x-show="page.sections && page.sections.length > 0"
                             class="nav-arrow-indicator"
-                            :class="{ 'expanded': hoveredItemId === page.id || currentPage === page.id || clickedItemId === page.id }"
+                            :class="{ 'expanded': hoveredItemId === page.id || currentPage === page.id || clickedItemId === page.id || (page.id === 'resources' && isResourceSubpage()) }"
                             @click.stop="if (isTouchDevice) { 
                                 clickedItemId = clickedItemId === page.id ? null : page.id; 
                                 touchBlocked = true; 
@@ -67,7 +67,7 @@
                     
                     <!-- Sub-navigation (Table of Contents) -->
                     <div 
-                        x-show="(currentPage === page.id || hoveredItemId === page.id || clickedItemId === page.id) && page.sections && page.sections.length > 0"
+                        x-show="(currentPage === page.id || hoveredItemId === page.id || clickedItemId === page.id || (page.id === 'resources' && isResourceSubpage())) && page.sections && page.sections.length > 0"
                         x-transition:enter="transition ease-out duration-150"
                         x-transition:enter-start="opacity-0 transform -translate-y-2"
                         x-transition:enter-end="opacity-100 transform translate-y-0"
@@ -78,10 +78,10 @@
                     >
                         <template x-for="section in page.sections" :key="section.id">
                             <a 
-                                :href="`#${section.id}`"
-                                @click.prevent="navigateToSection(page.id, section.id)"
+                                :href="section.path ? section.path : `#${section.id}`"
+                                @click.prevent="section.path ? navigateTo(section.path) : navigateToSection(page.id, section.id)"
                                 class="sub-nav-item"
-                                :class="{ 'is-selected': activeSection === section.id }"
+                                :class="{ 'is-selected': section.path ? currentPage === section.id : activeSection === section.id }"
                             >
                                 <div class="sub-nav-indicator"></div>
                                 <span class="sub-nav-text" x-text="section.title"></span>

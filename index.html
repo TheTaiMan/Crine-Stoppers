@@ -32,6 +32,10 @@
     <link rel="stylesheet" href="pages/volunteer/volunteer.css">
     <link rel="stylesheet" href="pages/donate/donate.css">
     <link rel="stylesheet" href="pages/submit_tip/submit_tip.css">
+    <link rel="stylesheet" href="pages/wanted/wanted.css">
+    <link rel="stylesheet" href="pages/contraband-tobacco/contraband-tobacco.css">
+    <link rel="stylesheet" href="pages/important-numbers/important-numbers.css">
+    <link rel="stylesheet" href="pages/links/links.css">
     
     <!-- Alpine.js -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
@@ -155,7 +159,7 @@
                                     x-show="page.sections && page.sections.length > 0"
                                     @click="toggleSubmenu(page.id)"
                                     class="mobile-nav-arrow-btn"
-                                    :class="{ 'expanded': openSubMenuId === page.id }"
+                                    :class="{ 'expanded': openSubMenuId === page.id || (page.id === 'resources' && isResourceSubpage()) }"
                                     :title="openSubMenuId === page.id ? 'Collapse ' + page.name : 'Expand ' + page.name"
                                 >
                                     <svg class="mobile-nav-arrow" viewBox="0 0 24 24" fill="currentColor">
@@ -166,7 +170,7 @@
                             
                             <!-- Mobile Sub-navigation -->
                             <div 
-                                x-show="(openSubMenuId === page.id || previousSubMenuId === page.id) && page.sections && page.sections.length > 0"
+                                x-show="(openSubMenuId === page.id || previousSubMenuId === page.id || (page.id === 'resources' && isResourceSubpage())) && page.sections && page.sections.length > 0"
                                 x-transition:enter="transition ease-out duration-150"
                                 x-transition:enter-start="opacity-0 transform -translate-y-2"
                                 x-transition:enter-end="opacity-100 transform translate-y-0"
@@ -177,19 +181,23 @@
                             >
                                 <template x-for="section in page.sections" :key="section.id">
                                     <a 
-                                        :href="`#${section.id}`"
+                                        :href="section.path ? section.path : `#${section.id}`"
                                         @click.prevent="
                                             closeMobileNav();
-                                            if (currentPage === page.id) {
-                                                scrollToSection(section.id);
+                                            if (section.path) {
+                                                navigateTo(section.path);
                                             } else {
-                                                navigateTo(page.path).then(() => {
-                                                    setTimeout(() => scrollToSection(section.id), 200);
-                                                });
+                                                if (currentPage === page.id) {
+                                                    scrollToSection(section.id);
+                                                } else {
+                                                    navigateTo(page.path).then(() => {
+                                                        setTimeout(() => scrollToSection(section.id), 200);
+                                                    });
+                                                }
                                             }
                                         "
                                         class="mobile-sub-nav-item"
-                                        :class="{ 'is-selected': activeSection === section.id }"
+                                        :class="{ 'is-selected': section.path ? currentPage === section.id : activeSection === section.id }"
                                     >
                                         <div class="mobile-sub-nav-indicator"></div>
                                         <span class="mobile-sub-nav-text" x-text="section.title"></span>
