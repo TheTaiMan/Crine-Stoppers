@@ -1,47 +1,568 @@
 /* Contraband Tobacco Page Styles */
-.page-contraband-tobacco .content {
-    display: flex;
+.page-contraband-tobacco {
+  width: 100%;
+}
+
+/* Override paragraph text size for this page */
+.page-contraband-tobacco .paragraph-text {
+  font-size: 18px;
+}
+
+/* ===== BANNER SECTION ===== */
+.contraband-banner-section {
+  width: 100%;
+  height: 235px;
+  position: relative;
+  overflow: hidden;
+}
+
+.contraband-banner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.contraband-banner-image-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.contraband-banner-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* ===== MAIN CONTENT ===== */
+.page-contraband-tobacco .contraband-header {
+  width: 100%;
+  margin-bottom: var(--space-4);
+}
+
+.page-contraband-tobacco .contraband-title {
+  font-family: var(--font-primary);
+  font-weight: var(--font-weight-black);
+  color: var(--color-dark);
+  font-size: 40px;
+  letter-spacing: 0;
+  line-height: 1.46;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+/* ===== WHAT SECTION ===== */
+.page-contraband-tobacco .contraband-what-section {
+  display: flex;
+  align-items: stretch; /* FIXED: Forces both flex children to same height */
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+  margin-bottom: var(--space-8);
+  position: relative;
+}
+
+.page-contraband-tobacco .contraband-main-content {
+  flex: 1;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-height: 800px;
+}
+
+.page-contraband-tobacco .contraband-subsection {
+  width: 100%;
+}
+
+.page-contraband-tobacco .contraband-subsection-title {
+  font-family: 'Montserrat-Bold', Helvetica;
+  font-weight: 700;
+  color: var(--color-dark);
+  font-size: 30px;
+  letter-spacing: 0;
+  line-height: 1.3;
+  margin: 0;
+  margin-bottom: var(--space-2);
+  text-transform: none;
+}
+
+/* ===== REWARD ASIDE ===== */
+.page-contraband-tobacco .contraband-aside-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  position: relative;
+  min-height: 800px; /* FIXED: Match main-content height for proper sticky context */
+}
+
+.page-contraband-tobacco .contraband-reward-card {
+  display: flex;
+  flex-direction: column;
+  width: 392px;
+  padding: 12px 20px;
+  background-color: var(--color-dark);
+  border-radius: 16px;
+  overflow: hidden;
+  gap: 5px;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 20px;
+  align-self: flex-start;
+  z-index: 10;
+  transition: transform 0.2s ease-out;
+}
+
+.page-contraband-tobacco .contraband-reward-card-sticky {
+  position: sticky;
+  top: 20px;
+}
+
+.page-contraband-tobacco .contraband-reward-card.stop-sticky {
+  position: absolute !important;
+  top: auto !important;
+  bottom: 20px;
+}
+
+.page-contraband-tobacco .contraband-card-header {
+  width: 100%;
+  max-width: 250px;
+}
+
+.page-contraband-tobacco .contraband-card-title {
+  font-family: 'Montserrat-Bold', Helvetica;
+  font-weight: 700;
+  color: var(--color-light);
+  font-size: 30px;
+  letter-spacing: 0;
+  line-height: 1.3;
+  margin: 0;
+}
+
+.page-contraband-tobacco .contraband-card-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.page-contraband-tobacco .contraband-card-text {
+  flex: 1;
+  max-width: 224px;
+}
+
+.page-contraband-tobacco .contraband-card-description {
+  font-family: 'Hind-SemiBold', Helvetica;
+  font-weight: 600;
+  color: var(--color-light);
+  font-size: 20px;
+  letter-spacing: -0.4px;
+  line-height: 1.53;
+  margin: 0;
+}
+
+.page-contraband-tobacco .contraband-card-list {
+  font-family: 'Hind-SemiBold', Helvetica;
+  font-weight: 600;
+  color: var(--color-light);
+  font-size: 20px;
+  letter-spacing: -0.4px;
+  line-height: 1.53;
+  margin: 0;
+  padding-left: 20px;
+  list-style-type: disc;
+  list-style-position: outside;
+}
+
+.page-contraband-tobacco .contraband-card-list li {
+  margin-bottom: 4px;
+  display: list-item;
+}
+
+.page-contraband-tobacco .contraband-card-list li::marker {
+  color: var(--color-light);
+}
+
+.page-contraband-tobacco .contraband-dark-list {
+  font-family: 'Hind-Medium', Helvetica;
+  font-weight: 500;
+  color: var(--color-light);
+  font-size: 18px;
+  letter-spacing: -0.36px;
+  line-height: 27.5px;
+  margin: 0;
+  padding-left: 20px;
+  list-style-type: disc;
+  list-style-position: outside;
+}
+
+.page-contraband-tobacco .contraband-dark-list li {
+  margin-bottom: 4px;
+  display: list-item;
+}
+
+.page-contraband-tobacco .contraband-dark-list li::marker {
+  color: var(--color-light);
+}
+
+.page-contraband-tobacco .contraband-card-image {
+  width: 132px;
+  height: 216px;
+  margin-right: -4px;
+}
+
+.page-contraband-tobacco .contraband-cigarette-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ===== DARK CARDS SECTION ===== */
+.page-contraband-tobacco .contraband-cards-section {
+  width: 100%;
+  margin-bottom: var(--space-8);
+}
+
+.page-contraband-tobacco .contraband-cards-container {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+  align-items: flex-start;
+  padding-bottom: var(--space-6);
+}
+
+.page-contraband-tobacco .contraband-left-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.page-contraband-tobacco .contraband-right-column {
+  flex: 1;
+  display: flex;
+}
+
+.page-contraband-tobacco .contraband-dark-card {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 20px 15px;
+  background-color: var(--color-dark);
+  border-radius: 16px;
+  gap: 8px;
+  height: fit-content;
+}
+
+.page-contraband-tobacco .contraband-dark-header {
+  width: 100%;
+  max-width: 489px;
+}
+
+.page-contraband-tobacco .contraband-dark-title {
+  font-family: 'Montserrat-Bold', Helvetica;
+  font-weight: 700;
+  color: var(--color-light);
+  font-size: 30px;
+  letter-spacing: 0;
+  line-height: 1.3;
+  margin: 0;
+}
+
+/* ===== LEGAL TOBACCO SECTION ===== */
+.page-contraband-tobacco .contraband-legal-section {
+  width: 100%;
+  margin-bottom: var(--space-8);
+}
+
+.page-contraband-tobacco .contraband-legal-content {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+  padding-bottom: var(--space-6);
+}
+
+.page-contraband-tobacco .contraband-legal-text {
+  flex: 1;
+  max-width: 500px;
+}
+
+.page-contraband-tobacco .contraband-stamp-aside {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.page-contraband-tobacco .contraband-stamp-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px 20px;
+  background-color: var(--color-dark);
+  border-radius: 16px;
+  gap: 9px;
+}
+
+.page-contraband-tobacco .contraband-stamp-title {
+  font-family: 'Montserrat-Bold', Helvetica;
+  font-weight: 700;
+  color: var(--color-light);
+  font-size: 30px;
+  letter-spacing: 0;
+  line-height: 1.3;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.page-contraband-tobacco .contraband-stamp-image {
+  width: 332px;
+  height: 184px;
+}
+
+.page-contraband-tobacco .duty-stamp-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  aspect-ratio: 1.8;
+}
+
+/* ===== IMAGES SECTION ===== */
+.page-contraband-tobacco .contraband-images-section {
+  width: 100%;
+  margin-bottom: var(--space-8);
+}
+
+.page-contraband-tobacco .contraband-images-grid {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  width: 100%;
+  padding-bottom: var(--space-6);
+}
+
+.page-contraband-tobacco .contraband-example-image {
+  flex: 1;
+  height: auto;
+  max-width: 48%;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+}
+
+/* ===== ILLEGAL TOBACCO SECTION ===== */
+.page-contraband-tobacco .contraband-illegal-section {
+  width: 100%;
+}
+
+.page-contraband-tobacco .contraband-illegal-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  width: 100%;
+}
+
+.page-contraband-tobacco .contraband-illegal-text {
+  flex: 1;
+  max-width: 500px;
+}
+
+.page-contraband-tobacco .contraband-final-aside {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.page-contraband-tobacco .contraband-cash-banner {
+  display: flex;
+  flex-direction: column;
+  padding: 15px 20px;
+  background-color: var(--color-primary);
+  border-radius: 16px;
+  width: 100%;
+  max-width: 500px;
+}
+
+.page-contraband-tobacco .contraband-cash-banner .paragraph-text {
+  font-family: 'Hind-SemiBold', Helvetica;
+  font-weight: 600;
+  color: var(--color-dark);
+  font-size: 20px;
+  letter-spacing: -0.4px;
+  line-height: 1.53;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 1200px) {
+  .page-contraband-tobacco .contraband-cards-container {
     flex-direction: column;
-    max-width: 100%;
-    align-items: center;
-    gap: 30px;
-    position: relative;
-    margin: 0 auto;
-}
+    gap: 20px;
+  }
 
-.page-contraband-tobacco .content .header {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    position: relative;
-    align-self: stretch;
+  .page-contraband-tobacco .contraband-left-column,
+  .page-contraband-tobacco .contraband-right-column {
+    flex: none;
     width: 100%;
-    flex: 0 0 auto;
+  }
 }
 
-.page-contraband-tobacco .content .text-wrapper {
-    position: relative;
-    flex: 1;
-    margin-top: -1px;
-    font-family: var(--font-primary);
-    font-weight: var(--font-weight-black);
-    color: var(--color-dark);
-    font-size: var(--text-4xl);
-    letter-spacing: 0;
-    line-height: 1.46;
+@media (max-width: 1024px) {
+  .page-contraband-tobacco .contraband-what-section {
+    flex-direction: column;
+    gap: 30px;
+    align-items: stretch; /* FIXED: Keep stretch alignment even in mobile */
+  }
+
+  .page-contraband-tobacco .contraband-main-content {
+    max-width: 100%;
+  }
+
+  .page-contraband-tobacco .contraband-aside-container {
+    justify-content: flex-start;
+    min-height: auto; /* FIXED: Reset min-height on mobile */
+  }
+
+  /* FIXED: Keep sticky positioning instead of static */
+  .page-contraband-tobacco .contraband-reward-card {
+    position: sticky;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .page-contraband-tobacco .contraband-legal-content {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .page-contraband-tobacco .contraband-legal-text {
+    max-width: 100%;
+  }
+
+  .page-contraband-tobacco .contraband-illegal-content {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .page-contraband-tobacco .contraband-illegal-text {
+    max-width: 100%;
+  }
 }
 
-.page-contraband-tobacco .blank-content {
-    padding: 40px;
-    text-align: center;
-    color: var(--color-dark);
-    font-family: var(--font-primary);
-    font-size: 18px;
-}
-
-/* Responsive Design */
 @media (max-width: 768px) {
-    .page-contraband-tobacco .content .text-wrapper {
-        font-size: var(--text-2xl);
-    }
+  .contraband-banner-section {
+    height: 180px;
+  }
+
+  .page-contraband-tobacco .contraband-title {
+    font-size: 28px;
+  }
+
+  .page-contraband-tobacco .contraband-subsection-title {
+    font-size: 24px;
+  }
+
+  .page-contraband-tobacco .contraband-card-title {
+    font-size: 24px;
+  }
+
+  .page-contraband-tobacco .contraband-dark-title {
+    font-size: 24px;
+  }
+
+  .page-contraband-tobacco .contraband-stamp-title {
+    font-size: 24px;
+  }
+
+  .page-contraband-tobacco .contraband-reward-card {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .page-contraband-tobacco .contraband-card-content {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .page-contraband-tobacco .contraband-card-image {
+    align-self: center;
+    margin-right: 0;
+  }
+
+  .page-contraband-tobacco .contraband-images-grid {
+    flex-direction: column;
+  }
+
+  .page-contraband-tobacco .contraband-example-image {
+    max-width: 100%;
+  }
+
+  .page-contraband-tobacco .contraband-stamp-image {
+    width: 250px;
+    height: 138px;
+  }
+}
+
+@media (max-width: 480px) {
+  .contraband-banner-section {
+    height: 150px;
+  }
+
+  .page-contraband-tobacco .contraband-title {
+    font-size: 24px;
+  }
+
+  .page-contraband-tobacco .contraband-subsection-title {
+    font-size: 20px;
+  }
+
+  .page-contraband-tobacco .contraband-card-title {
+    font-size: 20px;
+  }
+
+  .page-contraband-tobacco .contraband-dark-title {
+    font-size: 20px;
+  }
+
+  .page-contraband-tobacco .contraband-stamp-title {
+    font-size: 20px;
+  }
+
+  .page-contraband-tobacco .contraband-dark-card {
+    padding: 8px 15px 12px;
+  }
+
+  .page-contraband-tobacco .contraband-reward-card {
+    padding: 10px 15px;
+  }
+
+  .page-contraband-tobacco .contraband-stamp-image {
+    width: 200px;
+    height: 111px;
+  }
+
+  .page-contraband-tobacco .paragraph-text {
+    font-size: 16px;
+  }
+
+  .page-contraband-tobacco .contraband-card-description {
+    font-size: 18px;
+  }
+
+  .page-contraband-tobacco .contraband-card-list {
+    font-size: 18px;
+  }
+
+  .page-contraband-tobacco .contraband-dark-list {
+    font-size: 16px;
+  }
+
+  .page-contraband-tobacco .contraband-cash-banner .paragraph-text {
+    font-size: 18px;
+  }
 }
