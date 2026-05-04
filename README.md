@@ -40,4 +40,4 @@ You only need a modern web browser to view and interact with the application.
 
 This repository contains the frontend codebase developed as a submission for the design competition aimed at revamping the digital presence of the Winnipeg Crime Stoppers initiative. The design relies on Skeleton.css to maintain a lightweight and highly responsive structure without the overhead of larger utility frameworks.
 
-Project Link: [https://github.com/TheTaiMan/Crine-Stoppers](https://github.com/TheTaiMan/Crine-Stoppers)
+Project Link: [https://github.com/TheTaiMan/Crine-Stoppers](https://thetaiman.github.io/Crine-Stoppers/)
